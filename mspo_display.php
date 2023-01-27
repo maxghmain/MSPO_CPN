@@ -64,6 +64,9 @@ if (!$_SESSION['username']) {
             <div class="container_content">
                 <?php
                 /*เมนู Dashboard ของทุก User */
+                if($_SESSION['menu'] == ""){
+                    include 'component/content/dashboard.php';
+                }
                 if ($_SESSION['menu'] == "dashboard") {
                 ?>
                     <?php
