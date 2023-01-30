@@ -1,6 +1,3 @@
-<?php
-include 'php/connect_db.php';
-?>
 <div class="container_title">
     <h5>เพิ่มใบขอซื้อ - Add Ask For Buy</h5>
 </div>
@@ -8,20 +5,20 @@ include 'php/connect_db.php';
     <div class="add-pc-oder">
         <div class="infomation-add-afb" style="display: flex;">
             <div style="width: 33%;">
-                <p style="text-align:left;">เลขที่ : <input type="number" id="num_afb" value="<?php echo $_SESSION['num_afb'] ?>" placeholder="กรุณากรอก.." required></p>
+                <p style="text-align:left;">เลขที่ : <input type="number" id="num_afb" value="<?php echo $_SESSION['num_afb']; ?>" placeholder="กรุณากรอก.." required></p>
             </div>
             <div style="width: 33%;">
-                <p style="text-align:left;">เล่มที่ : <input type="number" id="num_book_afb" value="<?php echo $_SESSION['num_book_afb'] ?>" placeholder="กรุณากรอก.." required></p>
+                <p style="text-align:left;">เล่มที่ : <input type="number" id="num_book_afb" value="<?php echo $_SESSION['num_book_afb']; ?>" placeholder="กรุณากรอก.." required></p>
             </div>
             <div style="width: 33%;">
-                <p style="text-align:left;">วันที่ : <input type="date" id="create_afb_date" value="<?php echo $_SESSION['create_afb_date'] ?>" required />
+                <p style="text-align:left;">วันที่ : <input type="date" id="create_afb_date" value="<?php echo $_SESSION['create_afb_date']; ?>" required />
             </div>
         </div>
         <div>
             <p style="text-align:left;">ใช้งานกับ</p>
         </div>
         <div>
-            <textarea id="work_for" placeholder="หมายเหตุ...." style="height:50px;width:100%;"><?php echo $_SESSION['work_for'] ?></textarea>
+            <textarea id="work_for" placeholder="หมายเหตุ...." style="height:50px;width:100%;"><?php echo $_SESSION['work_for']; ?></textarea>
         </div>
         <br>
         <div id="button-div">
@@ -31,7 +28,7 @@ include 'php/connect_db.php';
                 $query = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_array($query);
                 $row_add = $row['order_afb_id_max'] + 1;
-                echo '<a href="mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '" id="add_butt" >เพิ่ม / ลบ / แก้ไข รายการวัสดุ</a>'
+                echo '<a href="mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '" id="add_butt" >เพิ่ม / ลบ / แก้ไข รายการวัสดุ</a>';
                 ?>
             </div>
 
@@ -40,9 +37,8 @@ include 'php/connect_db.php';
                 </a>
             </div>
         </div>
-
-
     </div>
+
     <div style="display: flex;justify-content: center;height: 35%;margin-bottom:20px;">
         <div id="table_data_show_display" style="border:1px solid black;">
             <table>
@@ -71,9 +67,11 @@ include 'php/connect_db.php';
                         </td>
                     </tr>
                 </thead>
+                <tbody>
                 <?php
                 include 'function/selectShowOrderAFB.php';
                 ?>
+                </tbody>
             </table>
         </div>
     </div>

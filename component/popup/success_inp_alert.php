@@ -1,6 +1,5 @@
 <style>
     #bg_pop_alert_succ{
-        display: none;
         position: fixed;
         z-index: 999;
         left: 0;
