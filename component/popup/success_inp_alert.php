@@ -19,7 +19,7 @@
         width: 400px;
         border-radius: 10px;
         background: white;
-        margin-top: 80px;
+        margin-top: 30px;
         margin-left: 10px;
         margin-right: auto;
         margin-left: auto;
@@ -38,7 +38,7 @@
         color: #ffffff;
         font-size: 18px;
         font-weight: bold;
-        background-color: green;
+        background-color: #00FF00;
         padding: 10px;
     }
 </style>
