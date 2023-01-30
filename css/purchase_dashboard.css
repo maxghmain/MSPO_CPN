@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Noto Sans Thai');
 
 body{
-    overflow: visible;
+    overflow: hidden;
     height: 100%;
     width: 100%;
     margin-left: 0px;
