@@ -1,6 +1,6 @@
 #set-con {
     margin: 20px;
-    width: 100%;
+    /*width: 100%;*/
     border: 2px solid #b7b7b7;
     height: auto;
     border-radius: 20px;
@@ -14,12 +14,12 @@
 }
 
 #table-show-detail {
-
+    /*width: 100%;*/
     display: block;
     margin: 50px;
     margin-top: 0px;
-    overflow: auto;
-    height: 500px;
+    overflow: scroll;
+    height: 27%;
 
 }
 
@@ -131,14 +131,15 @@ textarea {
 }
 
 #save-data {
-    transition: 0.3s;
+    padding:10px;
+    text-decoration: none;
     cursor: pointer;
-    border-radius: 20px;
-    color: white;
+    border: 0px solid black;
+    font-family: Noto sans Thai;
     background: #006EBC;
-    height: 35px;
-    width: 100px;
-    border: 0px solid rgb(255, 255, 255);
+    border-radius: 30px;
+    color: rgb(255, 255, 255);
+    transition: 0.2s;;
 }
 
 #save-data:hover {
@@ -386,6 +387,11 @@ input[type=button]:hover {
     border-radius: 30px;
     color: #fff;
     font-size: 15px;
+}
+
+#button-div{
+    display: flex;
+    align-items: center;
 }
 
 /*-----------------------------------------------------------*/

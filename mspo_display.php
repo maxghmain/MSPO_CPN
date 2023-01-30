@@ -21,39 +21,39 @@ if ($_SESSION['username'] == '') {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
-        <link rel="stylesheet" href="css/component/popup.css?version=021" />
+        <link rel="stylesheet" href="css/component/popup.css?version=0212" />
         <!-- <script type="text/javascript" src="js/custom/add_order_afb_ajex.js"></script> -->
 
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=03" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=06" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=03" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=06" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=03" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=06" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=03" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=06" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=03" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=06" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=03" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=06" />
         <?php
         }
 
