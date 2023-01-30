@@ -38,7 +38,7 @@
         color: #ffffff;
         font-size: 18px;
         font-weight: bold;
-        background-color: red;
+        background-color: #ca3433;
         padding: 10px;
     }
 </style>
