@@ -40,7 +40,7 @@
 
 
     </div>
-   <div style="display: flex;justify-content: center;height: 23%;margin-bottom:20px;">
+   <div style="display: flex;justify-content: center;height: 25%;margin-bottom:20px;">
    <div id="table_data_show_display" style="border:1px solid black;">
         <table>
             <thead>

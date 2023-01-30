@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Noto Sans Thai');
 
 body{
-    overflow: hidden;
     height: 100%;
     width: 100%;
     margin-left: 0px;
@@ -143,10 +142,11 @@ ul{
 
 /* Content */
 .contianer_detail_all{
+    height: 90%;
     display: flex;
 }
 .container_content{
-    
+    height: 100%;
     width: 85%;
    /* border: 1px solid red;*/
 }
