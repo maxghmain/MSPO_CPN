@@ -22,10 +22,4 @@ $unit_id = $row['unit_id'];
 $sql4 = "INSERT INTO order_afb_tbl(name_ms_id,order_afb_value,unit_id,order_afb_note,state_id,form_afb_id) VALUES ($name_ms_id,'$value_order_afb',$unit_id,'$subject_order',3,$form_afb_id);";
 mysqli_query($conn, $sql4);
 
-$sql = "SELECT MAX(order_afb_id) as order_afb_id_max  FROM order_afb_tbl;";
-$query = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($query);
-$row_add = $row['order_afb_id_max'] + 1;
-
-
 ?>

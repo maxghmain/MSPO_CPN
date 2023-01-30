@@ -101,11 +101,14 @@ if ($_SESSION['username'] == '') {
                 }
                 /*เมนูของ เพิ่มใบขอซื้อ */
                 if ($_SESSION['menu'] == "afb_add_afb") {
-                    include 'component/content/afb_menu/function/chack_state_and _id_form_afb_func.php';
                     include 'component/content/afb_menu/afb_add_afb.php';
+                    include 'component/content/afb_menu/function/chack_state_and _id_form_afb_func.php';
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
+                        echo '<script>';
+                        echo 'setTimeout(hide_pop_succ_alert, 5000);';
+                        echo '</script>';
                         include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
                         echo '<script>$("#bg_pop").show();</script>';
                         if ($_SESSION['state_excecut'] == "addData") {
@@ -115,18 +118,18 @@ if ($_SESSION['username'] == '') {
                             include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
                     ?>
                             <script type="text/javascript">
-                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?> + "&state_excecut=addSusdsdccess";
+                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?> + "&state_excecut=addSuccess";
                             </script>
                     <?php
                         }
                         if ($_SESSION['state_excecut'] == "addSuccess") {
-                            echo '<script>';
-                            echo 'setTimeout(loading_hide, 200);';
-                            echo '</script>';
-                            $sql = "SELECT MAX(order_afb_id) as order_afb_id_max  FROM order_afb_tbl;";
-                            $query = mysqli_query($conn, $sql);
-                            $row = mysqli_fetch_array($query);
-                            $row_add = $row['order_afb_id_max'] + 1;
+                            echo '<script> $("#bg_pop_alert_succ").show(); </script>';
+                            
+                            ?>
+                            <script type="text/javascript">
+                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?>;
+                            </script>
+                    <?php
                         }
                         /*if ($_SESSION['state_excecut'] == "addSuccess") {
                             echo '<script>';

@@ -5,7 +5,6 @@ $sql = "SELECT MAX(order_afb_id) as order_afb_id_max  FROM order_afb_tbl;";
 $query = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($query);
 $row_add = $row['order_afb_id_max'] + 1;
-$addData_last_id = $row_add + 1;
 
 $title_pop = "เพิ่มรายการใบขอซื้อ";
 /* title input */
