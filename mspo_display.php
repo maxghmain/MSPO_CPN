@@ -6,12 +6,16 @@ if ($_SESSION['username'] == '') {
     include 'php/connect_db.php';
     include 'component/popup/wrong_inp_alert.php';
     include 'component/popup/success_inp_alert.php';
+    include 'component/loading.php';
     $_SESSION['menu'] = $_GET['menu'];
     $_SESSION['editData_id'] = $_GET['editData_id'];
     $_SESSION['deleteData_id'] = $_GET['deleteData_id'];
     $_SESSION['addData_id'] = $_GET['addData_id'];
     $_SESSION['state_excecut'] = $_GET['state_excecut'];
     /* Session รับค่าที่พิมพ์เก็บไว้ เมื่อรีเฟรชจะไม่หายไป ของเพิ่มใบขอซื้อ */
+    /* ปิดการแสดงของ Popup และ Loading */
+    echo '<script>$("#bg_pop").hide();</script>';
+    echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -28,32 +32,32 @@ if ($_SESSION['username'] == '') {
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=10" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=11" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=10" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=11" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=10" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=11" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=10" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=11" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=10" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=11" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=10" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=11" />
         <?php
         }
 
@@ -92,12 +96,12 @@ if ($_SESSION['username'] == '') {
                 if ($_SESSION['menu'] == "afb_add_afb") {
                     include 'component/content/afb_menu/function/chack_state_and _id_form_afb_func.php';
                     include 'component/content/afb_menu/afb_add_afb.php';
-                    echo '<script>$("#bg_pop").hide();</script>';
-                    echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
+                    
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
                         include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
+                        /*echo '<script>$("#bg-loader").show();</script>';*/
                         echo '<script>$("#bg_pop").show();</script>';
                         if ($_SESSION['addData_id'] != "" && $_SESSION['state_excecut'] == "addSuccess") {
 
@@ -143,7 +147,7 @@ if ($_SESSION['username'] == '') {
                     ?>
                 <?php } else {
                     header("Location: ../mspo_display.php?menu=dashboard");
-                 } ?>
+                } ?>
             </div>
         </div>
     </body>

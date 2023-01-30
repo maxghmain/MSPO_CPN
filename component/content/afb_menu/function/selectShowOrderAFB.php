@@ -5,33 +5,44 @@ $query = mysqli_query($conn, $sql);
 $count_data = 1;
 while ($row = mysqli_fetch_array($query)) {
     echo '<tr">';
-    echo '<td style="word-wrap: break-word; display:none;">';
-    echo '<option id="id_ms' . $row['order_afb_id'] . '" value="' . $row['order_afb_id'] . '">' . $row['order_afb_id'] . '</option>';
+    echo '<td >';
+    echo $count_data;
     echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
-    echo '<option id="number' . $row['order_afb_id'] . '" value="' . $count_data . '">' . $count_data . '</option>';
+    echo '<td >';
+    echo $row['name_ms_normal_name'];
     echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
-    echo '<option id="name_not' . $row['order_afb_id'] . '" value="' . $row['name_ms_normal_name'] . '">' . $row['name_ms_normal_name'] . '</option>';
+    echo '<td >';
+    echo $row['name_ms_real_name'];
     echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
-    echo '<option id="name_yes' . $row['order_afb_id'] . '" value="' . $row['name_ms_real_name'] . '">' . $row['name_ms_real_name'] . '</option>';
+    echo '<td >';
+    echo '<div style="display: block;">';
+    echo '<div style="display: flex; justify-content:center;">';
+    echo '<div id="value_num">';
+    echo $row['order_afb_value'];
+    echo '</div>';
+    echo '<div id="center" style="width:5px;">';
+    echo '&nbsp;';
+    echo '</div>';
+    echo '<div id="unit_name">';
+    echo $row['unit_name'];
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
     echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
-    echo '<option id="value' . $row['order_afb_id'] . '" value="' . $row['order_afb_value'] . '">' . $row['order_afb_value'] . '</option>';
+    echo '<td >';
+    echo $row['order_afb_note'];
     echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
-    echo '<option id="unit' . $row['order_afb_id'] . '" value="' . $row['unit_name'] . '">' . $row['unit_name'] . '</option>';
-    echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
-    echo '<option id="note' . $row['order_afb_id'] . '" value="' . $row['order_afb_note'] . '">' . $row['order_afb_note'] . '</option>';
-    echo '</td>';
-    echo '<td style="word-wrap: break-word;">';
+    echo '<td >';
     if ($check_page_addData != "") {
         echo '<a id="edit_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=' . $check_page_addData . '&editData_id=' . $row['order_afb_id'] . '">แก้ไขรายการ</a><br />';
-        echo '<a id="delete_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=' . $check_page_addData . '&deleteData_id=' . $row['order_afb_id'] . '">ลบรายการ</a>';
     } else {
         echo '<a id="edit_butt" href="mspo_display.php?menu=afb_add_afb&editData_id=' . $row['order_afb_id'] . '">แก้ไขรายการ</a><br />';
+    }
+    echo '</td>';
+    echo '<td >';
+    if ($check_page_addData != "") {
+        echo '<a id="delete_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=' . $check_page_addData . '&deleteData_id=' . $row['order_afb_id'] . '">ลบรายการ</a>';
+    } else {
         echo '<a id="delete_butt" href="mspo_display.php?menu=afb_add_afb&deleteData_id=' . $row['order_afb_id'] . '">ลบรายการ</a>';
     }
     echo '</td>';
@@ -40,4 +51,3 @@ while ($row = mysqli_fetch_array($query)) {
 }
 $count_data = 1;
 mysqli_close($conn);
-?>

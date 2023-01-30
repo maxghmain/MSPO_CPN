@@ -115,59 +115,30 @@ $title_input =
                 <div id="table_data_show">
                     <table>
                         <thead>
-                            <th style="width: 6px;">
+                            <th style="width: 4%;">
                                 ลำดับ
                             </th>
-                            <th style="width: 17px;">
+                            <th style="width: 10%;">
                                 ชื่อรายการ <br /> ไม่เป็นทางการ
                             </th>
-                            <th style="width: 17px;">
+                            <th style="width: 10%;">
                                 ชื่อรายการ <br /> เป็นทางการ
                             </th>
-                            <th style="width: 15px;">
+                            <th style="width: 10%;">
                                 จำนวน
                             </th>
-                            <th style="width: 25px;">
+                            <th style="width: 10%;">
                                 หมายเหตุ
                             </th>
-                            <th style="width: 10px;">
+                            <th style="width: 8%;">
                                 แก้ไข
                             </th>
-                            <th style="width: 10px;">
+                            <th style="width: 8%;">
                                 ลบ
                             </th>
                         </thead>
                         <?php
-                        $i = 1;
-                        while ($i < 10) {
-                        ?>
-                            <tr>
-                                <td>
-                                    <?php echo $i; ?>
-                                </td>
-                                <td>
-                                    ขี้
-                                </td>
-                                <td>
-                                    น็อต *2นิ้ว / 32rm /แบบแหลม
-                                </td>
-                                <td>
-                                    1 ก้อน
-                                </td>
-                                <td>
-                                    ทำงาน
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                            </tr>
-                        <?php
-                            $i++;
-                        }
-                        $i = 0;
+                            include 'component/content/afb_menu/function/selectShowOrderAFB.php';
                         ?>
                     </table>
                 </div>

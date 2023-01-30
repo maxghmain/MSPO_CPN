@@ -1,1 +1,0 @@
-$(function () { var addData_id = 25; var state_excecut = "addSuccess"; $.ajax({type: "GET", url: "../../../../mspo_display.php?menu=afb_add_afb",data: {addData_id: addData_id,state_excecut: state_excecut,},});});

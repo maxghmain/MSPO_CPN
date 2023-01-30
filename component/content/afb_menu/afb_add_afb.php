@@ -40,31 +40,31 @@
 
 
     </div>
-   <div style="display: flex;justify-content: center;height: 13%;margin-bottom:20px;">
+   <div style="display: flex;justify-content: center;height: 23%;margin-bottom:20px;">
    <div id="table_data_show_display" style="border:1px solid black;">
         <table>
             <thead>
             <tr>
-                <td style="width: 7%;">
+                <td style="width: 2%;">
                     <p>ลำดับ</p>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 10%;">
                     <p>ชื่อรายการไม่เป็นทางการ</p>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 8%;">
                     <p>ชื่อรายการเป็นทางการ</p>
                 </td>
                 <td style="width: 7%;">
                     <p>จำนวน</p>
                 </td>
-                <td style="width: 7%;">
-                    <p>หน่วยนับ</p>
-                </td>
-                <td style="width: 7%;">
+                <td style="width: 20%;">
                     <p>หมายเหตุ</p>
                 </td>
                 <td style="width: 7%;">
-                    <p><strong>แก้ไข/ลบ</strong></p>
+                    <p><strong>แก้ไข</strong></p>
+                </td>
+                <td style="width: 7%;">
+                    <p><strong>ลบ</strong></p>
                 </td>
             </tr>
             </thead>

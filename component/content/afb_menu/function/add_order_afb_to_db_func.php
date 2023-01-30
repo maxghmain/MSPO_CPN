@@ -1,4 +1,3 @@
-<script type="text/javascript" src="../../../../js/jquery/dist/jquery.min.js"></script>
 <?php
 session_start();
 include '../../../../php/connect_db.php';
