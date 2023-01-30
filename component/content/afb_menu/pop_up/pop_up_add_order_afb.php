@@ -89,14 +89,15 @@ $title_input =
                                 <option value="ก้อน">
                                     ก้อน
                                 </option>
-                                
+
                             </select>
                         </div>
                         <div id="input_form">
                             <textarea id="subject_order" cols="30" rows="3  "><?php echo $_SESSION['subject_order'] ?></textarea>
                         </div>
                         <div id="input_form">
-                            <a id="add_order_afb_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData">
+                            <!-- <a id="add_order_afb_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData"> -->
+                            <a id="add_order_afb_butt" onclick="check_and_send_data()">
                                 <div id="butt_add_order">
                                     เพิ่มรายการ
                                 </div>
@@ -137,7 +138,7 @@ $title_input =
                             </th>
                         </thead>
                         <?php
-                            include 'component/content/afb_menu/function/selectShowOrderAFB.php';
+                        include 'component/content/afb_menu/function/selectShowOrderAFB.php';
                         ?>
                     </table>
                 </div>
@@ -147,41 +148,52 @@ $title_input =
 </div>
 
 <script>
-    function reloads() {
+    function check_and_send_data() {
         var name_not_order_afb = $("#name_not_order_afb").val();
         var name_yes_order_afb = $("#name_yes_order_afb").val();
         var value_order_afb = $("#value_order_afb").val();
         var unit_order_afb = $("#unit_order_afb").val();
         var subject_order = $("#subject_order").val();
         if (name_not_order_afb == "") {
-            $("#bg_pop_alert_succ").hide();
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
             $("#name_not_order_afb").focus();
             return;
         }
         if (value_order_afb == "") {
-            $("#bg_pop_alert_succ").hide();
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
             $("#value_order_afb").focus();
             return;
         }
-        $.ajax({
-            type: "GET",
-            url: "component/content/afb_menu/function/add_order_afb_to_db_func.php",
-            data: {
-                name_not_order_afb: name_not_order_afb,
-                name_yes_order_afb: name_yes_order_afb,
-                value_order_afb: value_order_afb,
-                unit_order_afb: unit_order_afb,
-                subject_order: subject_order,
-            } 
-              
-        });
-        $("#bg_pop_alert").hide();
-        $("#bg_pop_alert_succ").show();
-        setTimeout(hide_pop_succ_alert,3000);
+        if (unit_order_afb == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#unit_order_afb").focus();
+        }
+        if (subject_order == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#subject_order").focus();
+        }
+        if (name_not_order_afb != "" && value_order_afb != "" && unit_order_afb != "" && subject_order != "") {
+            $.ajax({
+                type: "GET",
+                url: "../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData",
+                data: {
+                    name_not_order_afb: name_not_order_afb,
+                    name_yes_order_afb: name_yes_order_afb,
+                    value_order_afb: value_order_afb,
+                    unit_order_afb: unit_order_afb,
+                    subject_order: subject_order,
+                }
+            });
+            window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData';
+        }
+    }
+
+    function loading_hide() {
+        $("#bg_loading").hide();
     }
     function hide_pop_wrong_alert() {
         $("#bg_pop_alert").hide();

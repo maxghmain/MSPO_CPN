@@ -32,7 +32,6 @@ if ($_SESSION['username'] == '') {
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
         <link rel="stylesheet" href="css/component/popup.css?version=0s2" />
         <script type="text/javascript" src="js/custom/add_order_afb_ajex.js"></script>
-
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
         if ($_SESSION['userlvid'] == 1) {
@@ -65,7 +64,6 @@ if ($_SESSION['username'] == '') {
             <link rel="stylesheet" href="css/component/afb_add_afb.css?version=11" />
         <?php
         }
-
         ?>
 
         <title>Dashboard</title>
@@ -108,25 +106,20 @@ if ($_SESSION['username'] == '') {
                     if ($_SESSION['addData_id'] != "") {
                         include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
                         echo '<script>$("#bg_pop").show();</script>';
-                        if ($_SESSION['state_excecut'] == "addFail"){
-                            
-                        }
                         if ($_SESSION['state_excecut'] == "addData") {
                             echo '<script>';
-                            echo  '$("#bg-loader").show();';
-                            echo '</>';
+                            echo  '$("#bg_loading").show();';
+                            echo '</script>';
                             include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
-                            ?>
-                            <script type="text/javascript">
-                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?> + "&state_excecut=addSuccess";
-                            </script>
-                        <?php
+                            echo  '$("#bg_loading").hide();';
+                            echo '<script>';
+                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id='.$row_add.'&state_excecut=addSuccess")';
+                            echo '</script>';
                         }
                         if ($_SESSION['state_excecut'] == "addSuccess") {
-                        ?>
+                    ?>
                             <script type="text/javascript">
                                 window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?>;
-                                $("#bg_pop_alert_succ").show();
                             </script>
                     <?php
                         }
