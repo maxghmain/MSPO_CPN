@@ -40,9 +40,10 @@
 
 
     </div>
-   
-    <div id="table-show-detail">
+   <div style="display: flex;justify-content: center;height: 13%;margin-bottom:20px;">
+   <div id="table_data_show_display" style="border:1px solid black;">
         <table>
+            <thead>
             <tr>
                 <td style="width: 7%;">
                     <p>ลำดับ</p>
@@ -66,11 +67,13 @@
                     <p><strong>แก้ไข/ลบ</strong></p>
                 </td>
             </tr>
+            </thead>
             <?php
             include 'function/selectShowOrderAFB.php';
             ?>
         </table>
-    </div>
+    </div></div>
+    
     
 </div>
 <!--POPUPยืนยันการลบข้อมูลรายการใบขอซื้อ-->
