@@ -106,28 +106,27 @@ if ($_SESSION['username'] == '') {
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
-                        echo '<script>';
-                        echo 'setTimeout(hide_pop_succ_alert, 5000);';
-                        echo '</script>';
                         include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
                         echo '<script>$("#bg_pop").show();</script>';
+                        if ($_SESSION['state_excecut'] == "addFail"){
+                            
+                        }
                         if ($_SESSION['state_excecut'] == "addData") {
                             echo '<script>';
                             echo  '$("#bg-loader").show();';
-                            echo '</script>';
+                            echo '</>';
                             include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
-                    ?>
+                            ?>
                             <script type="text/javascript">
                                 window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?> + "&state_excecut=addSuccess";
                             </script>
-                    <?php
+                        <?php
                         }
                         if ($_SESSION['state_excecut'] == "addSuccess") {
-                            echo '<script> $("#bg_pop_alert_succ").show(); </script>';
-                            
-                            ?>
+                        ?>
                             <script type="text/javascript">
                                 window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?>;
+                                $("#bg_pop_alert_succ").show();
                             </script>
                     <?php
                         }

@@ -9,13 +9,11 @@ $(function () {
       $("#bg_pop_alert").show();
       setTimeout(hide_pop_wrong_alert, 3000);
       $("#name_not_order_afb").focus();
-      return;
     }
     if (value_order_afb == "") {
       $("#bg_pop_alert").show();
       setTimeout(hide_pop_wrong_alert, 3000);
       $("#value_order_afb").focus();
-      return;
     }
     $.ajax({
       type: "GET",
