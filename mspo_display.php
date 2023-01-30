@@ -12,6 +12,13 @@ if ($_SESSION['username'] == '') {
     $_SESSION['deleteData_id'] = $_GET['deleteData_id'];
     $_SESSION['addData_id'] = $_GET['addData_id'];
     $_SESSION['state_excecut'] = $_GET['state_excecut'];
+    /* รับ Session จากการเพิ่มรายการใบขอซื้อ */
+    $name_not_order_afb = $_GET['name_not_order_afb'];
+    $name_yes_order_afb = $_GET['name_yes_order_afb'];
+    $value_order_afb = $_GET['value_order_afb'];
+    $unit_order_afb = $_GET['unit_order_afb'];
+    $subject_order = $_GET['subject_order'];
+    $form_afb_id = $_SESSION['form_afb_id'];
     /* Session รับค่าที่พิมพ์เก็บไว้ เมื่อรีเฟรชจะไม่หายไป ของเพิ่มใบขอซื้อ */
     /* ปิดการแสดงของ Popup และ Loading */
     echo '<script>$("#bg_pop").hide();</script>';
@@ -26,7 +33,7 @@ if ($_SESSION['username'] == '') {
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
         <link rel="stylesheet" href="css/component/popup.css?version=0212" />
-        <!-- <script type="text/javascript" src="js/custom/add_order_afb_ajex.js"></script> -->
+        <script type="text/javascript" src="js/custom/add_order_afb_ajex.js"></script>
 
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
@@ -96,23 +103,31 @@ if ($_SESSION['username'] == '') {
                 if ($_SESSION['menu'] == "afb_add_afb") {
                     include 'component/content/afb_menu/function/chack_state_and _id_form_afb_func.php';
                     include 'component/content/afb_menu/afb_add_afb.php';
-                    
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
                         include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
                         /*echo '<script>$("#bg-loader").show();</script>';*/
                         echo '<script>$("#bg_pop").show();</script>';
-                        if ($_SESSION['addData_id'] != "" && $_SESSION['state_excecut'] == "addSuccess") {
-
-
-                    ?>
-                            <script>
-                                $("#bg_pop_alert_succ").show();
-                                setTimeout(hide_pop_succ_alert, 3000);
-                                return;
-                            </script>
-                    <?php
+                        if ($_SESSION['state_excecut'] == "addSuccess") {
+                            $sql = "SELECT MAX(order_afb_id) as order_afb_id_max  FROM order_afb_tbl;";
+                            $query = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($query);
+                            $row_add = $row['order_afb_id_max'] + 1;
+                            $url = 'mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add;
+                            echo '<script>';
+                            echo  '$("#bg-loader").show();';
+                            echo '</script>';
+                            include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
+                            echo '<script>';
+                            echo  '$("#bg-loader").hide();';
+                            echo '</script>';
+                            echo '<script>';
+                            echo  '$("#bg_pop_alert_succ").show();';
+                            echo 'setTimeout(hide_pop_succ_alert, 3000);';
+                            echo '</script>';
+                            $_SESSION['state_excecut'] = "";
+                            header("Location:mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add;");
                         }
                     } else {
                         echo '<script>$("#bg_pop").hide();</script>';

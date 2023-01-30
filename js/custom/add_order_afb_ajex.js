@@ -19,7 +19,7 @@ $(function () {
     }
     $.ajax({
       type: "GET",
-      url: "component/content/afb_menu/function/add_order_afb_to_db_func.php",
+      url: "mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addSuccess",
       data: {
         name_not_order_afb: name_not_order_afb,
         name_yes_order_afb: name_yes_order_afb,
