@@ -97,7 +97,7 @@ $title_input =
                             <textarea id="subject_order" cols="30" rows="3  "><?php echo $_SESSION['subject_order'] ?></textarea>
                         </div>
                         <div id="input_form">
-                            <a id="add_order_afb_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addSuccess">
+                            <a id="add_order_afb_butt" href="mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData">
                                 <div id="butt_add_order">
                                     เพิ่มรายการ
                                 </div>

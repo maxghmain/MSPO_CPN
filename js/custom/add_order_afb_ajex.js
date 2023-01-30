@@ -1,5 +1,5 @@
 $(function () {
- $("#butt_add_order").click(function () {
+  $("#butt_add_order").click(function () {
     var name_not_order_afb = $("#name_not_order_afb").val();
     var name_yes_order_afb = $("#name_yes_order_afb").val();
     var value_order_afb = $("#value_order_afb").val();
@@ -26,10 +26,9 @@ $(function () {
         value_order_afb: value_order_afb,
         unit_order_afb: unit_order_afb,
         subject_order: subject_order,
-      }
+      },
     });
   });
-
 });
 
 function hide_pop_wrong_alert() {
@@ -38,4 +37,8 @@ function hide_pop_wrong_alert() {
 
 function hide_pop_succ_alert() {
   $("#bg_pop_alert_succ").hide();
+}
+
+function loading_hide() {
+  $("#bg-loader").hide();
 }

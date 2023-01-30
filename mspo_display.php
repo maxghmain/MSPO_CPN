@@ -21,8 +21,6 @@ if ($_SESSION['username'] == '') {
     $form_afb_id = $_SESSION['form_afb_id'];
     /* Session รับค่าที่พิมพ์เก็บไว้ เมื่อรีเฟรชจะไม่หายไป ของเพิ่มใบขอซื้อ */
     /* ปิดการแสดงของ Popup และ Loading */
-    echo '<script>$("#bg_pop").hide();</script>';
-    echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -32,7 +30,7 @@ if ($_SESSION['username'] == '') {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
-        <link rel="stylesheet" href="css/component/popup.css?version=0212" />
+        <link rel="stylesheet" href="css/component/popup.css?version=0s2" />
         <script type="text/javascript" src="js/custom/add_order_afb_ajex.js"></script>
 
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
@@ -81,6 +79,8 @@ if ($_SESSION['username'] == '') {
             <?php include 'component/sidebar.php'; ?>
             <div class="container_content">
                 <?php
+                echo '<script>$("#bg_pop").hide();</script>';
+                echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
                 /*เมนู Dashboard ของทุก User */
                 if ($_SESSION['menu'] == "") {
                     include 'component/content/dashboard.php';
@@ -107,30 +107,42 @@ if ($_SESSION['username'] == '') {
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
                         include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
-                        /*echo '<script>$("#bg-loader").show();</script>';*/
                         echo '<script>$("#bg_pop").show();</script>';
+                        if ($_SESSION['state_excecut'] == "addData") {
+                            echo '<script>';
+                            echo  '$("#bg-loader").show();';
+                            echo '</script>';
+                            include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
+                    ?>
+                            <script type="text/javascript">
+                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add ?> + "&state_excecut=addSusdsdccess";
+                            </script>
+                    <?php
+                        }
                         if ($_SESSION['state_excecut'] == "addSuccess") {
+                            echo '<script>';
+                            echo 'setTimeout(loading_hide, 200);';
+                            echo '</script>';
                             $sql = "SELECT MAX(order_afb_id) as order_afb_id_max  FROM order_afb_tbl;";
                             $query = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_array($query);
                             $row_add = $row['order_afb_id_max'] + 1;
-                            $url = 'mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add;
+                        }
+                        /*if ($_SESSION['state_excecut'] == "addSuccess") {
                             echo '<script>';
                             echo  '$("#bg-loader").show();';
                             echo '</script>';
                             include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
                             echo '<script>';
-                            echo  '$("#bg-loader").hide();';
+                            echo  '$("#bg_pop_alert_succ").show();';
+                            echo 'setTimeout(loading_hide, 200);'; 
                             echo '</script>';
                             echo '<script>';
-                            echo  '$("#bg_pop_alert_succ").show();';
                             echo 'setTimeout(hide_pop_succ_alert, 3000);';
                             echo '</script>';
-                            $_SESSION['state_excecut'] = "";
-                            header("Location:mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add;");
-                        }
+                        }*/
                     } else {
-                        echo '<script>$("#bg_pop").hide();</script>';
+                        echo '<script>$("#bg_pop").hide();</>';
                     }
                     /*
                     if ($_SESSION['addData_id'] != "" && $_SESSION['editData_id'] != "") {
