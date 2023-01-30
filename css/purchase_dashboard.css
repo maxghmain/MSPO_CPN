@@ -48,7 +48,7 @@ ul{
 .sidbar{
     background: #006BBC;
     width: 15%;
-    height: 95vh;
+    height: auto;
     display: inline-block;
     justify-content: center;
    /* border: 1px solid red;*/
@@ -144,11 +144,12 @@ ul{
 }
 .container_content{
   
-    width: 100%;
+    width: 85%;
    /* border: 1px solid red;*/
 }
 
 .container_title{
+    width: 100%;
     display: flex;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     /*border: 1px solid red;*/

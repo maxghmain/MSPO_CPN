@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Noto Sans Thai');
+
+/*************************************************************************************************************************/
+/************************************************//*POPUP Confirm*//************************************************/
+/*************************************************************************************************************************/
+
+
+/*************************************************************************************************************************/
+/************************************************//*POPUP Add afb Order*//************************************************/
+/*************************************************************************************************************************/
+    #bg_pop {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        backdrop-filter: blur(5px);
+    }
+
+    #bl_item {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        display: block;
+        /* border: 1px solid red; */
+        align-items: center;
+        width: 1100px;
+        border-radius: 20px;
+        background: white;
+        margin-top: 150px;
+        margin-left: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: #ffffff;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+
+    #title_group {
+        padding: 4px;
+        border-radius: 0px 0px 20px 20px;
+        display: flex;
+        width: auto;
+        height: 50px;
+        background-color: #006EBC;
+    }
+
+    #title_pop {
+        display: block;
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    #titlecen {
+        border-radius: 20px;
+        margin-top: 0px;
+        background-color: #ffffff;
+        width: 5px;
+        height: 50px;
+    }
+
+    #title1 {
+        margin-top: 5px;
+        width: 458px;
+    }
+
+    #title2 {
+        margin-top: 5px;
+        width: 652px;
+    }
+
+    #title_input {
+        display: flex;
+    }
+
+    #b_item_group {
+        display: flex;
+        padding: 20px;
+    }
+
+    #b_item1 {
+        margin-top: 5px;
+        width: 500px;
+        height: auto;
+        margin-right: 20px;
+    }
+
+    #b_item2 {
+        margin-left: 20px;
+        margin-top: 5px;
+        width: 700px;
+        height: auto;
+    }
+
+    #b_itemcen {
+        width: 5px;
+        height: auto;
+        border-radius: 20px;
+        background-color: #006EBC;
+    }
+
+    #item_form_group {
+        /*border: 1px solid red;*/
+        display: flex;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: -18px;
+    }
+
+    #item_form {
+        /*border: 1px solid red;*/
+        display: block;
+        justify-content: left;
+        align-items: left;
+        text-align: left;
+    }
+
+    #text {
+        /*border: 1px solid red;*/
+        margin: 30px;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+
+    #colon {
+        /*border: 1px solid red;*/
+        margin: 30px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 20px;
+    }
+
+    #input_form {
+        width: auto;
+        margin: 36px;
+        margin-top: 5px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    #input_form input {
+        margin-left: 0px;
+        width: 97%;
+    }
+
+    #input_form select {
+        text-align: center;
+        width: 100%;
+    }
+
+    #input_form textarea {
+        resize: none;
+        margin-right: -10px;
+        margin-top: 0px;
+    }
+
+    #unit_order_afb {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    #table_data_show {
+        width: 100%;
+        overflow: auto;
+        height: 350px;
+        border-radius: 10px;
+        border: 4px solid #006EBC;
+    }
+
+    #table_data_show table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    #table_data_show table thead {
+        position: sticky;
+        top: 0;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 1px;
+        border: 1px solid rgb(0, 0, 0);
+        background-color: #ffffff;
+    }
+
+    #table_data_show table thead th {
+        border: 0.5px solid rgb(0, 0, 0);
+    }
+
+    #table_data_show table tr td {
+        width: 100;
+        border: 0.5px solid rgb(0, 0, 0);
+        word-wrap: break-word;
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    #butt_close_pop {
+        border-radius: 20px 20px 0px 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 100%;
+        height: 20px;
+        background-color: #696969;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .block_item a {
+        color: #ffffff;
+        width: 100%;
+        height: 20px;
+        text-decoration: none;
+
+    }
+
+    #butt_close_pop:hover {
+        cursor: pointer;
+        border-radius: 20px 20px 0px 0px;
+        color: white;
+        background: #014474;
+    }
+
+    #butt_add_order {
+        text-align: center;
+        margin-top: -30px;
+        width: 100%;
+        background-color: #006EBC;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    #butt_add_order:hover {
+        cursor: pointer;
+        color: white;
+        background: #014474;
+    }
+/*************************************************************************************************************************/
+/*************************************************************************************************************************/
