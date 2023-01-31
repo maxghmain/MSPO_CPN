@@ -1,7 +1,7 @@
 <?php
 include 'php/connect_db.php';
 ?>
-<div id="popup_background_order_afb_edit">
+<div id="popup_background_order_afb_edit" style="display: none;">
     <div id="popup_edit_order_afb">
         <div id="box_butt_close">
             <div id="close_edit_order_afb_butt">

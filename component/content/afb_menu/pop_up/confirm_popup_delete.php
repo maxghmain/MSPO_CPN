@@ -117,7 +117,7 @@ $row = mysqli_fetch_array($query);
 
 ?>
 
-<div class="background_popup" id="bg_pop_delete">
+<div class="background_popup" id="bg_pop_delete" style="display: none;">
     <div class="block_item" id="bl_item_delete">
         <div class="title_popup" id="title_pop_delete">
             <p id="title1">
@@ -137,7 +137,7 @@ $row = mysqli_fetch_array($query);
 
         <div class="butt_area" id="butt_a_delete">
             <div id="butt_ok_box_delete">
-                <a id="butt_ok_delete" href="mspo_display.php?menu=afb_add_afb&deleteData_id=loading&state_excecut=deleteData">
+                <a id="butt_ok_delete" href="mspo_display.php?menu=afb_add_afb&deleteData_id=<?php echo $id_data ?>&state_excecut=deleteData">
                     <p id="butt_box_delete">
                         ตกลง
                     </p>
@@ -147,7 +147,7 @@ $row = mysqli_fetch_array($query);
                 <p>&nbsp;</p>
             </div>
             <div id="butt_cancle_box_delete">
-                <a id="butt_cancle_delete" href="mspo_display.php?menu=afb_add_afb&">
+                <a id="butt_cancle_delete" href="mspo_display.php?menu=afb_add_afb">
                     <p id="butt_box_delete">
                         ยกเลิก
                     </p>

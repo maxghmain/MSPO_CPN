@@ -23,7 +23,7 @@ $title_input =
     ]
 
 ?>
-<div class="background_popup" id="bg_pop">
+<div class="background_popup" id="bg_pop" style="display: none;">
     <div class="block_item" id="bl_item">
         <a href="mspo_display.php?menu=afb_add_afb">
             <div id="butt_close_pop">

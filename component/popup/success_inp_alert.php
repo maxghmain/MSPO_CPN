@@ -41,7 +41,7 @@
         padding: 10px;
     }
 </style>
-<div id="bg_pop_alert_succ">
+<div id="bg_pop_alert_succ" style="display: none;">
     <div class="block_item" id="bl_item_alert">
         <div class="title_popup" id="title_pop_success_alert">
             เพิ่มรายการสำเร็จ !!
