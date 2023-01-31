@@ -343,9 +343,9 @@ input[type=button]:hover {
     cursor: pointer;
     border: 0px solid black;
     font-family: Noto sans Thai;
-    background: #f7d07a;
+    background: #006EBC;
     border-radius: 30px;
-    color: #000;
+    color: white;
     transition: 0.2s;
 }
 
@@ -356,9 +356,9 @@ input[type=button]:hover {
     cursor: pointer;
     border: 0px solid black;
     font-family: Noto sans Thai;
-    background: #f7d05a;
+    background: #014474;
     border-radius: 30px;
-    color: #7285a5;
+    color: white;
 }
 
 #delete_butt {
