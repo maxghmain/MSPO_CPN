@@ -1,3 +1,6 @@
+<?php
+include 'php/connect_db.php';
+?>
 <!--<link rel="stylesheet" href="../../css/component/popup.css">-->
 <style>
     #bg_pop_delete {
@@ -20,7 +23,7 @@
         width: 350px;
         border-radius: 10px;
         background: white;
-        margin-top:15%;
+        margin-top: 15%;
         margin-left: 10px;
         margin-right: auto;
         margin-left: auto;
@@ -102,8 +105,17 @@
         color: white;
         background: #800000;
     }
+    #detail_text{
+        word-wrap:break-word;
+    }
 </style>
+<?php
+$id_data = $_SESSION['deleteData_id'];
+$sql = "SELECT order_afb_id,name_ms_normal_name,name_ms_real_name,order_afb_value,unit_name,order_afb_note FROM order_afb_tbl as a INNER JOIN name_ms_tbl as b ON a.name_ms_id = b.name_ms_id INNER JOIN unit_tbl as c ON a.unit_id = c.unit_id WHERE a.order_afb_id = '$id_data' ";
+$query = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($query);
 
+?>
 
 <div class="background_popup" id="bg_pop_delete">
     <div class="block_item" id="bl_item_delete">
@@ -113,10 +125,16 @@
             </p>
         </div>
         <div class="detail_area" id="detail_a_delete">
-            <p id="detail_text">
-                ท่านต้องการ&nbsp;<strong style="color: red;">"ลบ"</strong>&nbsp;รายการนี้หรือไม่ ?
+            <p >
+                ท่านต้องการ&nbsp;<strong style="color: red;">"ลบ"</strong>&nbsp;รายการ&nbsp;
             </p>
+            <p id="detail_text">
+            <strong><?php echo $row['name_ms_normal_name']; ?></strong>
+            </p>
+            <p>หรือไม่ ?</p>
         </div>
+
+
         <div class="butt_area" id="butt_a_delete">
             <div id="butt_ok_box_delete">
                 <a id="butt_ok_delete" href="#">
@@ -138,3 +156,6 @@
         </div>
     </div>
 </div>
+<?php
+mysqli_close($conn)
+?>
