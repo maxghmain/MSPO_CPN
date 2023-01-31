@@ -94,16 +94,12 @@ if ($_SESSION['username'] == '') {
                     include 'component/content/afb_menu/pop_up/pop_up_edit_data.php';
                     include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
                     include 'component/popup/confirm_popup_delete.php';
-                    echo '<script>$("#bg_pop_alert_succ").hide();</script>';
-                    echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
-                    echo '<script>$("#bg_pop").hide();</script>';
-                    echo '<script>$("#bg_pop_delete").hide();</script>';
+                    echo '<script>$("#bg_pop_alert_succ").hide(); $("#popup_background_order_afb_edit").hide();$("#bg_pop").hide();$("#bg_pop_delete").hide();</script>';
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
                         echo '<script>$("#bg_pop").show();</script>';
-                        if ($_SESSION['add_count_succ'] != "") {
-                            $_SESSION['add_count_succ'] = "";
+                        if ($_SESSION['add_last_state'] != "") {
                             echo '<script>$("#bg_pop_alert_succ").show();</script>';
                             echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
                         } else if ($_SESSION['editData_id'] != "") {
@@ -116,7 +112,7 @@ if ($_SESSION['username'] == '') {
                             echo  '$("#bg_loading").show();';
                             echo '</script>';
                             include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
-                            echo  '<script>setTimeout(loading_hide,100);</script>';
+                            echo  '<script>setTimeout(loading_hide,50);</script>';
                             echo '<script>';
                             echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '&state_excecut=addSuccess")';
                             echo '</script>';
