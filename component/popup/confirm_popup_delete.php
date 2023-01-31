@@ -1,6 +1,6 @@
 <!--<link rel="stylesheet" href="../../css/component/popup.css">-->
 <style>
-    #bg_pop {
+    #bg_pop_delete {
         /*display: none;*/
         position: fixed;
         z-index: 1;
@@ -12,7 +12,7 @@
         backdrop-filter: blur(5px);
     }
 
-    #bl_item {
+    #bl_item_delete {
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         display: block;
         /* border: 1px solid red; */
@@ -20,7 +20,7 @@
         width: 350px;
         border-radius: 10px;
         background: white;
-        margin-top: 150px;
+        margin-top:15%;
         margin-left: 10px;
         margin-right: auto;
         margin-left: auto;
@@ -30,7 +30,7 @@
         margin-bottom: 0px;
     }
 
-    #title_pop {
+    #title_pop_delete {
         border-radius: 10px;
         text-align: center;
         display: block;
@@ -41,7 +41,14 @@
         padding: 0.1px 0px 0.1px 0px;
     }
 
-    #butt_ok_box {
+    #title_pop_delete p {
+        margin-bottom: 0px;
+
+        width: 100%;
+
+    }
+
+    #butt_ok_box_delete {
         border-radius: 10px;
         display: block;
         padding: 20px;
@@ -51,12 +58,12 @@
         font-weight: bold;
     }
 
-    #butt_ok_box a {
+    #butt_ok_box_delete a {
         text-decoration: none;
         color: #ffffff;
     }
 
-    #butt_cancle_box {
+    #butt_cancle_box_delete {
         border-radius: 10px;
         display: block;
         padding: 20px;
@@ -66,12 +73,12 @@
         font-weight: bold;
     }
 
-    #butt_cancle_box a {
+    #butt_cancle_box_delete a {
         text-decoration: none;
         color: #ffffff;
     }
 
-    #butt_a {
+    #butt_a_delete {
         justify-content: center;
         align-items: center;
         display: flex;
@@ -80,16 +87,17 @@
         padding: 10px;
     }
 
-    #detail_a {
+    #detail_a_delete {
         font-size: 18px;
     }
 
-    #butt_ok_box:hover {
+    #butt_ok_box_delete:hover {
         cursor: pointer;
         color: white;
         background: #014474;
     }
-    #butt_cancle_box:hover {
+
+    #butt_cancle_box_delete:hover {
         cursor: pointer;
         color: white;
         background: #800000;
@@ -97,22 +105,22 @@
 </style>
 
 
-<div class="background_popup" id="bg_pop">
-    <div class="block_item" id="bl_item">
-        <div class="title_popup" id="title_pop">
+<div class="background_popup" id="bg_pop_delete">
+    <div class="block_item" id="bl_item_delete">
+        <div class="title_popup" id="title_pop_delete">
             <p id="title1">
                 ยืนยันการทำรายการ
             </p>
         </div>
-        <div class="detail_area" id="detail_a">
+        <div class="detail_area" id="detail_a_delete">
             <p id="detail_text">
                 ท่านต้องการ&nbsp;<strong style="color: red;">"ลบ"</strong>&nbsp;รายการนี้หรือไม่ ?
             </p>
         </div>
-        <div class="butt_area" id="butt_a">
-            <div id="butt_ok_box">
-                <a id="butt_ok" href="#">
-                    <p id="butt_box">
+        <div class="butt_area" id="butt_a_delete">
+            <div id="butt_ok_box_delete">
+                <a id="butt_ok_delete" href="#">
+                    <p id="butt_box_delete">
                         ตกลง
                     </p>
                 </a>
@@ -120,9 +128,9 @@
             <div id="center_">
                 <p>&nbsp;</p>
             </div>
-            <div id="butt_cancle_box">
-                <a id="butt_cancle" href="#">
-                    <p id="butt_box">
+            <div id="butt_cancle_box_delete">
+                <a id="butt_cancle_delete" href="mspo_display.php?menu=afb_add_afb&">
+                    <p id="butt_box_delete">
                         ยกเลิก
                     </p>
                 </a>

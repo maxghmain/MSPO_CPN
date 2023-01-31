@@ -3,8 +3,10 @@ session_start();
 if ($_SESSION['username'] == '') {
     header("Location: index.php");
 } else {
+    
     include 'php/connect_db.php';
     include 'component/loading.php';
+    
     $_SESSION['menu'] = $_GET['menu'];
     $_SESSION['editData_id'] = $_GET['editData_id'];
     $_SESSION['deleteData_id'] = $_GET['deleteData_id'];
@@ -85,15 +87,17 @@ if ($_SESSION['username'] == '') {
                     include 'component/content/afb_menu/afb_select_menu.php';
                     /*เมนูของ เพิ่มใบขอซื้อ */
                 } else if ($_SESSION['menu'] == "afb_add_afb") {
+                    include 'component/content/afb_menu/function/chack_state_and_id_form_afb_func.php';
                     include 'component/content/afb_menu/afb_add_afb.php';
                     include 'component/popup/wrong_inp_alert.php';
                     include 'component/popup/success_inp_alert.php';
                     include 'component/content/afb_menu/pop_up/pop_up_edit_data.php';
                     include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
-                    include 'component/content/afb_menu/function/chack_state_and_id_form_afb_func.php';
+                    include 'component/popup/confirm_popup_delete.php';
                     echo '<script>$("#bg_pop_alert_succ").hide();</script>';
                     echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
                     echo '<script>$("#bg_pop").hide();</script>';
+                    echo '<script>$("#bg_pop_delete").hide();</script>';
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
                     if ($_SESSION['addData_id'] != "") {
@@ -104,7 +108,9 @@ if ($_SESSION['username'] == '') {
                             echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
                         } else if ($_SESSION['editData_id'] != "") {
                             echo '<script>$("#popup_background_order_afb_edit").show();</script>';
-                        } else if ($_SESSION['state_excecut'] == "addData") {
+                        }else if ($_SESSION['deleteData_id'] != ""){
+                            echo '<script>$("#bg_pop_delete").show();</script>';
+                        }else if ($_SESSION['state_excecut'] == "addData") {
                             echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
                             echo '<script>';
                             echo  '$("#bg_loading").show();';
@@ -125,6 +131,8 @@ if ($_SESSION['username'] == '') {
                         }
                     } else if ($_SESSION['editData_id'] != "") {
                         echo '<script>$("#popup_background_order_afb_edit").show();</script>';
+                    }else if ($_SESSION['deleteData_id'] != ""){
+                        echo '<script>$("#bg_pop_delete").show();</script>';
                     }
                 }
                 ?>

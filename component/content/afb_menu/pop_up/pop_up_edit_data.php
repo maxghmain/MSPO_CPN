@@ -13,7 +13,7 @@ include 'php/connect_db.php';
                 <?php
                 } else {
                 ?>
-                    <a href="mspo_display.php?menu=afb_add_afb">X</a>
+                    <a href="mspo_display.php?menu=afb_add_afb" style="text-decoration: none;">X</a>
                 <?php
                 }
                 ?>

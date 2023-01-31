@@ -1,6 +1,6 @@
 <!--<link rel="stylesheet" href="../../css/component/popup.css">-->
 <style>
-    #bg_pop {
+    #bg_pop_edit {
         /*display: none;*/
         position: fixed;
         z-index: 1;
@@ -97,7 +97,7 @@
 </style>
 
 
-<div class="background_popup" id="bg_pop">
+<div class="background_popup" id="bg_pop_edit">
     <div class="block_item" id="bl_item">
         <div class="title_popup" id="title_pop">
             <p id="title1">
