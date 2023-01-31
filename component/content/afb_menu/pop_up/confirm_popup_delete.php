@@ -126,18 +126,18 @@ $row = mysqli_fetch_array($query);
         </div>
         <div class="detail_area" id="detail_a_delete">
             <p >
-                ท่านต้องการ&nbsp;<strong style="color: red;">"ลบ"</strong>&nbsp;รายการ&nbsp;
+                ท่านต้องการ&nbsp;<strong style="color: red;">"ลบ"</strong>&nbsp;รายการหรือไม่?
             </p>
             <p id="detail_text">
+                ชื่อรายการ :
             <strong><?php echo $row['name_ms_normal_name']; ?></strong>
             </p>
-            <p>หรือไม่ ?</p>
         </div>
 
 
         <div class="butt_area" id="butt_a_delete">
             <div id="butt_ok_box_delete">
-                <a id="butt_ok_delete" href="#">
+                <a id="butt_ok_delete" href="mspo_display.php?menu=afb_add_afb&deleteData_id=loading&state_excecut=deleteData">
                     <p id="butt_box_delete">
                         ตกลง
                     </p>
@@ -156,6 +156,7 @@ $row = mysqli_fetch_array($query);
         </div>
     </div>
 </div>
+
 <?php
 mysqli_close($conn)
 ?>

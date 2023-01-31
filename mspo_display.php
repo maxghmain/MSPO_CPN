@@ -93,7 +93,7 @@ if ($_SESSION['username'] == '') {
                     include 'component/popup/success_inp_alert.php';
                     include 'component/content/afb_menu/pop_up/pop_up_edit_data.php';
                     include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
-                    include 'component/popup/confirm_popup_delete.php';
+                    include 'component/content/afb_menu/pop_up/confirm_popup_delete.php';
                     echo '<script>$("#bg_pop_alert_succ").hide(); $("#popup_background_order_afb_edit").hide();$("#bg_pop").hide();$("#bg_pop_delete").hide();</script>';
                     /*popup เพิ่มรายการของใบขอซื้อ*/
                     /* addData_Page_toggle */
@@ -129,6 +129,10 @@ if ($_SESSION['username'] == '') {
                         echo '<script>$("#popup_background_order_afb_edit").show();</script>';
                     }else if ($_SESSION['deleteData_id'] != ""){
                         echo '<script>$("#bg_pop_delete").show();</script>';
+                        if($_SESSION['state_excecut'] == "deleteData"){
+                            include 'component/content/afb_menu/function/delete_order_afb_out_db_func.php';
+
+                        }
                     }
                 }
                 ?>
