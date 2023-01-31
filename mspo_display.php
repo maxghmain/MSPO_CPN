@@ -37,27 +37,27 @@ if ($_SESSION['username'] == '') {
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=11" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=12" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=11" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=12" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=11" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=12" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=11" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=12" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=11" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=12" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {

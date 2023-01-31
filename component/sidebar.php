@@ -6,7 +6,7 @@
                 <img src="img/LogoEdit.png" width="70" heigth="auto" />
             </div>
         </div>
-        <div>
+        <div style="position: sticky;">
             <div class="test-sd">
                 <div class="test-sd1">
                     <img src="img/icon/1144760.png" style="width: 20px" height="20px" />
