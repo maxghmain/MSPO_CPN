@@ -135,7 +135,7 @@ if ($_SESSION['username'] == '') {
                                 echo '</script>';
                                 include 'component/content/afb_menu/function/delete_order_afb_out_db_func.php';
                                 echo '<script>';
-                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add .'state_excecut=deleteSuccess")';
+                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add .'&deleteData_id'.$_SESSION['deleteData_id'].'=&state_excecut=deleteSuccess")';
                                 echo '</script>';
                             } else if ($_SESSION['state_excecut'] == "deleteSuccess") {
                                 echo '<script>';
