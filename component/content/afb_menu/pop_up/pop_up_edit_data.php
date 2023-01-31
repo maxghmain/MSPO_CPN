@@ -77,7 +77,7 @@ include 'php/connect_db.php';
             <div id="block_area_inp">
                 <div id="block_laout">
                     <div>
-                        <input type="text" value="<?php echo $id_data; ?>" id="inp_name_not_edit">
+                        <input type="text" value="<?php echo $row['name_ms_normal_name']; ?>" id="inp_name_not_edit">
                         <!-- <input type="text" value="<?php /* echo $row['name_ms_normal_name']; */ ?>" id="inp_name_not_edit"> -->
                     </div>
                 </div>
