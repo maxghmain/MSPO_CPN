@@ -13,6 +13,7 @@
                     </a>
                 </td>
                 <td style="border: none;">
+                <a href="mspo_display.php?menu=state_afb">
                     <button id="insert-afb"><img src="img/icon/951971-1.png" width="250"><br><strong id="font-button">สถานะใบขอซื้อ</strong></button>
                 </td>
                 <td style="border: none;">

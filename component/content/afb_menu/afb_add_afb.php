@@ -33,7 +33,7 @@
             </div>
 
             <div style="width: 50%;text-align:right;">
-                <a id="save-data">ดำเนินการถัดไป
+                <a id="save-data" onclick="check_info_and_save()">ดำเนินการถัดไป
                 </a>
             </div>
         </div>
@@ -76,3 +76,58 @@
         </div>
     </div>
 </div>
+<script>
+    function check_info_and_save() {
+        var num_afb = $("#num_afb").val();
+        var num_book_afb = $("#num_book_afb").val();
+        var create_afb_date = $("#create_afb_date").val();
+        var work_for = $("#work_for").val();
+        if (num_afb == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#name_not_order_afb").focus();
+            return;
+        }
+        if (num_book_afb == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#value_order_afb").focus();
+            return;
+        }
+        if (create_afb_date == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#unit_order_afb").focus();
+        }
+        if (work_for == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#subject_order").focus();
+        }
+        if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "") {
+            $.ajax({
+                type: "GET",
+                url: "../../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=saveData",
+                data: {
+                    num_afb: num_afb,
+                    num_book_afb: num_book_afb,
+                    create_afb_date: create_afb_date,
+                    create_afb_date: create_afb_date,
+                    work_for: work_for,
+                }
+            });
+            window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=saveData';
+        }
+    }
+
+    function loading_hide() {
+        $("#bg_loading").hide();
+    }
+    function hide_pop_wrong_alert() {
+        $("#bg_pop_alert").hide();
+    }
+
+    function hide_pop_succ_alert() {
+        $("#bg_pop_alert_succ").hide();
+    }
+</script>

@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Noto Sans Thai');
 
-body{
+
+html {
+
     height: 100%;
+  }
+body{
+    position:absolute; 
+    top:0; 
+    bottom:0; 
+    right:0; 
+    left:0;
     width: 100%;
+    height: 100vh;
     margin-left: 0px;
     margin-top: 0px;
     font-family: Noto sans Thai;
@@ -49,11 +59,12 @@ ul{
 .sidbar{
     background: #006BBC;
     width: 15%;
-    height: 100%;
+    height: 100vh;
     display: inline-block;
     justify-content: center;
     /*border: 1px solid red;*/
    overflow: auto;
+   
 }
 .box-pf{
     justify-content: center;
