@@ -191,17 +191,30 @@ if ($_SESSION['username'] == '') {
                                 window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb';
                             </script>
                 <?php
-                        }else if($_SESSION['state_excecut'] == "saveData"){
+                        }/*else if($_SESSION['state_excecut'] == "saveData"){
                             echo '<script>';
                             echo ' $("#bg_loading").show(); setTimeout(loading_hide,500);';
                             echo '</script>';
-                        }
+                            include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
+                            echo '<script>';
+                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&saveData&state_excecut=saveDataSuccess")';
+                            echo '</script>';
+                        }/*else if ($_SESSION['state_excecut'] == "saveDataSuccess") {
+                            ?>
+                                <script type="text/javascript">
+                                    window.location = '../mspo_cpn/mspo_display.php?menu=state_afb';
+                                </script>
+                    <?php
+                            }*/
                     }
 
 
 
                 }else if($_SESSION['menu'] == "state_afb"){
+                    
                     include 'component/content/afb_menu/state_afb.php';
+                }else if($_SESSION['state_afb'] == "form_afb_id"){
+                    include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
                 }
                 ?>
             </div>

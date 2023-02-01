@@ -28,4 +28,3 @@ unit_id=$unit_id,
 order_afb_note = '$subject_order'
 WHERE order_afb_id = $editData_id ;");
 mysqli_query($conn, $sql);
-?>

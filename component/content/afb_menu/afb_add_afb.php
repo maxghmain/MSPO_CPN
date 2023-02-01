@@ -107,7 +107,7 @@
         if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "") {
             $.ajax({
                 type: "GET",
-                url: "../../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=saveData",
+                url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id?>",
                 data: {
                     num_afb: num_afb,
                     num_book_afb: num_book_afb,
@@ -116,7 +116,7 @@
                     work_for: work_for,
                 }
             });
-            window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=saveData';
+            window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id?>';
         }
     }
 
