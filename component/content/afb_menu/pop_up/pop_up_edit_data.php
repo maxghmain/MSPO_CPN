@@ -101,13 +101,15 @@ include 'php/connect_db.php';
                 </div>
             </div>
         </div>
-        <a id="butt_edit_submit" onclick="check_and_send_data_for_edit()">
+        
         <div id="box_butt_enter">
             <div id="block_butt_enter">
+            <a id="butt_edit_submit" onclick="check_and_send_data_for_edit()">
                 บันทึกข้อมูล
+                </a>
             </div>
         </div>
-        </a>
+        
     </div>
 </div>
 
@@ -170,3 +172,31 @@ mysqli_close($conn)
         $("#bg_pop_alert_succ").hide();
     }
 </script>
+<style>
+    #butt_edit_submit{
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        width: 100px;
+        align-items: center;
+        justify-content: center;
+        border: 0px solid red;
+        background: #006ebc;
+        border-radius: 30px;
+        color:white;
+        transition-duration: 0.3s;
+    }
+    #butt_edit_submit:hover{
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        width: 90px;
+        align-items: center;
+        justify-content: center;
+        border: 0px solid red;
+        background: #014474;
+        border-radius: 30px;
+        color:white;
+    }
+</style>
+
