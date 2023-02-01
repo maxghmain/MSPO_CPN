@@ -102,14 +102,22 @@ if ($_SESSION['username'] == '') {
                         if ($_SESSION['add_last_state'] != "") {
                             echo '<script>$("#bg_pop_alert_succ").show();</script>';
                             echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
-                        } else if ($_SESSION['delete_last_state'] != "") {
+                        } 
+                        
+                        else if ($_SESSION['delete_last_state'] != "") {
                             echo '<script>$("#bg_pop_alert_succ").show();</script>';
                             echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
-                        } else if ($_SESSION['editData_id'] != "") {
+                        } 
+                        
+                        else if ($_SESSION['editData_id'] != "") {
                             echo '<script>$("#popup_background_order_afb_edit").show();</script>';
-                        } else if ($_SESSION['deleteData_id'] != "") {
+                        } 
+                        
+                        else if ($_SESSION['deleteData_id'] != "") {
                             echo '<script>$("#bg_pop_delete").show();</script>';
-                        } else if ($_SESSION['state_excecut'] == "addData") {
+                        } 
+                        
+                        else if ($_SESSION['state_excecut'] == "addData") {
                             echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
                             echo '<script>';
                             echo  '$("#bg_loading").show();';
@@ -119,15 +127,21 @@ if ($_SESSION['username'] == '') {
                             echo '<script>';
                             echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '&state_excecut=addSuccess")';
                             echo '</script>';
-                        } else if ($_SESSION['state_excecut'] == "addSuccess") {
+                        } 
+                        
+                        else if ($_SESSION['state_excecut'] == "addSuccess") {
                 ?>
                             <script type="text/javascript">
                                 window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add; ?> + '&add_last_state=1';
                             </script>
                             <?php
-                        } else if ($_SESSION['editData_id'] != "") {
+                        } 
+                        
+                        else if ($_SESSION['editData_id'] != "") {
                             echo '<script>$("#popup_background_order_afb_edit").show();</script>';
-                        } else if ($_SESSION['deleteData_id'] != "") {
+                        } 
+                        
+                        else if ($_SESSION['deleteData_id'] != "") {
                             echo '<script>$("#bg_pop_delete").show();</script>';
                             if ($_SESSION['state_excecut'] == "deleteData") {
                                 echo '<script>';
@@ -148,9 +162,32 @@ if ($_SESSION['username'] == '') {
                             <?php
                             }
                         }
-                    } else if ($_SESSION['editData_id'] != "") {
+                        /*   EDIT DATA */
+                    } 
+                    
+                    else if ($_SESSION['editData_id'] != "") {
                         echo '<script>$("#popup_background_order_afb_edit").show();</script>';
-                    } else if ($_SESSION['deleteData_id'] != "") {
+                        if($_SESSION['state_excecut'] == "editData"){
+                            echo '<script>';
+                            echo '$("#bg_loading").show(); setTimeout(loading_hide,500);';
+                            echo '</script>';
+                            include 'component/content/afb_menu/function/update_oder_afb_to_db_func.php';
+                            echo '<script>';
+                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=editSuccess")';
+                            echo '</script>';
+                        }else if ($_SESSION['state_excecut'] == "editSuccess") {
+                            ?>
+                            <script type="text/javascript">
+                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb';
+                            </script>
+                <?php
+                        }
+
+
+                            /*   DELETE DATA */
+                    } 
+                    
+                    else if ($_SESSION['deleteData_id'] != "") {
                         echo '<script>$("#bg_pop_delete").show();</script>';
                         if ($_SESSION['state_excecut'] == "deleteData") {
                             echo '<script>';

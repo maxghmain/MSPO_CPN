@@ -101,13 +101,72 @@ include 'php/connect_db.php';
                 </div>
             </div>
         </div>
+        <a id="butt_edit_submit" onclick="check_and_send_data_for_edit()">
         <div id="box_butt_enter">
             <div id="block_butt_enter">
-                <button id="save_edit_order_afb_butt" type="submit">บันทึกข้อมูล</buttonid=>
+                บันทึกข้อมูล
             </div>
         </div>
+        </a>
     </div>
 </div>
+
 <?php
 mysqli_close($conn)
 ?>
+<script>
+    function check_and_send_data_for_edit() {
+        var name_not_order_afb = $("#inp_name_not_edit").val();
+        var name_yes_order_afb = $("#inp_name_yes_edit").val();
+        var value_order_afb = $("#inp_value_edit").val();
+        var unit_order_afb = $("#inp_unit_edit").val();
+        var subject_order = $("#subject_order_edit").val();
+        if (name_not_order_afb == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#name_not_order_afb").focus();
+            return;
+        }
+        if (value_order_afb == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#value_order_afb").focus();
+            return;
+        }
+        if (unit_order_afb == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#unit_order_afb").focus();
+        }
+        if (subject_order == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#subject_order").focus();
+        }
+        if (name_not_order_afb != "" && value_order_afb != "" && unit_order_afb != "" && subject_order != "") {
+            $.ajax({
+                type: "GET",
+                url: "../../mspo_cpn/mspo_display.php?menu=afb_add_afb&editData_id=<?php echo $id_data ?>&state_excecut=editData",
+                data: {
+                    name_not_order_afb: name_not_order_afb,
+                    name_yes_order_afb: name_yes_order_afb,
+                    value_order_afb: value_order_afb,
+                    unit_order_afb: unit_order_afb,
+                    subject_order: subject_order,
+                }
+            });
+            window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&editData_id=<?php echo $id_data ?>&state_excecut=editData';
+        }
+    }
+
+    function loading_hide() {
+        $("#bg_loading").hide();
+    }
+    function hide_pop_wrong_alert() {
+        $("#bg_pop_alert").hide();
+    }
+
+    function hide_pop_succ_alert() {
+        $("#bg_pop_alert_succ").hide();
+    }
+</script>
