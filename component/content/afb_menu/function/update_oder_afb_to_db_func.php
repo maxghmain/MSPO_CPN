@@ -12,6 +12,11 @@ $query = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($query);
 $unit_id = $row['unit_id'];
 
-$sql = "UPDATE order_afb_tbl SET name_ms_id=$name_ms_id,order_afb_value='$value_order_afb',unit_id=$unit_id,order_afb_note='    $subject_order' WHERE oder_afb_id = $editData_id ;";
+$sql = ("UPDATE order_afb_tbl 
+SET name_ms_id=$name_ms_id,
+order_afb_value='$value_order_afb',
+unit_id=$unit_id,
+order_afb_note = '$subject_order'
+WHERE order_afb_id = $editData_id ;");
 mysqli_query($conn, $sql);
 ?>
