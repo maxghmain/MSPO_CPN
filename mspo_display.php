@@ -13,10 +13,17 @@ if ($_SESSION['username'] == '') {
     $_SESSION['addData_id'] = $_GET['addData_id'];
     $_SESSION['state_excecut'] = $_GET['state_excecut'];
     $_SESSION['add_last_state'] = $_GET['add_last_state'];
+    
+
+
     $num_afb = $_GET['num_afb'];
     $num_book_afb = $_GET['num_book_afb'];
     $create_afb_date = $_GET['create_afb_date'];
     $work_for = $_GET['work_for'];
+    $name_afb_ark = $_GET['name_afb_ark'];
+    $name_afb_ark_conf = $_GET['name_afb_ark_conf'];
+
+    
     /* รับ Session จากการเพิ่มรายการใบขอซื้อ */
     $name_not_order_afb = $_GET['name_not_order_afb'];
     $name_yes_order_afb = $_GET['name_yes_order_afb'];
@@ -213,8 +220,11 @@ if ($_SESSION['username'] == '') {
                 }else if($_SESSION['menu'] == "state_afb"){
                     
                     include 'component/content/afb_menu/state_afb.php';
-                }else if($_SESSION['state_afb'] == "form_afb_id"){
+                }else if($_SESSION['state_excecut'] == "saveData"){
                     include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
+                    echo '<script>';
+                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
+                    echo '</script>';
                 }
                 ?>
             </div>

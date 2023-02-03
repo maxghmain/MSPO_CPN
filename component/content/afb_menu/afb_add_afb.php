@@ -11,7 +11,7 @@
                 <p style="text-align:left;">เล่มที่ : <input type="number" id="num_book_afb" value="<?php echo $_SESSION['num_book_afb']; ?>" placeholder="กรุณากรอก.." required></p>
             </div>
             <div style="width: 33%;">
-                <p style="text-align:left;">วันที่ : <input type="date" id="create_afb_date" value="<?php echo $_SESSION['create_afb_date']; ?>" required />
+                <p style="text-align:left;">วันที่ : <input type="date" id="create_afb_date" value="<?php echo $_SESSION['create_afb_date']; ?>" required /></p>
             </div>
         </div>
         <div>
@@ -19,6 +19,10 @@
         </div>
         <div>
             <textarea id="work_for" placeholder="หมายเหตุ...." style="height:50px;width:100%;"><?php echo $_SESSION['work_for']; ?></textarea>
+        </div>
+        <div style="display: flex;">
+            <p style="width: 100%;">ผู้ขอซื้อ : <input type="text" value="<?php echo $_SESSION['name_afb_ark']; ?>" id="name_afb_ark" required></p>
+            <p style="text-align: right;width: 100%;">ผู้อนุมัติ : <input type="text" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>" id="name_afb_ark_conf" required></p>
         </div>
         <br>
         <div id="button-div">
@@ -33,8 +37,7 @@
             </div>
 
             <div style="width: 50%;text-align:right;">
-                <a id="save-data" onclick="check_info_and_save()">ดำเนินการถัดไป
-                </a>
+                <a id="save-data" onclick="check_info_and_save()">ดำเนินการถัดไป</a>
             </div>
         </div>
     </div>
@@ -68,9 +71,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                include 'function/selectShowOrderAFB.php';
-                ?>
+                    <?php
+                    include 'function/selectShowOrderAFB.php';
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -82,47 +85,61 @@
         var num_book_afb = $("#num_book_afb").val();
         var create_afb_date = $("#create_afb_date").val();
         var work_for = $("#work_for").val();
+        var name_afb_ark = $("#name_afb_ark").val();
+        var name_afb_ark_conf = $("#name_afb_ark_conf").val();
         if (num_afb == "") {
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
-            $("#name_not_order_afb").focus();
+            $("#num_afb").focus();
             return;
         }
         if (num_book_afb == "") {
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
-            $("#value_order_afb").focus();
+            $("#num_book_afb").focus();
             return;
         }
         if (create_afb_date == "") {
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
-            $("#unit_order_afb").focus();
+            $("#create_afb_date").focus();
+        }
+        if (name_afb_ark == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#name_afb_ark").focus();
+        }
+        if (name_afb_ark_conf == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#name_afb_ark_conf").focus();
         }
         if (work_for == "") {
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
-            $("#subject_order").focus();
+            $("#work_for").focus();
         }
-        if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "") {
+        if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "") {
             $.ajax({
                 type: "GET",
-                url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id?>",
+                url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData",
                 data: {
                     num_afb: num_afb,
                     num_book_afb: num_book_afb,
                     create_afb_date: create_afb_date,
-                    create_afb_date: create_afb_date,
                     work_for: work_for,
+                    name_afb_ark: name_afb_ark,
+                    name_afb_ark_conf: name_afb_ark_conf,
                 }
             });
-            window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id?>';
+            window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData';
         }
     }
 
     function loading_hide() {
         $("#bg_loading").hide();
     }
+
     function hide_pop_wrong_alert() {
         $("#bg_pop_alert").hide();
     }
