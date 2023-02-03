@@ -3,7 +3,6 @@
 </div>
 <style>
     #set-con {
-        display: flex;
         margin: 20px;
         /*width: 100%;*/
         border: 2px solid #b7b7b7;
