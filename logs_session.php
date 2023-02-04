@@ -18,3 +18,4 @@ $_SESSION['state_excecut'] = $_GET['state_excecut'];*/
     $_SESSION['unit_order_afb'] = $_GET['unit_order_afb'];
     $_SESSION['subject_order'] = $_GET['subject_order'];
 /***************************************************************/
+?>

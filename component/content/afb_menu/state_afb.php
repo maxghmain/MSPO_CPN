@@ -8,10 +8,11 @@
         border: 2px solid #b7b7b7;
         height: auto;
         border-radius: 20px;
+        display: flex;
     }
 </style>
 
 <div id="set-con">
        <?php include 'function/selectShowOderAFBstate.php';?>
-
+       
 </div>
