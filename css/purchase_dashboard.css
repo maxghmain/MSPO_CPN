@@ -1007,3 +1007,35 @@ table td{
         height: 20px;
         border-radius: 10px;
       }
+      .button-add-afb{
+        justify-content: right;
+        align-items: center;
+        display: flex;
+        width: 50%;
+        margin-left:400px;
+    }
+    .button-add-afb a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 35px;
+        font-size: 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        background: #006ebc;
+        color: white;
+        transition-duration: 0.3s;
+    }
+    .button-add-afb a:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 35px;
+        font-size: 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        background: #014474;
+        color: white;
+    }

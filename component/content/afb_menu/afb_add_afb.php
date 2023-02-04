@@ -1,5 +1,8 @@
 <div class="container_title">
     <h5>เพิ่มใบขอซื้อ - Add Ask For Buy</h5>
+    <div class="button-add-afb" >
+        <a href="mspo_display.php?menu=afb_select_menu">เมนูใบขอซื้อ</a>
+    </div>
 </div>
 <div id="set-con">
     <div class="add-pc-oder">

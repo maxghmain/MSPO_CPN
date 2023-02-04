@@ -1,7 +1,9 @@
+
+
 <style>
 
     #body-afb-box-1{
-        width: 100%;
+        width: 400px;
         border: 1px solid black;
         margin: 10px;
         border-radius: 10px;
@@ -32,9 +34,16 @@
    }
 </style>
 
+
+
+
+
             <?php
             include 'php/connect_db.php';
-            $sql = "SELECT * FROM form_afb_tbl WHERE state_id = 1";
+            $limit = 3; // number of items to show per page
+            $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
+            $offset = ($page - 1) * $limit;
+            $sql = "SELECT * FROM form_afb_tbl WHERE state_id = 1 LIMIT $offset, $limit";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($result)) {
                 echo '<div id="body-afb-box-1">';
@@ -106,6 +115,27 @@
                 echo '</div>';
                 echo '</div>';
             }
-            // Close the database connection
-            $conn->close();
-            ?>
+            $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = 1";
+$total_result = mysqli_query($conn, $total_sql);
+$total_row = mysqli_fetch_array($total_result);
+$total_items = $total_row['total'];
+$total_pages = ceil($total_items / $limit);
+
+// Create the pagination links
+$pagination = "";
+if ($total_pages > 1) {
+    for ($i = 1; $i <= $total_pages; $i++) {
+        if ($i == $page) {
+            $pagination .= "<strong>$i</strong>";
+        } else {
+            $pagination .= "<a href=mspo_display.php?menu=state_afb&page=$i'>$i</a>";
+        }
+    }
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+<!-- Display the pagination links -->
+
