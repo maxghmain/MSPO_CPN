@@ -43,7 +43,7 @@
             $limit = 3; // number of items to show per page
             $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
             $offset = ($page - 1) * $limit;
-            $sql = "SELECT * FROM form_afb_tbl WHERE state_id = 1 LIMIT $offset, $limit";
+            $sql = "SELECT * FROM form_afb_tbl  WHERE state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($result)) {
                 echo '<div id="body-afb-box-1">';

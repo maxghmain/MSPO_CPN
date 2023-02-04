@@ -15,47 +15,27 @@
         display: flex;
     }
     #container-afb-box{
-        height: 70vh;
+        height: 60vh;
     }
-    #pagination{
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
-    .button-add-afb{
-        justify-content: right;
-        align-items: center;
-        display: flex;
-        width: 50%;
-        margin-left:400px;
-    }
-    .button-add-afb a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 150px;
-        height: 35px;
-        font-size: 20px;
-        border-radius: 30px;
-        text-decoration: none;
-        background: #006ebc;
-        color: white;
-        transition-duration: 0.3s;
-    }
-    .button-add-afb a:hover{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 150px;
-        height: 35px;
-        font-size: 20px;
-        border-radius: 30px;
-        text-decoration: none;
-        background: #014474;
-        color: white;
-    }
+    .pagination {
+    display: flex;
+    justify-content: center;
+  }
+  .page-item {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  .page-link {
+    padding: 8px 16px;
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .page-link.active {
+    background-color: #555;
+    color: #fff;
+  }
+    
 </style>
 
 <div id="set-con">
@@ -64,7 +44,15 @@
             <?php include 'function/selectShowOderAFBstate.php'; ?>
         </div>
     </div>
-    <div id="pagination">
-        <?php echo $pagination; ?>
+   
+   
+    <div class="pagination">
+  <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+    <div class="page-item">
+      <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=state_afb&page=<?php echo $i; ?>">
+        <?php echo $i; ?>
+      </a>
     </div>
+  <?php endfor; ?>
+</div>
 </div>
