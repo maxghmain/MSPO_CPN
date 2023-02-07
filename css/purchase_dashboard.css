@@ -59,7 +59,7 @@ ul{
 .sidbar{
     background: #006BBC;
     width: 15%;
-    height: 100vh;
+    height: auto;
     display: inline-block;
     justify-content: center;
     /*border: 1px solid red;*/
@@ -153,8 +153,10 @@ ul{
 
 /* Content */
 .contianer_detail_all{
+    position: relative;
     height: 90%;
     display: flex;
+    height: auto;
 }
 .container_content{
     height: 100%;
@@ -1011,7 +1013,7 @@ table td{
         justify-content: right;
         align-items: center;
         display: flex;
-        width: 50%;
+        width: 45%;
         margin-left:400px;
     }
     .button-add-afb a{

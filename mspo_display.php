@@ -50,32 +50,32 @@ if ($_SESSION['username'] == '') {
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=14" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=15" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=14" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=15" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=14" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=15" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=14" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=15" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=14" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=15" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=141" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=151" />
         <?php
         }
         ?>
@@ -226,6 +226,10 @@ if ($_SESSION['username'] == '') {
                     echo '<script>';
                     echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
                     echo '</script>';
+                }
+                else if($_SESSION['menu'] == "item_wait_for_use"){
+                    
+                    include 'component/content/afb_menu/item_wait_for_use.php';
                 }
                 ?>
             </div>

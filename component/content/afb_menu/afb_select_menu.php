@@ -17,8 +17,9 @@
                     <button id="insert-afb"><img src="img/icon/951971-1.png" width="250"><br><strong id="font-button">สถานะใบขอซื้อ</strong></button>
                 </td>
                 <td style="border: none;">
-
+                <a href="mspo_display.php?menu=item_wait_for_use">
                     <button id="insert-afb"><img src="img/icon/951971-2.png" width="250"><br><strong id="font-button">รายการขอซื้อที่รอใช้งาน</strong></button>
+                    </a>
                 </td>
             </tr>
         </table>
