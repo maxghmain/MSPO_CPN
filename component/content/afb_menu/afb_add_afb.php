@@ -24,10 +24,49 @@
             <textarea id="work_for" placeholder="หมายเหตุ...." style="height:50px;width:100%;"><?php echo $_SESSION['work_for']; ?></textarea>
         </div>
         <div style="display: flex;">
-            <p style="width: 100%;">ผู้ขอซื้อ : <input type="text" value="<?php echo $_SESSION['name_afb_ark']; ?>" id="name_afb_ark" required></p>
-            <p style="text-align: right;width: 100%;">ผู้อนุมัติ : <input type="text" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>" id="name_afb_ark_conf" required></p>
+            <p style="width: 100%;">ผู้ขอซื้อ : <input type="text" value="<?php echo $_SESSION['name_afb_ark']; ?>" id="name_afb_ark" placeholder="กรุณากรอก.." required></p>
+            <p style="width: 100%;">ผู้อนุมัติ : <input type="text" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>" id="name_afb_ark_conf" placeholder="กรุณากรอก.."required></p>
+            <p style="width: 100%;display:flex;">ฝ่าย :
+                            <select title="pleaseSelect" value="" id="afb_group_id" style="width:250px">
+                                <option value="1">
+                                    ว่าง
+                                </option>
+                                <option value="2">
+                                บัญชีและการเงิน (AC)
+                                </option>
+                                <option value="3">
+                                ทรัพยากรณ์มนุษย์ (HRM)
+                                </option>
+                                <option value="4">
+                                ข้อมูล (MIS)
+                                </option>
+                                <option value="5">
+                                การตลาด (MK)
+                                </option>
+                                <option value="6">
+                                จัดซื้อทัั่วไป (PC)
+                                </option>
+                                <option value="7">
+                                วิศวกรรม (EN)
+                                </option>
+                                <option value="8">
+                                ส่งเสริมการบริการ (QM)
+                                </option>
+                                <option value="9">
+                                คลังสินค้า (WH)
+                                </option>
+                                <option value="10">
+                                คลังวัสดุ (Store)
+                                </option>
+                                <option value="11">
+                                โรงงาน
+                                </option>
+
+                            </select>
+                            </p>
         </div>
         <br>
+       
         <div id="button-div">
             <div style="width: 50%;">
                 <?php
@@ -90,6 +129,7 @@
         var work_for = $("#work_for").val();
         var name_afb_ark = $("#name_afb_ark").val();
         var name_afb_ark_conf = $("#name_afb_ark_conf").val();
+        var afb_group_id = $("#afb_group_id").val();
         if (num_afb == "") {
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
@@ -121,8 +161,13 @@
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
             $("#work_for").focus();
+        }if (afb_group_id == "") {
+            $("#bg_pop_alert").show();
+            setTimeout(hide_pop_wrong_alert, 3000);
+            $("#afb_group_id").focus();
         }
-        if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "") {
+        
+        if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "") {
             $.ajax({
                 type: "GET",
                 url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData",
@@ -133,6 +178,7 @@
                     work_for: work_for,
                     name_afb_ark: name_afb_ark,
                     name_afb_ark_conf: name_afb_ark_conf,
+                    afb_group_id: afb_group_id,
                 }
             });
             window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData';

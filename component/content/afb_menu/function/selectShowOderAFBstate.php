@@ -32,6 +32,7 @@
    #info-afb-box-2{
     width: 100%;
    }
+   
 </style>
 
 
@@ -43,7 +44,13 @@
             $limit = 3; // number of items to show per page
             $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
             $offset = ($page - 1) * $limit;
-            $sql = "SELECT * FROM form_afb_tbl  WHERE state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
+            $sql = "SELECT form_afb_id,form_afb_number,form_afb_book_number,form_afb_write_date, 
+            form_afb_savesys_date,form_afb_people_name,form_afb_people_name_ok, 
+            form_afb_detail_work_for, b.group_name 
+            FROM form_afb_tbl as a 
+            INNER JOIN group_tbl as b 
+            ON a.group_id = b.group_id
+            WHERE state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($result)) {
                 echo '<div id="body-afb-box-1">';
@@ -60,7 +67,7 @@
                 echo 'เลขที่ :' . $row['form_afb_book_number'];
                 echo '</div>';
                 echo '</div>';
-
+                echo '<hr>';
                 echo '<div id="info-afb-box-1">';
                 echo '<div id="info-afb-box-2">';
                 echo 'วันที่เขียน :' . $row['form_afb_write_date'];
@@ -69,23 +76,39 @@
                 echo 'วันที่เพิ่มลงระบบ :' . $row['form_afb_savesys_date'];
                 echo '</div>';
                 echo '</div>';
-
+                echo '<hr>';
                 echo '<div id="info-afb-box-1">';
                 echo '<div id="info-afb-box-2">';
                 echo 'ผู้ขอซื้อ :' . $row['form_afb_people_name'];
                 echo '</div>';
                 echo '<div id="info-afb-box-2">';
                 echo 'ผู้อนุมัติ :' . $row['form_afb_people_name_ok'];
-               
                 echo '</div>';
                 echo '</div>';
+                echo '<hr>';
+                echo '<div id="info-afb-box-1">';
+                echo '<div id="info-afb-box-2">';
                 echo 'ใช้งานกับ :' . $row['form_afb_detail_work_for'];
-   
+                echo '</div>';
+                echo '<div id="info-afb-box-2">';
+                echo 'ฝ่าย :' . $row['group_name'];
+                echo '</div>';
+                echo '</div>';
                 $form_afb_id = $row['form_afb_id'];
-                $sql = "SELECT order_afb_id,name_ms_normal_name,name_ms_real_name,order_afb_value,unit_name,order_afb_note FROM order_afb_tbl as a INNER JOIN name_ms_tbl as b ON a.name_ms_id = b.name_ms_id INNER JOIN unit_tbl as c ON a.unit_id = c.unit_id WHERE form_afb_id = $form_afb_id ";
+                $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note 
+                FROM order_afb_tbl as a 
+                INNER JOIN name_ms_tbl as b 
+                ON a.name_ms_id = b.name_ms_id 
+                INNER JOIN unit_tbl as c 
+                ON a.unit_id = c.unit_id 
+                WHERE form_afb_id = '$form_afb_id'";
                 $count_data = 1;
                 $result1 = mysqli_query($conn, $sql);
+                if (!$result1) {
+                    die('Error: ' . mysqli_error($conn));
+                }
                 while ($row1 = mysqli_fetch_array($result1)) {
+                    echo '<div class="scoool">';
                     echo '<table >';
                     echo '<thead>';
                     echo '<tr>';
@@ -107,8 +130,8 @@
                     echo '</td>';
                     echo '<tr>';
                     echo '</table>';
-
-
+                    echo '</div>';
+              
                     $count_data ++;
                 }
                 echo '<br/>';
@@ -132,10 +155,7 @@ if ($total_pages > 1) {
         }
     }
 }
-
-// Close the database connection
 $conn->close();
 ?>
 
-<!-- Display the pagination links -->
 

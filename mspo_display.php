@@ -22,6 +22,7 @@ if ($_SESSION['username'] == '') {
     $work_for = $_GET['work_for'];
     $name_afb_ark = $_GET['name_afb_ark'];
     $name_afb_ark_conf = $_GET['name_afb_ark_conf'];
+    $afb_group_id = $_GET['afb_group_id'];
 
     
     /* รับ Session จากการเพิ่มรายการใบขอซื้อ */

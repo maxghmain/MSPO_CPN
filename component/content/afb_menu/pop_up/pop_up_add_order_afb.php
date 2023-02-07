@@ -19,7 +19,9 @@ $title_input =
         /*4*/
         'หน่วยนับ',
         /*5*/
-        'หมายเหตุ(หากมี)'
+        'ฝ่าย',
+        /*6*/
+        'หมายเหตุ'
     ]
 
 ?>
@@ -186,6 +188,7 @@ $title_input =
                     value_order_afb: value_order_afb,
                     unit_order_afb: unit_order_afb,
                     subject_order: subject_order,
+               
                 }
             });
             window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData';
