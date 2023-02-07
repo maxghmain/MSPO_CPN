@@ -7,9 +7,6 @@
 <style>
     #set-con {
         margin: 20px;
-        border-radius: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
     }
     #list-item-container{
         margin: 10px;
