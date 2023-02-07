@@ -13,7 +13,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['addData_id'] = $_GET['addData_id'];
     $_SESSION['state_excecut'] = $_GET['state_excecut'];
     $_SESSION['add_last_state'] = $_GET['add_last_state'];
-    
+    $_SESSION['open_afb_more_detail'] = $_GET['open_afb_more_detail'];
 
 
     $num_afb = $_GET['num_afb'];

@@ -14,6 +14,39 @@
         width: 100%;
         margin: 5px;
     }
+    .button_more_afb{
+        border: 0px solid red;
+        border-radius: 20px;
+        margin: 10px;
+        height: 40px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        background: #006ebc;
+        color: white;
+        font-family: Noto sans Thai;
+        cursor: pointer;
+        transition-duration: 0.3s;
+        width: 150px;
+        padding: 10px;
+
+    }
+    .button_more_afb:hover{
+        border: 0px solid red;
+        border-radius: 20px;
+        margin: 10px;
+        height: 40px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        background: #5d8d75;
+        color: white;
+        font-family: Noto sans Thai;
+        cursor: pointer;
+    }
+    #open_afb_more_detail{
+        text-decoration: none;
+    }
 </style>
 
 <?php
@@ -37,6 +70,9 @@ while ($row = mysqli_fetch_array($query)) {
     echo 'จำนวน : '.$row['order_afb_value'].' '.$row['unit_name'].'|';
     echo 'หมายเหตุ : '.$row['order_afb_note'];
     echo '</div>';
+    echo '<a id="open_afb_more_detail" href="mspo_display.php?menu=item_wait_for_use&item_Number='.$row['order_afb_id'].'" >';
+    echo '<button type="button" class="button_more_afb" >รายละเอียดรายการขอซื้อ</button>';
+    echo '</a>';
     echo '</div>';
     $counst++;
 }
