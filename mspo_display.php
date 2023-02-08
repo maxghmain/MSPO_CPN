@@ -33,6 +33,10 @@ if ($_SESSION['username'] == '') {
     $form_afb_id = $_SESSION['form_afb_id'];
    
     /* Session รับค่าที่พิมพ์เก็บไว้ เมื่อรีเฟรชจะไม่หายไป ของเพิ่มใบขอซื้อ */
+    $_SESSION['item_Number'] = $_GET['item_Number'];
+    $item_Number = $_GET['item_Number'];
+
+
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
     <!DOCTYPE html>
@@ -228,7 +232,9 @@ if ($_SESSION['username'] == '') {
                 }
                 else if($_SESSION['menu'] == "item_wait_for_use"){
                     include 'component/content/afb_menu/item_wait_for_use.php';
-                }if ($_SESSION['state_excecut'] == "show_detail_afb"){
+                    include 'component/content/afb_menu/pop_up/pop_up_afb_more_detail.php';
+                    
+                }if ($_SESSION['item_Number'] != ""){
                     
                         echo '<script>';
                         echo '$("#showDetails_afb").show();';

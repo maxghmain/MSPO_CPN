@@ -2,7 +2,7 @@
     .containner_item{
         border-radius: 10px;
         margin: 10px;
-        height: 60px;
+        height: auto;
         display: flex;
         justify-content: left;
         align-items: center;
@@ -48,11 +48,42 @@
     #open_afb_more_detail{
         text-decoration: none;
     }
+    #showdetail_butt{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 35px;
+        width: 170px;
+        margin: 5px;
+        background: #006ebc;
+        text-decoration: none;
+        border-radius: 30px;
+        padding: 5px;
+        color: white;
+        font-size: 14px;
+        transition-duration: 0.3s;
+    }
+    #showdetail_butt:hover{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 35px;
+        width: 170px;
+        margin: 5px;
+        background: #014474;
+        text-decoration: none;
+        border-radius: 30px;
+        padding: 5px;
+        color: white;
+        font-size: 14px;
+    }
 </style>
 
 <?php
-
-$sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note,form_afb_number,form_afb_book_number,a.state_id
+ $limit = 5; // number of items to show per page
+ $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
+ $offset = ($page - 1) * $limit;
+$sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note,form_afb_number,form_afb_book_number,a.state_id,form_afb_write_date
 FROM order_afb_tbl as a 
 INNER JOIN name_ms_tbl as b 
 ON a.name_ms_id = b.name_ms_id 
@@ -60,7 +91,7 @@ INNER JOIN unit_tbl as c
 ON a.unit_id = c.unit_id 
 INNER JOIN form_afb_tbl as d 
 ON a.form_afb_id = d.form_afb_id
-WHERE a.state_id = 3";
+WHERE a.state_id = 3 LIMIT $offset, $limit";
 $counst = 1;
 $query = mysqli_query($conn, $sql);
 if (!$query) {
@@ -69,16 +100,36 @@ if (!$query) {
 while ($row = mysqli_fetch_array($query)) {
     echo '<div class="containner_item">';
     echo '<div class="box-item-show-1">';
-    echo 'รายการที่ : '.$counst.' '.' เล่มที่ '.$row['form_afb_book_number'].' เลขที่ '.$row['form_afb_number'];
+    echo 'รายการที่ : '.$counst;
     echo '<br>';
+    echo ' เล่มที่ '.$row['form_afb_book_number'].' เลขที่ '.$row['form_afb_number'].' | '.' วันที่ :'.$row['form_afb_write_date'].'<br>';
     echo 'ชื่อไม่เป็นทางการ : '.$row['name_ms_normal_name'].'|'; 
     echo 'ชื่อเป็นทางการ : '.$row['name_ms_real_name'].'|';
     echo 'จำนวน : '.$row['order_afb_value'].' '.$row['unit_name'].'|';
     echo 'หมายเหตุ : '.$row['order_afb_note'];
     echo '</div>';
-    echo '<a id="open_afb_more_detail" href="mspo_display.php?menu=item_wait_for_use&item_Number='.$row['order_afb_id'].'&state_excecut=show_detail_afb" >';
-    echo '<button type="button" class="button_more_afb" >รายละเอียดรายการขอซื้อ</button>';
+    echo '<a id="showdetail_butt" href="mspo_display.php?menu=item_wait_for_use&item_Number='.$row['order_afb_id'].'" >รายละเอียดรายการขอซื้อ';
+
     echo '</a>';
     echo '</div>';
     $counst++;
 }
+$total_sql = "SELECT COUNT(*) as total FROM order_afb_tbl WHERE state_id = 3";
+$total_result = mysqli_query($conn, $total_sql);
+$total_row = mysqli_fetch_array($total_result);
+$total_items = $total_row['total'];
+$total_pages = ceil($total_items / $limit);
+
+// Create the pagination links
+$pagination = "";
+if ($total_pages > 1) {
+    for ($i = 1; $i <= $total_pages; $i++) {
+        if ($i == $page) {
+            $pagination .= "<strong>$i</strong>";
+        } else {
+            $pagination .= "<a href=mspo_display.php?menu=item_wait_for_use&page=$i'>$i</a>";
+        }
+    }
+}
+$conn->close();
+?>
