@@ -20,7 +20,7 @@ $row = mysqli_fetch_array($query);
 $unit_id = $row['unit_id'];
 
 $sql4 = "INSERT INTO order_afb_tbl(name_ms_id,order_afb_value,unit_id,order_afb_note,state_id,form_afb_id
-) VALUES ($name_ms_id,$value_order_afb,$unit_id,'$subject_order',3,$form_afb_id);";
+) VALUES ($name_ms_id,$value_order_afb,$unit_id,'$subject_order',5,$form_afb_id);";
 mysqli_query($conn, $sql4);
 
 ?>

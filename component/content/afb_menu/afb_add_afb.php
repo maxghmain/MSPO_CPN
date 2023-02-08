@@ -1,3 +1,4 @@
+
 <div class="container_title">
     <h5>เพิ่มใบขอซื้อ - Add Ask For Buy</h5>
     <div class="button-add-afb" >
@@ -122,6 +123,8 @@
     </div>
 </div>
 <script>
+    <?php include 'php/connect_db.php';
+session_start();?>
     function check_info_and_save() {
         var num_afb = $("#num_afb").val();
         var num_book_afb = $("#num_book_afb").val();
@@ -130,59 +133,69 @@
         var name_afb_ark = $("#name_afb_ark").val();
         var name_afb_ark_conf = $("#name_afb_ark_conf").val();
         var afb_group_id = $("#afb_group_id").val();
-        if (num_afb == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#num_afb").focus();
-            return;
-        }
-        if (num_book_afb == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#num_book_afb").focus();
-            return;
-        }
-        if (create_afb_date == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#create_afb_date").focus();
-        }
-        if (name_afb_ark == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#name_afb_ark").focus();
-        }
-        if (name_afb_ark_conf == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#name_afb_ark_conf").focus();
-        }
-        if (work_for == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#work_for").focus();
-        }if (afb_group_id == "") {
-            $("#bg_pop_alert").show();
-            setTimeout(hide_pop_wrong_alert, 3000);
-            $("#afb_group_id").focus();
-        }
-        
-        if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "") {
-            $.ajax({
-                type: "GET",
-                url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData",
-                data: {
-                    num_afb: num_afb,
-                    num_book_afb: num_book_afb,
-                    create_afb_date: create_afb_date,
-                    work_for: work_for,
-                    name_afb_ark: name_afb_ark,
-                    name_afb_ark_conf: name_afb_ark_conf,
-                    afb_group_id: afb_group_id,
-                }
-            });
-            window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData';
-        }
+        <?php
+        $form_afb_id = $_SESSION['form_afb_id'];
+        $sql ="SELECT * FROM order_afb_tbl WHERE form_afb_id = $form_afb_id";
+        $query = mysqli_query($conn,$sql);
+        if ($row=mysqli_fetch_array($query)) { ?>
+            if (num_afb == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#num_afb").focus();
+                return;
+            }
+            if (num_book_afb == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#num_book_afb").focus();
+                return;
+            }
+            if (create_afb_date == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#create_afb_date").focus();
+            }
+            if (name_afb_ark == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#name_afb_ark").focus();
+            }
+            if (name_afb_ark_conf == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#name_afb_ark_conf").focus();
+            }
+            if (work_for == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#work_for").focus();
+            }if (afb_group_id == "") {
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+                $("#afb_group_id").focus();
+            }
+            
+            
+            if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "") {
+                $.ajax({
+                    type: "GET",
+                    url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData",
+                    data: {
+                        num_afb: num_afb,
+                        num_book_afb: num_book_afb,
+                        create_afb_date: create_afb_date,
+                        work_for: work_for,
+                        name_afb_ark: name_afb_ark,
+                        name_afb_ark_conf: name_afb_ark_conf,
+                        afb_group_id: afb_group_id,
+                    }
+                });
+                window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData';
+            }
+            <?php }else{ ?>
+                $("#bg_pop_alert").show();
+                setTimeout(hide_pop_wrong_alert, 3000);
+            <?php }?>
     }
 
     function loading_hide() {
@@ -197,3 +210,4 @@
         $("#bg_pop_alert_succ").hide();
     }
 </script>
+<?php   mysqli_close($conn); ?>

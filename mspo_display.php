@@ -227,8 +227,12 @@ if ($_SESSION['username'] == '') {
                     echo '</script>';
                 }
                 else if($_SESSION['menu'] == "item_wait_for_use"){
-                    
                     include 'component/content/afb_menu/item_wait_for_use.php';
+                }if ($_SESSION['state_excecut'] == "show_detail_afb"){
+                    
+                        echo '<script>';
+                        echo '$("#showDetails_afb").show();';
+                        echo '</script>';
                 }
                 ?>
             </div>
