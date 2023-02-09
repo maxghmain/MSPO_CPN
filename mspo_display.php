@@ -223,9 +223,13 @@ if ($_SESSION['username'] == '') {
 
 
                 }else if($_SESSION['menu'] == "state_afb"){
-                    
                     include 'component/content/afb_menu/state_afb.php';
-                }else if($_SESSION['state_excecut'] == "saveData"){
+                    if ($_SESSION['state_excecut'] == "cancle_afb"){
+                        include 'component/content/afb_menu/function/cancle_afb.php';
+                    }
+                }
+                
+                else if($_SESSION['state_excecut'] == "saveData"){
                     include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
                     echo '<script>';
                     echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';

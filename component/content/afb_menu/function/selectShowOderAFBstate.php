@@ -32,6 +32,25 @@
    #info-afb-box-2{
     width: 100%;
    }
+   #cancel-afb-state{
+    padding: 5px;
+    margin:5px;
+    border-radius: 50px;
+    background: #cd5c5c;
+    color: white;
+    text-decoration: none;   
+    transition-duration: 0.3s; 
+    cursor: pointer;
+}
+#cancel-afb-state:hover{
+    padding: 5px;
+    margin:5px;
+    border-radius: 50px;
+    background: #cc353f;
+    color: white;
+    text-decoration: none;    
+    cursor: pointer;
+}
    
 </style>
 
@@ -45,13 +64,18 @@
             $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
             $offset = ($page - 1) * $limit;
             $sql = "SELECT form_afb_id,form_afb_number,form_afb_book_number,form_afb_write_date, 
-            form_afb_savesys_date,form_afb_people_name,form_afb_people_name_ok, 
+            form_afb_savesys_date,form_afb_people_name,form_afb_people_name_ok,a.state_id,state_name,
             form_afb_detail_work_for, b.group_name 
             FROM form_afb_tbl as a 
             INNER JOIN group_tbl as b 
             ON a.group_id = b.group_id
-            WHERE state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
+            INNER JOIN state_tbl as c
+            ON c.state_id = a.state_id
+            WHERE a.state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
             $result = mysqli_query($conn, $sql);
+            if (!$result) {
+                die('Error: ' . mysqli_error($conn));
+            }
             while ($row = mysqli_fetch_array($result)) {
                 echo '<div id="body-afb-box-1">';
                 echo '<div id="body-afb-box-2">';
@@ -94,6 +118,16 @@
                 echo 'ฝ่าย :' . $row['group_name'];
                 echo '</div>';
                 echo '</div>';
+                echo '<hr>';
+                echo '<div id="info-afb-box-1">';
+                echo '<div id="info-afb-box-2">';
+                echo 'สถานะ :' . $row['state_name'];
+                echo '</div>';
+                echo '<div id="info-afb-box-2">';
+                echo 'Action :'.'<a id="cancel-afb-state" href="mspo_display.php?menu=state_afb&page='.$page.'&form_afb_id='.$form_afb_id.'&state_excecut=cancle_afb">ยกเลิกใบขอซื้อ</a>';
+                echo '</div>';
+                echo '</div>';
+                echo '<br>';
                 $form_afb_id = $row['form_afb_id'];
                 $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note 
                 FROM order_afb_tbl as a 
@@ -131,11 +165,16 @@
                     echo '<tr>';
                     echo '</table>';
                     echo '</div>';
+                    
+                    
                     $count_data ++;
                 }
                 echo '<br/>';
+                
                 echo '</div>';
+                
                 echo '</div>';
+                
             }
             $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = 1";
 $total_result = mysqli_query($conn, $total_sql);
