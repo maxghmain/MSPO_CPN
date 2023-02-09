@@ -94,7 +94,7 @@ include 'php/connect_db.php';
         <div id="box-detail-1">
             <div id="box_butt_close">
                 <div id="close_edit_order_afb_butt">
-                    <a href="mspo_display.php?menu=item_wait_for_use">X</a>
+                    <a href="mspo_display.php?menu=item_wait_for_use&page=<?php echo $_SESSION['page'] ?>">X</a>
                 </div>
             </div>
             <div id="header-detail">

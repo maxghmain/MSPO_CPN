@@ -13,6 +13,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['addData_id'] = $_GET['addData_id'];
     $_SESSION['state_excecut'] = $_GET['state_excecut'];
     $_SESSION['add_last_state'] = $_GET['add_last_state'];
+    $_SESSION['page'] = $_GET['page'];
 
 
     $num_afb = $_GET['num_afb'];
@@ -239,7 +240,11 @@ if ($_SESSION['username'] == '') {
                         echo '<script>';
                         echo '$("#showDetails_afb").show();';
                         echo '</script>';
-                }else if ($_SESSION['menu'] == "po_select_menu")
+                }else if ($_SESSION['menu'] == "po_select_menu"){
+                    include 'component/content/po_menu/po_select_menu.php';
+                }else if ($_SESSION['menu'] == "po_material"){
+                    include 'component/content/po_menu/po_material.php';
+                }
                 ?>
             </div>
         </div>

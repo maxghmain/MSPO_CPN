@@ -78,8 +78,8 @@
         font-size: 14px;
     }
 </style>
-
 <?php
+session_start();
  $limit = 5; // number of items to show per page
  $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
  $offset = ($page - 1) * $limit;
@@ -92,7 +92,7 @@ ON a.unit_id = c.unit_id
 INNER JOIN form_afb_tbl as d 
 ON a.form_afb_id = d.form_afb_id
 WHERE a.state_id = 3 LIMIT $offset, $limit";
-$counst = 1;
+$counst = ($offset + 1);
 $query = mysqli_query($conn, $sql);
 if (!$query) {
     die('Error: ' . mysqli_error($conn));
@@ -108,8 +108,7 @@ while ($row = mysqli_fetch_array($query)) {
     echo 'จำนวน : '.$row['order_afb_value'].' '.$row['unit_name'].'|';
     echo 'หมายเหตุ : '.$row['order_afb_note'];
     echo '</div>';
-    echo '<a id="showdetail_butt" href="mspo_display.php?menu=item_wait_for_use&item_Number='.$row['order_afb_id'].'" >รายละเอียดรายการขอซื้อ';
-
+    echo '<a id="showdetail_butt" href="mspo_display.php?menu=item_wait_for_use&page='.$_SESSION['page'].'&item_Number='.$row['order_afb_id'].'" >รายละเอียดรายการขอซื้อ';
     echo '</a>';
     echo '</div>';
     $counst++;

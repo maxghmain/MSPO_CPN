@@ -82,7 +82,7 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/9177009.png" style="width: 20px" height="20px" />
-                    <a href="#">สร้างและออก PO</a>
+                    <a href="mspo_display.php?menu=po_select_menu">สร้างและออก PO</a>
                 </div>
             </div>
             <div class="manu-list">
