@@ -25,8 +25,8 @@
             <textarea id="work_for" placeholder="หมายเหตุ...." style="height:50px;width:100%;"><?php echo $_SESSION['work_for']; ?></textarea>
         </div>
         <div style="display: flex;">
-            <p style="width: 100%;">ผู้ขอซื้อ : <input type="text" value="<?php echo $_SESSION['name_afb_ark']; ?>" id="name_afb_ark" placeholder="กรุณากรอก.." required></p>
-            <p style="width: 100%;">ผู้อนุมัติ : <input type="text" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>" id="name_afb_ark_conf" placeholder="กรุณากรอก.."required></p>
+            <p style="width: 100%;">ผู้ขอซื้อ : <input type="text" id="name_afb_ark" value="<?php echo $_SESSION['name_afb_ark']; ?>"  placeholder="กรุณากรอก.." required></p>
+            <p style="width: 100%;">ผู้อนุมัติ : <input type="text" id="name_afb_ark_conf" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>"  placeholder="กรุณากรอก.."required></p>
             <p style="width: 100%;display:flex;">ฝ่าย :
                             <select title="pleaseSelect" value="" id="afb_group_id" style="width:250px">
                                 <option value="1">
