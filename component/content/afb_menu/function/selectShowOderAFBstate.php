@@ -131,7 +131,6 @@
                     echo '<tr>';
                     echo '</table>';
                     echo '</div>';
-              
                     $count_data ++;
                 }
                 echo '<br/>';
