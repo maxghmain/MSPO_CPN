@@ -239,7 +239,7 @@ if ($_SESSION['username'] == '') {
                         echo '<script>';
                         echo '$("#showDetails_afb").show();';
                         echo '</script>';
-                }
+                }else if ($_SESSION['menu'] == "po_select_menu")
                 ?>
             </div>
         </div>
