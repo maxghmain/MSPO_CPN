@@ -29,8 +29,19 @@
             <p style="width: 100%;">ผู้อนุมัติ : <input type="text" id="name_afb_ark_conf" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>"  placeholder="กรุณากรอก.."required></p>
             <p style="width: 100%;display:flex;">ฝ่าย :
                             <select title="pleaseSelect" value="" id="afb_group_id" style="width:250px">
-                                <option value="ว่าง">
-                                    ว่าง
+                                <option value="<?php echo  $_SESSION['afb_group_id'];?>">
+                                    <?php
+                                    include 'php/connect_db.php';
+                                    $sql = "SELECT group_name FROM group_tbl WHERE group_id = ".$_SESSION['afb_group_id'];
+                                    $result = mysqli_query($conn, $sql);
+                                    while ( $row = mysqli_fetch_array($result)){
+                                        echo $row['group_name'];
+
+                                    }
+                                    ?>
+                                </option>
+                                <option value="anyvalue" selected>
+                                ---กรุณาเลือกฝ่าย---
                                 </option>
                                 <option value="2">
                                 บัญชีและการเงิน (AC)
@@ -169,14 +180,14 @@ session_start();?>
                 $("#bg_pop_alert").show();
                 setTimeout(hide_pop_wrong_alert, 3000);
                 $("#work_for").focus();
-            }if (afb_group_id == "ว่าง") {
+            }if (afb_group_id == "anyvalue") {
                 $("#bg_pop_alert").show();
                 setTimeout(hide_pop_wrong_alert, 3000);
                 $("#afb_group_id").focus();
             }
             
             
-            if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "ว่าง") {
+            if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "anyvalue") {
                 $.ajax({
                     type: "GET",
                     url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData",
@@ -191,6 +202,7 @@ session_start();?>
                     }
                 });
                 window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData';
+                
             }
             <?php }else{ ?>
                 $("#bg_pop_alert").show();

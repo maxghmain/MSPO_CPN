@@ -88,9 +88,8 @@ $title_input =
                         </div>
                         <div id="input_form">
                             <select title="pleaseSelect" value="" id="unit_order_afb">
-                            <option value="<?php if($_SESSION['unit_order_afb']==""){ echo 'กรุณาเลือกหน่วย';}else{ echo $_SESSION['unit_order_afb']; } ?>"></option>
-                                   
-                                <option value="1">
+                            
+                                <option value="ก้อน">
                                     ก้อน
                                 </option>
 
