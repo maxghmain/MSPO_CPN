@@ -29,7 +29,7 @@
             <p style="width: 100%;">ผู้อนุมัติ : <input type="text" id="name_afb_ark_conf" value="<?php echo $_SESSION['name_afb_ark_conf']; ?>"  placeholder="กรุณากรอก.."required></p>
             <p style="width: 100%;display:flex;">ฝ่าย :
                             <select title="pleaseSelect" value="" id="afb_group_id" style="width:250px">
-                                <option value="1">
+                                <option value="ว่าง">
                                     ว่าง
                                 </option>
                                 <option value="2">
@@ -169,14 +169,14 @@ session_start();?>
                 $("#bg_pop_alert").show();
                 setTimeout(hide_pop_wrong_alert, 3000);
                 $("#work_for").focus();
-            }if (afb_group_id == "") {
+            }if (afb_group_id == "ว่าง") {
                 $("#bg_pop_alert").show();
                 setTimeout(hide_pop_wrong_alert, 3000);
                 $("#afb_group_id").focus();
             }
             
             
-            if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "") {
+            if (num_book_afb != "" && num_book_afb != "" && create_afb_date != "" && work_for != "" && name_afb_ark != "" && name_afb_ark_conf != "" && afb_group_id != "ว่าง") {
                 $.ajax({
                     type: "GET",
                     url: "../../mspo_cpn/mspo_display.php?menu=state_afb=&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData",

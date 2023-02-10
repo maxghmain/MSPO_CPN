@@ -17,5 +17,5 @@ $_SESSION['state_excecut'] = $_GET['state_excecut'];*/
     $_SESSION['value_order_afb'] = $_GET['value_order_afb'];
     $_SESSION['unit_order_afb'] = $_GET['unit_order_afb'];
     $_SESSION['subject_order'] = $_GET['subject_order'];
-    $_SESSION['group_id'] = $_GET['group_id'];
+    $_SESSION['afb_group_id'] = $_GET['afb_group_id'];
 /***************************************************************/
