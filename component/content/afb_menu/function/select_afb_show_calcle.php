@@ -50,14 +50,21 @@
     color: white;
     text-decoration: none;    
     cursor: pointer;
-}#state_name_wait{
+}
+#state_name_cancle{
+    padding: 5px;
+    border-radius: 30px;
+    background: #cc353f;
+    color:white;
+    margin: 5px;
+}
+#state_name_wait{
     padding: 5px;
     border-radius: 30px;
     background: #7bae6a;
     color:white;
     margin: 5px;
 }
-   
 </style>
 
 
@@ -77,7 +84,7 @@
             ON a.group_id = b.group_id
             INNER JOIN state_tbl as c
             ON c.state_id = a.state_id
-            WHERE a.state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
+            WHERE a.state_id  ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
             $result = mysqli_query($conn, $sql);
             if (!$result) {
                 die('Error: ' . mysqli_error($conn));
@@ -127,10 +134,13 @@
                 echo '<hr>';
                 echo '<div id="info-afb-box-1">';
                 echo '<div id="info-afb-box-2">';
-                echo 'สถานะ :' .'<a id="state_name_wait">'. $row['state_name']."</a>";
-                echo '</div>';
-                echo '<div id="info-afb-box-2">';
-                echo 'Action :'.'<a id="cancel-afb-state" href="mspo_display.php?menu=state_afb&page='.$page.'&form_afb_id='.$row['form_afb_id'].'&state_excecut=cancle_afb">ยกเลิกใบขอซื้อ</a>';
+                if ($row['state_id'] == 6){
+                    echo 'สถานะ :'.'<a id="state_name_cancle">' . $row['state_name'].'</a>';
+                }
+                if($row['state_id'] == 1){
+                    echo 'สถานะ :'.'<a id="state_name_wait">' . $row['state_name'].'</a>';
+                }
+                
                 echo '</div>';
                 echo '</div>';
                 echo '<br>';
@@ -171,8 +181,6 @@
                     echo '<tr>';
                     echo '</table>';
                     echo '</div>';
-                    
-                    
                     $count_data ++;
                 }
                 echo '<br/>';
@@ -182,7 +190,7 @@
                 echo '</div>';
                 
             }
-            $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = 1";
+            $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = state_id";
 $total_result = mysqli_query($conn, $total_sql);
 $total_row = mysqli_fetch_array($total_result);
 $total_items = $total_row['total'];
@@ -195,7 +203,7 @@ if ($total_pages > 1) {
         if ($i == $page) {
             $pagination .= "<strong>$i</strong>";
         } else {
-            $pagination .= "<a href=mspo_display.php?menu=state_afb&page=$i'>$i</a>";
+            $pagination .= "<a href=mspo_display.php?menu=history_afb&page=$i'>$i</a>";
         }
     }
 }
