@@ -14,6 +14,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['state_excecut'] = $_GET['state_excecut'];
     $_SESSION['add_last_state'] = $_GET['add_last_state'];
     $_SESSION['page'] = $_GET['page'];
+    $_SESSION['cancle_afb'] = $_GET['cancle_afb'];
 
 
     $num_afb = $_GET['num_afb'];
@@ -224,8 +225,11 @@ if ($_SESSION['username'] == '') {
 
                 }else if($_SESSION['menu'] == "state_afb"){
                     include 'component/content/afb_menu/state_afb.php';
-                    if ($_SESSION['state_excecut'] == "cancle_afb"){
+                    if ($form_afb_id != "" && $_SESSION['state_excecut'] == "cancle_afb"){
                         include 'component/content/afb_menu/function/cancle_afb.php';
+                        echo '<script>';
+                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
+                    echo '</script>';
                     }
                 }
                 
@@ -238,6 +242,10 @@ if ($_SESSION['username'] == '') {
                 else if($_SESSION['menu'] == "item_wait_for_use"){
                     include 'component/content/afb_menu/item_wait_for_use.php';
                     include 'component/content/afb_menu/pop_up/pop_up_afb_more_detail.php';
+                    
+                } else if($_SESSION['menu'] == "history_afb"){
+                    include 'component/content/afb_menu/history_afb.php';
+                    
                     
                 }if ($_SESSION['item_Number'] != ""){
                     

@@ -71,7 +71,7 @@
             ON a.group_id = b.group_id
             INNER JOIN state_tbl as c
             ON c.state_id = a.state_id
-            WHERE a.state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
+            WHERE a.state_id = 6 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
             $result = mysqli_query($conn, $sql);
             if (!$result) {
                 die('Error: ' . mysqli_error($conn));
@@ -122,9 +122,6 @@
                 echo '<div id="info-afb-box-1">';
                 echo '<div id="info-afb-box-2">';
                 echo 'สถานะ :' . $row['state_name'];
-                echo '</div>';
-                echo '<div id="info-afb-box-2">';
-                echo 'Action :'.'<a id="cancel-afb-state" href="mspo_display.php?menu=state_afb&page='.$page.'&form_afb_id='.$row['form_afb_id'].'&state_excecut=cancle_afb">ยกเลิกใบขอซื้อ</a>';
                 echo '</div>';
                 echo '</div>';
                 echo '<br>';
