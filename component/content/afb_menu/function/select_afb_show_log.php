@@ -65,6 +65,10 @@
     color:white;
     margin: 5px;
 }
+#item-log{
+    height: 55px;
+    overflow: auto;
+}
 </style>
 
 
@@ -144,6 +148,7 @@
                 echo '</div>';
                 echo '</div>';
                 echo '<br>';
+                echo '<div id="item-log">';
                 $form_afb_id = $row['form_afb_id'];
                 $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note 
                 FROM order_afb_tbl as a 
@@ -181,10 +186,12 @@
                     echo '<tr>';
                     echo '</table>';
                     echo '</div>';
+                    
                     $count_data ++;
                 }
-                echo '<br/>';
                 
+                echo '</div>';
+                echo '<br>';
                 echo '</div>';
                 
                 echo '</div>';

@@ -45,7 +45,7 @@
 <div id="set-con">
   <div id="container-afb-box">
     <div class="margin-box">
-      <?php include 'function/select_afb_show_calcle.php'; ?>
+      <?php include 'function/select_afb_show_log.php'; ?>
     </div>
   </div>
 
