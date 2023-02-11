@@ -15,6 +15,8 @@ if ($_SESSION['username'] == '') {
     $_SESSION['add_last_state'] = $_GET['add_last_state'];
     $_SESSION['page'] = $_GET['page'];
     $_SESSION['cancle_afb'] = $_GET['cancle_afb'];
+    $_SESSION['po_material'] = $_GET['po_material'];
+    $_SESSION['add_afb'] = $_GET['add_afb'];
 
 
     $num_afb = $_GET['num_afb'];
@@ -25,7 +27,7 @@ if ($_SESSION['username'] == '') {
     $name_afb_ark_conf = $_GET['name_afb_ark_conf'];
     $afb_group_id = $_GET['afb_group_id'];
 
-    
+
     /* รับ Session จากการเพิ่มรายการใบขอซื้อ */
     $name_not_order_afb = $_GET['name_not_order_afb'];
     $name_yes_order_afb = $_GET['name_yes_order_afb'];
@@ -33,7 +35,7 @@ if ($_SESSION['username'] == '') {
     $unit_order_afb = $_GET['unit_order_afb'];
     $subject_order = $_GET['subject_order'];
     $form_afb_id = $_SESSION['form_afb_id'];
-   
+
     /* Session รับค่าที่พิมพ์เก็บไว้ เมื่อรีเฟรชจะไม่หายไป ของเพิ่มใบขอซื้อ */
     $_SESSION['item_Number'] = $_GET['item_Number'];
     $item_Number = $_GET['item_Number'];
@@ -220,42 +222,38 @@ if ($_SESSION['username'] == '') {
                     <?php
                             }*/
                     }
-
-
-
-                }else if($_SESSION['menu'] == "state_afb"){
+                } else if ($_SESSION['menu'] == "state_afb") {
                     include 'component/content/afb_menu/state_afb.php';
-                    if ($form_afb_id != "" && $_SESSION['state_excecut'] == "cancle_afb"){
+                    if ($form_afb_id != "" && $_SESSION['state_excecut'] == "cancle_afb") {
                         include 'component/content/afb_menu/function/cancle_afb.php';
+
                         echo '<script>';
-                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
-                    echo '</script>';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
+                        echo '</script>';
                     }
-                }
-                
-                else if($_SESSION['state_excecut'] == "saveData"){
+                } else if ($_SESSION['state_excecut'] == "saveData") {
                     include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
                     echo '<script>';
                     echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
                     echo '</script>';
-                }
-                else if($_SESSION['menu'] == "item_wait_for_use"){
+                } else if ($_SESSION['menu'] == "item_wait_for_use") {
                     include 'component/content/afb_menu/item_wait_for_use.php';
                     include 'component/content/afb_menu/pop_up/pop_up_afb_more_detail.php';
-                    
-                } else if($_SESSION['menu'] == "history_afb"){
+                } else if ($_SESSION['menu'] == "history_afb") {
                     include 'component/content/afb_menu/history_afb.php';
-                    
-                    
-                }if ($_SESSION['item_Number'] != ""){
-                    
-                        echo '<script>';
-                        echo '$("#showDetails_afb").show();';
-                        echo '</script>';
-                }else if ($_SESSION['menu'] == "po_select_menu"){
+                }
+                if ($_SESSION['item_Number'] != "") {
+
+                    echo '<script>';
+                    echo '$("#showDetails_afb").show();';
+                    echo '</script>';
+                } else if ($_SESSION['menu'] == "po_select_menu") {
                     include 'component/content/po_menu/po_select_menu.php';
-                }else if ($_SESSION['menu'] == "po_material"){
+                } else if ($_SESSION['menu'] == "po_material") {
                     include 'component/content/po_menu/po_material.php';
+                    if($_SESSION['add_afb'] == "afb"){
+                        include 'component/content/po_menu/popup/add_po_afb.php';
+                    }
                 }
                 ?>
             </div>

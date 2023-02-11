@@ -102,6 +102,18 @@
                 echo '<br>';
                 echo '<div id="info-afb-box-1">';
                 echo '<div id="info-afb-box-2">';
+                if ($row['state_id'] == 6){
+                    echo 'สถานะ :'.'<a id="state_name_cancle">' . $row['state_name'].'</a>';
+                }
+                if($row['state_id'] == 1){
+                    echo 'สถานะ :'.'<a id="state_name_wait">' . $row['state_name'].'</a>';
+                }
+                 
+                echo '</div>';
+                echo '</div>';
+                echo '<hr>';
+                echo '<div id="info-afb-box-1">';
+                echo '<div id="info-afb-box-2">';
                 echo 'เล่มที่ :' . $row['form_afb_number'];
                 echo '</div>';
                 echo '<div id="info-afb-box-2">';
@@ -136,17 +148,9 @@
                 echo '</div>';
                 echo '</div>';
                 echo '<hr>';
-                echo '<div id="info-afb-box-1">';
-                echo '<div id="info-afb-box-2">';
-                if ($row['state_id'] == 6){
-                    echo 'สถานะ :'.'<a id="state_name_cancle">' . $row['state_name'].'</a>';
-                }
-                if($row['state_id'] == 1){
-                    echo 'สถานะ :'.'<a id="state_name_wait">' . $row['state_name'].'</a>';
-                }
-                
-                echo '</div>';
-                echo '</div>';
+               
+               
+               
                 echo '<br>';
                 echo '<div id="item-log">';
                 $form_afb_id = $row['form_afb_id'];

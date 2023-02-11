@@ -1,5 +1,5 @@
 <div class="container_title">
-  <h5>สถานะใบขอซื้อ - State Ask For Buy</h5>
+  <h5>ใบขอซื้อที่รอใช้งาน - State Ask For Buy</h5>
   <div class="button-add-afb">
     <a href="mspo_display.php?menu=afb_add_afb">เพิ่มใบขอซื้อ</a>
   </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-
+<br><br><br>
   <div class="pagination">
     <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
       <div class="page-item">

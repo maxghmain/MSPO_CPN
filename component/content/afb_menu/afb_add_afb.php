@@ -40,9 +40,7 @@
                                     }
                                     ?>
                                 </option>
-                                <option value="anyvalue" selected>
-                                ---กรุณาเลือกฝ่าย---
-                                </option>
+
                                 <option value="2">
                                 บัญชีและการเงิน (AC)
                                 </option>
@@ -202,7 +200,7 @@ session_start();?>
                     }
                 });
                 window.location = '../../mspo_cpn/mspo_display.php?menu=state_afb&form_afb_id=<?php echo $form_afb_id ?>&state_excecut=saveData';
-                
+               
             }
             <?php }else{ ?>
                 $("#bg_pop_alert").show();
