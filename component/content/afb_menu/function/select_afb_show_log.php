@@ -163,7 +163,7 @@
                 ON a.unit_id = c.unit_id 
                 INNER JOIN form_afb_tbl as d
                 ON a.form_afb_id = d.form_afb_id
-                WHERE a.form_afb_id = '$form_afb_id' AND (d.state_id = 3 OR d.state_id = 6)";
+                WHERE a.form_afb_id = '$form_afb_id' AND (d.state_id = 1 OR d.state_id = 6)";
                 $count_data = 1;
                 $result1 = mysqli_query($conn, $sql);
                 if (!$result1) {
@@ -204,7 +204,7 @@
                 echo '</div>';
                 
             }
-            $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = state_id";
+            $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = 1 OR state_id = 6";
 $total_result = mysqli_query($conn, $total_sql);
 $total_row = mysqli_fetch_array($total_result);
 $total_items = $total_row['total'];
