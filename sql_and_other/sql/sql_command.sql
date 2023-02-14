@@ -153,9 +153,9 @@ CREATE TABLE IF NOT EXISTS po_tbl(
 
 CREATE TABLE IF NOT EXISTS po_people_afb_tbl(
     po_people_afb_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    po_people_afb_name VARCHAR(50) NOT NULL COLLATE utf8mb4_unicode_ci,
-    po_id INT NOT NULL,
-    group_id INT NOT NULL,
+    po_people_afb_name VARCHAR(50) NULL COLLATE utf8mb4_unicode_ci,
+    po_id INT NULL,
+    group_id INT NULL,
     FOREIGN KEY(po_id) REFERENCES po_tbl(po_id),
     FOREIGN KEY(group_id) REFERENCES group_tbl(group_id)
 )ENGINE = INNODB DEFAULT CHARSET UTF8MB4;

@@ -100,7 +100,7 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/7387663.png" style="width: 20px" height="20px" />
-                    <a href="">จำนวนวัสดุคงเหลือ</a>
+                    <a href="mspo_display.php?menu=total_items">จำนวนวัสดุคงเหลือ</a>
                 </div>
             </div>
             <div class="manu-list">

@@ -254,7 +254,9 @@ if ($_SESSION['username'] == '') {
                     if($_SESSION['add_item'] == "already_selected") {
                         include 'component/content/po_menu/popup/add_po_afb.php';
                     }
-                }
+                }else if ($_SESSION['menu'] == "total_items") {
+                   include 'component/content/total_item/total_item.php';
+                    }
                 ?>
             </div>
         </div>

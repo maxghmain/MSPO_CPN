@@ -44,6 +44,9 @@ include 'php/connect_db.php'
         color: white;
         text-decoration: none;
     }
+    #box-po-2{
+        display: flex;
+    }
 </style>
 <!--Content-->
 <div id="container-po-content">
@@ -51,13 +54,16 @@ include 'php/connect_db.php'
         <div id="content-po">
             <div id="box-po">
                 <div id="box-po-1">
+                    <div id="box-po-2">
                     <p>เลขที่ออกใบ PO : PO <input type="number" id="po-number" placeholder="กรุณากรอก" /></p>
+                    </div>
+                    
                 </div>
                 <div id="box-po-1">
                     <p>เลขที่ใบขอซื้อ : <strong>เลขที่</strong> <input type="text" id="po-number" placeholder="กรุณาเลือกใบขอซื้อ" readonly /> <strong>เล่มที่</strong> <input type="text" id="po-number" placeholder="กรุณาเลือกใบขอซื้อ" readonly /></p>
                 </div>
                 <div id="box-po-1">
-                    <p>ผู้ขอซื้อ : <input type="text" id="po-afb" placeholder="กรุณากรอกชื่อผู้ขอซื้อ" readonly /> ผู้อนุมัติ : <input type="text" id="po-afb" placeholder="กรุณากรอกชื่อผู้ขอซื้อ" readonly /></p>
+                    <p>ผู้ขอซื้อ : <input type="text" id="po-afb" placeholder="กรุณากรอกชื่อผู้ขอซื้อ" readonly /> </p>
                 </div>
             </div>
             <div id="box-po">
