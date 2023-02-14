@@ -88,7 +88,7 @@
             ON a.group_id = b.group_id
             INNER JOIN state_tbl as c
             ON c.state_id = a.state_id
-            WHERE a.state_id  ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
+            WHERE a.state_id = 1 OR a.state_id = 6  ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
             $result = mysqli_query($conn, $sql);
             if (!$result) {
                 die('Error: ' . mysqli_error($conn));
@@ -108,6 +108,7 @@
                 if($row['state_id'] == 1){
                     echo 'สถานะ :'.'<a id="state_name_wait">' . $row['state_name'].'</a>';
                 }
+                
                  
                 echo '</div>';
                 echo '</div>';
@@ -154,13 +155,15 @@
                 echo '<br>';
                 echo '<div id="item-log">';
                 $form_afb_id = $row['form_afb_id'];
-                $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note 
+                $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note,a.form_afb_id,d.state_id 
                 FROM order_afb_tbl as a 
                 INNER JOIN name_ms_tbl as b 
                 ON a.name_ms_id = b.name_ms_id 
                 INNER JOIN unit_tbl as c 
                 ON a.unit_id = c.unit_id 
-                WHERE form_afb_id = '$form_afb_id'";
+                INNER JOIN form_afb_tbl as d
+                ON a.form_afb_id = d.form_afb_id
+                WHERE a.form_afb_id = '$form_afb_id' AND (d.state_id = 3 OR d.state_id = 6)";
                 $count_data = 1;
                 $result1 = mysqli_query($conn, $sql);
                 if (!$result1) {
