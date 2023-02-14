@@ -69,7 +69,7 @@ include 'php/connect_db.php'
 
         </div>
         <div>
-        <a id="butt-add-afb-po">เพิ่มรายการวัสดุ</a>
+        <a id="butt-add-afb-po" href="mspo_display.php?menu=po_material&add_item=already_selected">เพิ่มรายการวัสดุ</a>
         </div>
         
         <br>
@@ -92,6 +92,15 @@ include 'php/connect_db.php'
                             </td>
                             <td style="width: 20%;">
                                 หมายเหตุ
+                            </td>
+                            <td style="width: 7%;">
+                                <strong>ปริมาณสั่ง</strong>
+                            </td>
+                            <td style="width: 7%;">
+                                <strong>หน่วยนับ</strong>
+                            </td>
+                            <td style="width: 7%;">
+                                <strong>ราคา</strong>
                             </td>
                             <td style="width: 7%;">
                                 <strong>แก้ไข</strong>

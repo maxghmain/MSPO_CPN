@@ -62,9 +62,7 @@ include 'php/connect_db.php'; ?>
         margin: 10px;
         height: 95%;
         /* border: 1px solid red;*/
-        display: flex;
-        align-items: center;
-        justify-content: center;
+
     }
 
     #body-afb-box-1 {
@@ -195,38 +193,124 @@ include 'php/connect_db.php'; ?>
         background: #014474;
         color: white;
     }
+
     .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
 
-  .pagination .page-item {
-    margin: 0 10px;
-  }
+    .pagination .page-item {
+        margin: 0 10px;
+    }
 
-  .pagination .page-link {
-    color: #333;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: all 0.3s ease-in-out;
-  }
+    .pagination .page-link {
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: all 0.3s ease-in-out;
+    }
 
-  .pagination .page-link:hover,
-  .pagination .page-link:focus {
-    background-color: #f2f2f2;
-    outline: none;
-  }
+    .pagination .page-link:hover,
+    .pagination .page-link:focus {
+        background-color: #f2f2f2;
+        outline: none;
+    }
 
-  .pagination .page-link.active {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-  }
+    .pagination .page-link.active {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .containner_item {
+        border-radius: 10px;
+        margin: 10px;
+        height: auto;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    .box-item-show-1 {
+        /* border: 1px solid red;*/
+        display: block;
+        width: 100%;
+        margin: 5px;
+    }
+
+    .button_more_afb {
+        border: 0px solid red;
+        border-radius: 20px;
+        margin: 10px;
+        height: 40px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        background: #006ebc;
+        color: white;
+        font-family: Noto sans Thai;
+        cursor: pointer;
+        transition-duration: 0.3s;
+        width: 150px;
+        padding: 10px;
+
+    }
+
+    .button_more_afb:hover {
+        border: 0px solid red;
+        border-radius: 20px;
+        margin: 10px;
+        height: 40px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        background: #5d8d75;
+        color: white;
+        font-family: Noto sans Thai;
+        cursor: pointer;
+
+    }
+
+    #open_afb_more_detail {
+        text-decoration: none;
+    }
+
+    #showdetail_butt {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 35px;
+        width: 170px;
+        margin: 5px;
+        background: #006ebc;
+        text-decoration: none;
+        border-radius: 30px;
+        padding: 5px;
+        color: white;
+        font-size: 14px;
+        transition-duration: 0.3s;
+    }
+
+    #showdetail_butt:hover {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 35px;
+        width: 170px;
+        margin: 5px;
+        background: #014474;
+        text-decoration: none;
+        border-radius: 30px;
+        padding: 5px;
+        color: white;
+        font-size: 14px;
+    }
 </style>
 
 <div class="add_afb_po" id="add_afb_po">
@@ -236,135 +320,47 @@ include 'php/connect_db.php'; ?>
                 <div id="box_add_afb_po-2">
                     <div id="box_butt_close"><a href="mspo_display.php?menu=po_material">X</a></div>
                     <div id="titel-name">
-                        รายการใบขอซื้อ
+                        รายการขอซื้อที่รอใช้งาน
 
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
                             <?php
-                            include 'php/connect_db.php';
-                            $limit = 3; // number of items to show per page
+                            session_start();
+                            $limit = 4; // number of items to show per page
                             $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
                             $offset = ($page - 1) * $limit;
-                            $sql = "SELECT form_afb_id,form_afb_number,form_afb_book_number,form_afb_write_date, 
-            form_afb_savesys_date,form_afb_people_name,form_afb_people_name_ok,a.state_id,state_name,
-            form_afb_detail_work_for, b.group_name 
-            FROM form_afb_tbl as a 
-            INNER JOIN group_tbl as b 
-            ON a.group_id = b.group_id
-            INNER JOIN state_tbl as c
-            ON c.state_id = a.state_id
-            WHERE a.state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
-                            $result = mysqli_query($conn, $sql);
-                            if (!$result) {
+                            $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note,form_afb_number,form_afb_book_number,a.state_id,form_afb_write_date
+FROM order_afb_tbl as a 
+INNER JOIN name_ms_tbl as b 
+ON a.name_ms_id = b.name_ms_id 
+INNER JOIN unit_tbl as c 
+ON a.unit_id = c.unit_id 
+INNER JOIN form_afb_tbl as d 
+ON a.form_afb_id = d.form_afb_id
+WHERE a.state_id = 3 LIMIT $offset, $limit";
+                            $counst = ($offset + 1);
+                            $query = mysqli_query($conn, $sql);
+                            if (!$query) {
                                 die('Error: ' . mysqli_error($conn));
                             }
-                            while ($row = mysqli_fetch_array($result)) {
-
-                                echo '<div id="body-afb-box-1">';
-                                echo '<div id="body-afb-box-2">';
-                                echo '<div id="title-afb">';
-                                echo 'ใบขอซื้อ';
-                                echo '</div>';
+                            while ($row = mysqli_fetch_array($query)) {
+                                echo '<div class="containner_item">';
+                                echo '<div class="box-item-show-1">';
+                                echo 'รายการที่ : ' . $counst;
                                 echo '<br>';
-                                echo '<div id="info-afb-box-1">';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'สถานะ :' . '<a id="state_name_wait">' . $row['state_name'] . "</a>";
+                                echo ' เล่มที่ ' . $row['form_afb_book_number'] . ' เลขที่ ' . $row['form_afb_number'] . ' | ' . ' วันที่ :' . $row['form_afb_write_date'] . '<br>';
+                                echo 'ชื่อไม่เป็นทางการ : ' . $row['name_ms_normal_name'] . '|';
+                                echo 'ชื่อเป็นทางการ : ' . $row['name_ms_real_name'] . '|';
+                                echo 'จำนวน : ' . $row['order_afb_value'] . ' ' . $row['unit_name'] . '|';
+                                echo 'หมายเหตุ : ' . $row['order_afb_note'];
                                 echo '</div>';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'Action : ' . '<a id="create_po_afb" href="mspo_display.php?menu=po_material&form_afb_id=' . $row['form_afb_id'] . '&state_excecut=select_afb">เลือกใบขอซื้อ</a>';
+                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=item_wait_for_use&page=' . $_SESSION['page'] . '&item_Number=' . $row['order_afb_id'] . '" >เลือกรายการขอซื้อ';
+                                echo '</a>';
                                 echo '</div>';
-                                echo '</div>';
-                                echo '<hr>';
-                                echo '<div id="info-afb-box-1">';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'เล่มที่ :' . $row['form_afb_number'];
-                                echo '</div>';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'เลขที่ :' . $row['form_afb_book_number'];
-                                echo '</div>';
-                                echo '</div>';
-                                echo '<hr>';
-                                echo '<div id="info-afb-box-1">';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'วันที่เขียน :' . $row['form_afb_write_date'];
-                                echo '</div>';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'วันที่เพิ่มลงระบบ :' . $row['form_afb_savesys_date'];
-                                echo '</div>';
-                                echo '</div>';
-                                echo '<hr>';
-                                echo '<div id="info-afb-box-1">';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'ผู้ขอซื้อ :' . $row['form_afb_people_name'];
-                                echo '</div>';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'ผู้อนุมัติ :' . $row['form_afb_people_name_ok'];
-                                echo '</div>';
-                                echo '</div>';
-                                echo '<hr>';
-                                echo '<div id="info-afb-box-1">';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'ใช้งานกับ :' . $row['form_afb_detail_work_for'];
-                                echo '</div>';
-                                echo '<div id="info-afb-box-2">';
-                                echo 'ฝ่าย :' . $row['group_name'];
-                                echo '</div>';
-                                echo '</div>';
-                                echo '<hr>';
-
-
-                                echo '<br>';
-                                echo '<div id="item-log">';
-                                $form_afb_id = $row['form_afb_id'];
-                                $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value, unit_name, order_afb_note 
-                FROM order_afb_tbl as a 
-                INNER JOIN name_ms_tbl as b 
-                ON a.name_ms_id = b.name_ms_id 
-                INNER JOIN unit_tbl as c 
-                ON a.unit_id = c.unit_id 
-                WHERE form_afb_id = '$form_afb_id'";
-                                $count_data = 1;
-                                $result1 = mysqli_query($conn, $sql);
-                                if (!$result1) {
-                                    die('Error: ' . mysqli_error($conn));
-                                }
-                                while ($row1 = mysqli_fetch_array($result1)) {
-                                    echo '<div class="scoool">';
-                                    echo '<table >';
-                                    echo '<thead>';
-                                    echo '<tr>';
-                                    echo '<td style="width:6%">';
-                                    echo $count_data;
-                                    echo '</td>';
-                                    echo '<td style="width:20%">';
-                                    echo $row1['name_ms_normal_name'];
-                                    echo '</td>';
-                                    echo '<td style="width:20%"> ';
-                                    echo $row1['name_ms_real_name'];
-                                    echo '</td>';
-                                    echo '<td style="width:20%">';
-                                    echo $row1['order_afb_value'];
-                                    echo $row1['unit_name'];
-                                    echo '</td>';
-                                    echo '<td style="width:20%">';
-                                    echo $row1['order_afb_note'];
-                                    echo '</td>';
-                                    echo '<tr>';
-                                    echo '</table>';
-                                    echo '</div>';
-
-
-                                    $count_data++;
-                                }
-                                echo '</div>';
-                                echo '<br/>';
-
-                                echo '</div>';
-
-                                echo '</div>';
+                                $counst++;
                             }
-                            $total_sql = "SELECT COUNT(*) as total FROM form_afb_tbl WHERE state_id = 1";
+                            $total_sql = "SELECT COUNT(*) as total FROM order_afb_tbl WHERE state_id = 3";
                             $total_result = mysqli_query($conn, $total_sql);
                             $total_row = mysqli_fetch_array($total_result);
                             $total_items = $total_row['total'];
@@ -377,43 +373,43 @@ include 'php/connect_db.php'; ?>
                                     if ($i == $page) {
                                         $pagination .= "<strong>$i</strong>";
                                     } else {
-                                        $pagination .= "<a href=mspo_display.php?menu=state_afb&page=$i'>$i</a>";
+                                        $pagination .= "<a href=mspo_display.php?menu=item_wait_for_use&page=$i'>$i</a>";
                                     }
                                 }
                             }
                             $conn->close();
                             ?>
+                            
 
                         </div>
-                        <br>
                         <div class="pagination">
-                            <?php if ($total_pages > 1) : ?>
-                                <div class="page-item">
-                                    <a class="page-link" href="mspo_display.php?menu=history_afb&page=1">First</a>
-                                </div>
-                                <?php
-                                $start_page = max(1, $page - 2);
-                                $end_page = min($total_pages, $page + 2);
-                                for ($i = $start_page; $i <= $end_page; $i++) :
-                                ?>
+                                <?php if ($total_pages > 1) : ?>
                                     <div class="page-item">
-                                        <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=history_afb&page=<?php echo $i; ?>">
-                                            <?php echo $i; ?>
-                                        </a>
+                                        <a class="page-link" href="mspo_display.php?menu=po_material&add_item=already_selected&page=1">First</a>
                                     </div>
-                                <?php endfor; ?>
-                                <?php if ($page < $total_pages - 2) : ?>
-                                    <div class="page-item">
-                                        <span class="page-link">&hellip;</span>
-                                    </div>
+                                    <?php
+                                    $start_page = max(1, $page - 2);
+                                    $end_page = min($total_pages, $page + 2);
+                                    for ($i = $start_page; $i <= $end_page; $i++) :
+                                    ?>
+                                        <div class="page-item">
+                                            <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=po_material&add_item=already_selected&page=<?php echo $i; ?>">
+                                                <?php echo $i; ?>
+                                            </a>
+                                        </div>
+                                    <?php endfor; ?>
+                                    <?php if ($page < $total_pages - 2) : ?>
+                                        <div class="page-item">
+                                            <span class="page-link">&hellip;</span>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($page < $total_pages - 1) : ?>
+                                        <div class="page-item">
+                                            <a class="page-link" href="mspo_display.php?menu=po_material&add_item=already_selected&page=<?php echo $total_pages; ?>">Last</a>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if ($page < $total_pages - 1) : ?>
-                                    <div class="page-item">
-                                        <a class="page-link" href="mspo_display.php?menu=history_afb&page=<?php echo $total_pages; ?>">Last</a>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>

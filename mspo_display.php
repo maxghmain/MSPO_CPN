@@ -17,7 +17,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['cancle_afb'] = $_GET['cancle_afb'];
     $_SESSION['po_material'] = $_GET['po_material'];
     $_SESSION['add_afb'] = $_GET['add_afb'];
-
+    $_SESSION['add_item'] = $_GET['add_item'];
 
     $num_afb = $_GET['num_afb'];
     $num_book_afb = $_GET['num_book_afb'];
@@ -251,7 +251,7 @@ if ($_SESSION['username'] == '') {
                     include 'component/content/po_menu/po_select_menu.php';
                 } else if ($_SESSION['menu'] == "po_material") {
                     include 'component/content/po_menu/po_material.php';
-                    if($_SESSION['add_afb'] == "afb"){
+                    if($_SESSION['add_item'] == "already_selected") {
                         include 'component/content/po_menu/popup/add_po_afb.php';
                     }
                 }
