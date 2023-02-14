@@ -23,7 +23,7 @@ include 'php/connect_db.php'; ?>
     }
 
     #box_add_afb_po-1 {
-      /*  border: 1px solid red;*/
+        /*  border: 1px solid red;*/
         margin: 5px;
         display: flex;
         justify-content: center;
@@ -61,7 +61,7 @@ include 'php/connect_db.php'; ?>
     #afb_content_xxx {
         margin: 10px;
         height: 95%;
-       /* border: 1px solid red;*/
+        /* border: 1px solid red;*/
         display: flex;
         align-items: center;
         justify-content: center;
@@ -163,36 +163,70 @@ include 'php/connect_db.php'; ?>
         justify-content: center;
         align-items: center;
     }
-    #crop-box{
+
+    #crop-box {
         display: flex;
         justify-content: center;
         margin-top: 50px;
     }
+
     #box_butt_close {
+        display: flex;
+        justify-content: right;
+        background-color: #006EBC;
+        padding-top: 10px;
+    }
+
+    #box_butt_close a {
+        margin: 5px;
+        border-radius: 40px;
+        border: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 20px;
+        color: #006EBC;
+        background-color: white;
+        font-weight: bold;
+        transition-duration: 0.2s;
+    }
+
+    #box_butt_close a:hover {
+        cursor: pointer;
+        background: #014474;
+        color: white;
+    }
+    .pagination {
     display: flex;
-    justify-content: right;
-    background-color: #006EBC;
-    padding-top: 10px;
-}
+    justify-content: center;
+    margin-top: 20px;
+  }
 
-#box_butt_close a {
-    margin: 5px;
-    border-radius: 40px;
-    border: none;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 20px;
-    color: #006EBC;
-    background-color: white;
-    font-weight: bold;
-    transition-duration: 0.2s;
-}
+  .pagination .page-item {
+    margin: 0 10px;
+  }
 
-#box_butt_close a:hover {
-    cursor: pointer;
-    background: #014474;
-    color: white;
-}
+  .pagination .page-link {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .pagination .page-link:hover,
+  .pagination .page-link:focus {
+    background-color: #f2f2f2;
+    outline: none;
+  }
+
+  .pagination .page-link.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
 </style>
 
 <div class="add_afb_po" id="add_afb_po">
@@ -203,7 +237,7 @@ include 'php/connect_db.php'; ?>
                     <div id="box_butt_close"><a href="mspo_display.php?menu=po_material">X</a></div>
                     <div id="titel-name">
                         รายการใบขอซื้อ
-                        
+
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
@@ -238,7 +272,7 @@ include 'php/connect_db.php'; ?>
                                 echo 'สถานะ :' . '<a id="state_name_wait">' . $row['state_name'] . "</a>";
                                 echo '</div>';
                                 echo '<div id="info-afb-box-2">';
-                                echo 'Action : ' . '<a id="create_po_afb" href="mspo_display.php?menu=state_afb&page=' . $page . '&form_afb_id=' . $row['form_afb_id'] . '&state_excecut=cancle_afb">เลือกใบขอซื้อ</a>';
+                                echo 'Action : ' . '<a id="create_po_afb" href="mspo_display.php?menu=po_material&form_afb_id=' . $row['form_afb_id'] . '&state_excecut=select_afb">เลือกใบขอซื้อ</a>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '<hr>';
@@ -353,13 +387,32 @@ include 'php/connect_db.php'; ?>
                         </div>
                         <br>
                         <div class="pagination">
-                            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                            <?php if ($total_pages > 1) : ?>
                                 <div class="page-item">
-                                    <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=po_material&add_afb=afb&page=<?php echo $i; ?>">
-                                        <?php echo $i; ?>
-                                    </a>
+                                    <a class="page-link" href="mspo_display.php?menu=history_afb&page=1">First</a>
                                 </div>
-                            <?php endfor; ?>
+                                <?php
+                                $start_page = max(1, $page - 2);
+                                $end_page = min($total_pages, $page + 2);
+                                for ($i = $start_page; $i <= $end_page; $i++) :
+                                ?>
+                                    <div class="page-item">
+                                        <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=history_afb&page=<?php echo $i; ?>">
+                                            <?php echo $i; ?>
+                                        </a>
+                                    </div>
+                                <?php endfor; ?>
+                                <?php if ($page < $total_pages - 2) : ?>
+                                    <div class="page-item">
+                                        <span class="page-link">&hellip;</span>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($page < $total_pages - 1) : ?>
+                                    <div class="page-item">
+                                        <a class="page-link" href="mspo_display.php?menu=history_afb&page=<?php echo $total_pages; ?>">Last</a>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

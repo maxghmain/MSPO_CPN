@@ -205,7 +205,7 @@
 $total_result = mysqli_query($conn, $total_sql);
 $total_row = mysqli_fetch_array($total_result);
 $total_items = $total_row['total'];
-$total_pages = ceil($total_items / $limit);
+$total_pages = ceil($total_items / $limit) ;
 
 // Create the pagination links
 $pagination = "";
