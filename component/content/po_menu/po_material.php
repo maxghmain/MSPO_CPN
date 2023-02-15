@@ -49,7 +49,7 @@ include 'php/connect_db.php'
     }
 </style>
 <?php
-$sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value,c.unit_id,unit_name, order_afb_note,form_afb_number,form_afb_book_number,a.state_id,form_afb_write_date,form_afb_people_name
+$sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value,c.unit_id,unit_name, order_afb_note,form_afb_number,form_afb_book_number,a.state_id,form_afb_write_date,form_afb_people_name,d.group_id
 FROM order_afb_tbl as a 
 INNER JOIN name_ms_tbl as b 
 ON a.name_ms_id = b.name_ms_id 
@@ -57,10 +57,18 @@ INNER JOIN unit_tbl as c
 ON a.unit_id = c.unit_id 
 INNER JOIN form_afb_tbl as d 
 ON a.form_afb_id = d.form_afb_id
+INNER JOIN group_tbl as g
+ON d.group_id = g.group_id
 WHERE order_afb_id = $item_Number_select";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 
+$order_afb_value = $row['order_afb_value'];
+$form_afb_people_name = $row['form_afb_people_name'];
+$group_id = $row['group_id'];
+$form_afb_number = $row['form_afb_number'];
+$form_afb_book_number = $row['form_afb_book_number'];
+$order_afb_note = $row['order_afb_note'];
 $name_ms_real_name = $row['name_ms_real_name'];
 $order_afb_value = $row['order_afb_value'];
 $unit_id = $row['unit_id'];
