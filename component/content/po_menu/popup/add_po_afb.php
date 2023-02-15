@@ -358,7 +358,7 @@ $row['form_afb_number']= $form_afb_number;
                                 echo 'จำนวน : ' . $row['order_afb_value'] . ' ' . $row['unit_name'] . '|';
                                 echo 'หมายเหตุ : ' . $row['order_afb_note'];
                                 echo '</div>';
-                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&item_Number_select=' . $row['order_afb_id'] . '&state_excecut=select_item" >เลือกรายการขอซื้อ';
+                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&item_Number_select=' .$row['order_afb_id'] . '&state_excecut=select_item" >เลือกรายการขอซื้อ';
                                 echo '</a>';
                                 echo '</div>';
                                 $counst++;

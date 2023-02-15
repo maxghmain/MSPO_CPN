@@ -17,15 +17,4 @@ $sql = "INSERT INTO po_people_afb_tbl(po_people_afb_name,po_id,group_id)
 VALUES ('$form_afb_people_name',$po_id,$group_id)";
 mysqli_query($conn, $sql);
 
-$sql = "SELECT * FROM order_afb_tbl";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
-while ($row['order_afb_value'] == 0){
-    $sql="UPDATE order_afb_tbl SET state_id = 2";
-    mysqli_query($conn,$sql);
-}
-
-
-
-
 ?>

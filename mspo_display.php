@@ -26,7 +26,7 @@ if ($_SESSION['username'] == '') {
     $name_afb_ark = $_GET['name_afb_ark'];
     $name_afb_ark_conf = $_GET['name_afb_ark_conf'];
     $afb_group_id = $_GET['afb_group_id'];
-
+    $order_afb_id = $_GET['order_afb_id'];
 
     /* รับ Session จากการเพิ่มรายการใบขอซื้อ */
     $name_not_order_afb = $_GET['name_not_order_afb'];
@@ -266,7 +266,10 @@ if ($_SESSION['username'] == '') {
                     
                     else if($_SESSION['state_excecut'] == "select_item"){
                     include 'component/content/po_menu/function/insert_afb_to_po.php';
-                   
+                    echo '<script>';
+                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                    echo '</script>';
+                    
                     }
                 }
                 
