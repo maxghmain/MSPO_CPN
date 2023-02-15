@@ -338,7 +338,10 @@ INNER JOIN unit_tbl as c
 ON a.unit_id = c.unit_id 
 INNER JOIN form_afb_tbl as d 
 ON a.form_afb_id = d.form_afb_id
-WHERE a.state_id = 3 LIMIT $offset, $limit";
+WHERE a.state_id = 3 ORDER BY order_afb_id DESC  LIMIT $offset, $limit";
+
+$row['form_afb_book_number'] = $form_afb_book_number;
+$row['form_afb_number']= $form_afb_number;
                             $counst = ($offset + 1);
                             $query = mysqli_query($conn, $sql);
                             if (!$query) {
@@ -355,7 +358,7 @@ WHERE a.state_id = 3 LIMIT $offset, $limit";
                                 echo 'จำนวน : ' . $row['order_afb_value'] . ' ' . $row['unit_name'] . '|';
                                 echo 'หมายเหตุ : ' . $row['order_afb_note'];
                                 echo '</div>';
-                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=item_wait_for_use&page=' . $_SESSION['page'] . '&item_Number=' . $row['order_afb_id'] . '" >เลือกรายการขอซื้อ';
+                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&item_Number_select=' . $row['order_afb_id'] . '&state_excecut=select_item" >เลือกรายการขอซื้อ';
                                 echo '</a>';
                                 echo '</div>';
                                 $counst++;

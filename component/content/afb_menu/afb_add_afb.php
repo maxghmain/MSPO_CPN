@@ -89,7 +89,7 @@
             </div>
 
             <div style="width: 50%;text-align:right;">
-                <a id="save-data" onclick="check_info_and_save()">ดำเนินการถัดไป</a>
+                <a id="save-data" onclick="check_info_and_save()">เพิ่มใบขอซื้อ</a>
             </div>
         </div>
     </div>

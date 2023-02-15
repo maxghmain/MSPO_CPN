@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS po_tbl(
     FOREIGN KEY(comp_contect_id) REFERENCES comp_contect_tbl(comp_contect_id),
     FOREIGN KEY(type_po_id) REFERENCES type_po_tbl(type_po_id),
     FOREIGN KEY(state_id) REFERENCES state_tbl(state_id)
+
 )ENGINE = INNODB DEFAULT CHARSET UTF8MB4;
 
 CREATE TABLE IF NOT EXISTS po_people_afb_tbl(
@@ -164,8 +165,10 @@ CREATE TABLE IF NOT EXISTS po_afb_tbl(
     po_afb_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     po_afb_num INT NOT NULL COLLATE utf8mb4_unicode_ci,
     po_afb_book_num INT NOT NULL COLLATE utf8mb4_unicode_ci,
+    group_id INT NOT NULL,
     po_id INT NOT NULL,
-    FOREIGN KEY(po_id) REFERENCES po_tbl(po_id)
+    FOREIGN KEY(po_id) REFERENCES po_tbl(po_id),
+    FOREIGN KEY(group_id) REFERENCES group_tbl(group_id)
 )ENGINE = INNODB DEFAULT CHARSET UTF8MB4;
 
 CREATE TABLE IF NOT EXISTS po_file_path_tbl(
@@ -472,7 +475,7 @@ INSERT INTO material_tbl(material_name,material_value,unit_id,material_type_id,m
 ('ไม้กวาดก้านมะพร้าว',3,23,7,1),('ไม้กวาดดอกหญ้า',3,23,7,1);
 
 INSERT INTO state_tbl(state_name) VALUES
-('มีรายการคงเหลือ'),('ใช้รายการทั้งหมดแล้ว'),('รอเรียกใช้รายการ'),('สร้างฟอร์มเพิ่มใบขอซื้อ'),('รายการถูกสร้างใหม่(รอยืนยัน)'),('ใบขอซื้อที่ถูกยกเลิก'),('รายการจากใบขอซื้อถูกยกเลิก');
+('มีรายการคงเหลือ'),('ใช้รายการทั้งหมดแล้ว'),('รอเรียกใช้รายการ'),('สร้างฟอร์มเพิ่มใบขอซื้อ'),('รายการถูกสร้างใหม่(รอยืนยัน)'),('ใบขอซื้อที่ถูกยกเลิก'),('รายการจากใบขอซื้อถูกยกเลิก'),('สร้างฟอร์มใบPO'),('รายการใบPO');
 
 INSERT INTO type_po_tbl(type_po_name) VALUES
 ('ประเภทสำหรับวัสดุ'),('ประเภทสำหรับบริการ');
