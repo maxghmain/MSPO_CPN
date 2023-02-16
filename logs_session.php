@@ -19,3 +19,4 @@ $_SESSION['state_excecut'] = $_GET['state_excecut'];*/
     $_SESSION['subject_order'] = $_GET['subject_order'];
     $_SESSION['afb_group_id'] = $_GET['afb_group_id'];
 /***************************************************************/
+    $_SESSION['po_number'] = $_GET['po_number'];

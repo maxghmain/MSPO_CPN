@@ -556,3 +556,19 @@ $(function () {
         });
     });
 });
+$(function () {
+    /* SESSION INPUT LOGS FORM รายการขอซื้อ */
+    $('#po_number').on("keyup", function () {
+        var po_number = $('#po_number').val();
+       
+        $.ajax({
+            type: "GET",
+            url: "logs_session.php",
+            data: {
+              
+                po_number: po_number,
+            }
+
+        });
+    });
+});

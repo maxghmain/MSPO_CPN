@@ -119,7 +119,7 @@ $unit_id = $row['unit_id'];
             <div id="box-po">
                 <div id="box-po-1">
                     <div id="box-po-2">
-                        <p>เลขที่ออกใบ PO : PO <input type="number" id="po-number" placeholder="กรุณากรอก" /></p>
+                        <p>เลขที่ออกใบ PO : PO <input type="number" id="po_number" value="<?php echo $_SESSION['po_number']; ?>"placeholder="กรุณากรอก" /></p>
                     </div>
 
                 </div>
@@ -132,7 +132,7 @@ $unit_id = $row['unit_id'];
             </div>
             <div id="box-po">
                 <div id="box-po-1">
-                    <p> บริษัทที่ติดต่อ : <a href="#" type="button" id="butt-add-afb-po">เพิ่มชื่อบริษัท</a></p>
+                    <p> บริษัทที่ติดต่อ : <a href="mspo_display.php?menu=po_material&add_company=already_selected" type="button" id="butt-add-afb-po">เพิ่มชื่อบริษัท</a></p>
                 </div>
 
             </div>

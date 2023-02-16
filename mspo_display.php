@@ -18,6 +18,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['po_material'] = $_GET['po_material'];
     $_SESSION['add_afb'] = $_GET['add_afb'];
     $_SESSION['add_item'] = $_GET['add_item'];
+    $_SESSION['add_company'] = $_GET['add_company'];
 
     $num_afb = $_GET['num_afb'];
     $num_book_afb = $_GET['num_book_afb'];
@@ -58,7 +59,10 @@ if ($_SESSION['username'] == '') {
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
         <link rel="stylesheet" href="css/component/popup.css?version=0s2" />
-        <!-- <script type="text/javascript" src="js/custom/add_order_afb_ajex.js"></script> -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
         if ($_SESSION['userlvid'] == 1) {
@@ -270,6 +274,8 @@ if ($_SESSION['username'] == '') {
                     echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
                     echo '</script>';
                     
+                    }if($_SESSION['add_company'] == "already_selected") {
+                        include 'component/content/po_menu/popup/pop_add_company.php';
                     }
                 }
                 
