@@ -276,6 +276,8 @@ if ($_SESSION['username'] == '') {
                     
                     }if($_SESSION['add_company'] == "already_selected") {
                         include 'component/content/po_menu/popup/pop_add_company.php';
+                    }else if($_SESSION['add_company'] == "select_company"){
+
                     }
                 }
                 

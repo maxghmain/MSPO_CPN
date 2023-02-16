@@ -373,7 +373,12 @@ include 'php/connect_db.php'; ?>
         border: 0px solid red;
     }
 </style>
+<?php
+$sql = "SELECT * FROM comp_contect_tbl";
+$result = mysqli_query($conn, $sql);
 
+$comp_name = $row['comp_contect_name'];
+?>
 <div class="add_afb_po" id="add_afb_po">
     <div id="crop-box">
         <div id="box_add_afb_po">
@@ -382,7 +387,6 @@ include 'php/connect_db.php'; ?>
                     <div id="box_butt_close"><a href="mspo_display.php?menu=po_material">X</a></div>
                     <div id="titel-name">
                         เพิ่มชื่อบริษัทที่ติดต่อ
-
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
@@ -394,18 +398,11 @@ include 'php/connect_db.php'; ?>
                                     :
                                 </div>
                                 <div id="box-context-3">
-                                    <input type="text" name="example" list="exampleList">
-                                    <datalist id="exampleList">
-                                        <?php 
-
-                                        $sql = " SELECT comp_contect_name FROM comp_contect_tbl";
-                                        $result=mysqli_query($conn,$sql);
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            echo '<option value="'.$row['comp_contect_name'].'"></option';
-                                           
-                                        }
-
-                                        ?>
+                                    <input type="text" name="example" list="comp_name">
+                                    <datalist id="comp_name">
+                                        <?php while($row = mysqli_fetch_array($result)){
+                                            echo '<option value="' . $row['comp_contect_name'].'"></option>';
+                                        }?>
                                     </datalist>
                                 </div>
                             </div>
@@ -417,7 +414,10 @@ include 'php/connect_db.php'; ?>
                                     :
                                 </div>
                                 <div id="box-context-4">
-                                    เลขที่ : <input type="text" /> หมู่ที่ : <input type="text" />
+                                    เลขที่ : 
+                               
+                                
+                                 หมู่ที่ : <input type="text" />
                                 </div>
                             </div>
                             <div id="box-context">
@@ -535,7 +535,7 @@ include 'php/connect_db.php'; ?>
                                 </div>
                             </div>
                             <div style="text-align: right;">
-                                <a id="butt_add_company" href="">บันทึกข้อมูล</a>
+                                <a id="butt_add_company" href="mspo_display.php?menu=po_material&add_company=select_company">บันทึกข้อมูล</a>
                             </div>
 
                         </div>
