@@ -397,7 +397,16 @@
                                 <div id="box-context-3">
                                     <input type="text" name="comp_name" list="comp_name">
                                     <datalist id="comp_name">
-                                      
+                                    <?php
+                                        include 'php/connect_db.php';
+                                        $sql = "SELECT comp_contect_name FROM comp_contect_tbl";
+                                        $result = mysqli_query($conn, $sql);
+                                        
+                                        $comp_contect_name = $row['comp_contect_name'];
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo '<option value="' . $row['comp_contect_name'] . '">'.$row['comp_contect_name'].'</option>';
+                                        }
+                                        ?>
 
 
                                     </datalist>
@@ -414,24 +423,28 @@
                                     เลขที่ : <input type="text" name="num_address" list="num_address">
                                     <datalist id="num_address">
                                         <?php
+                                        include 'php/connect_db.php';
                                         $sql = "SELECT comp_contect_loca_num FROM comp_contect_tbl";
                                         $result = mysqli_query($conn, $sql);
-                                        $row = mysqli_fetch_array($result);
+                                        
                                         $comp_contect_loca_num = $row['comp_contect_loca_num'];
-                                        
-                                            echo '<option value="' . $row['comp_contect_loca_num'] . '"></option>';
-                                        
-                                        mysqli_close($conn);?>
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo '<option value="' . $row['comp_contect_loca_num'] . '">'.$row['comp_contect_loca_num'].'</option>';
+                                        }
+                                        ?>
                                     </datalist>
                                     หมู่ที่ : <input type="text" list="mutee" />
                                     <datalist id="mutee">
-                                        <?php
+                                    <?php
+                                        include 'php/connect_db.php';
                                         $sql = "SELECT comp_contect_loca_moo FROM comp_contect_tbl";
                                         $result = mysqli_query($conn, $sql);
-                                        $comp_contect_loca_moo = $row3['comp_contect_loca_moo'];
-                                        while ($row3 = mysqli_fetch_array($result)) {
-                                            echo '<option value="' . $row3['comp_contect_loca_moo'] . '"></option>';
-                                        } mysqli_close($conn);?>
+                                        
+                                        $comp_contect_loca_moo = $row['comp_contect_loca_moo'];
+                                        while($row = mysqli_fetch_array($result)){
+                                            echo '<option value="' . $row['comp_contect_loca_moo'] . '">'.$row['comp_contect_loca_moo'].'</option>';
+                                        }
+                                        ?>
                                     </datalist>
                                 </div>
                             </div>
@@ -445,13 +458,7 @@
                                 <div id="box-context-4">
                                     ถนน&nbsp; : <input type="text" list="road" />
                                     <datalist id="road">
-                                        <?php
-                                        $sql = "SELECT comp_contect_loca_road FROM comp_contect_tbl";
-                                        $result = mysqli_query($conn, $sql);
-                                        $comp_contect_loca_road = $row3['comp_contect_loca_road'];
-                                        while ($row3 = mysqli_fetch_array($result)) {
-                                            echo '<option value="' . $row3['comp_contect_loca_road'] . '"></option>';
-                                        } mysqli_close($conn);?>
+                                     
                                     </datalist>
                                 </div>
                             </div>
@@ -515,12 +522,7 @@
                                 <div id="box-context-3">
                                  <input type="text" list="comp_contect_tel" />
                                     <datalist id="comp_contect_tel">
-                                        <?php
-                                        $sql = "SELECT comp_contect_tel FROM comp_contect_tbl";
-                                        $result = mysqli_query($conn, $sql);
-                                        while ($row3 = mysqli_fetch_array($result)) {
-                                            echo '<option value="' . $row3['comp_contect_tel'] . '"></option>';
-                                        } mysqli_close($conn);?>
+                                     
                                     </datalist>
 
                                 </div>
@@ -547,12 +549,7 @@
                                 <div id="box-context-3">
                                 <input type="text" list="comp_contect_people_name" />
                                     <datalist id="comp_contect_people_name">
-                                        <?php
-                                        $sql = "SELECT comp_contect_people_name FROM comp_contect_tbl";
-                                        $result = mysqli_query($conn, $sql);
-                                        while ($row3 = mysqli_fetch_array($result)) {
-                                            echo '<option value="' . $row3['comp_contect_people_name'] . '"></option>';
-                                        } mysqli_close($conn);?>
+                                      
                                     </datalist>
 
                                 </div>

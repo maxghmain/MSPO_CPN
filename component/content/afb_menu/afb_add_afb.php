@@ -144,7 +144,7 @@ session_start();?>
         var afb_group_id = $("#afb_group_id").val();
         <?php
         $form_afb_id = $_SESSION['form_afb_id'];
-        $sql ="SELECT * FROM comp_contect_tbl WHERE form_afb_id = $form_afb_id";
+        $sql ="SELECT * FROM order_afb_tbl WHERE form_afb_id = $form_afb_id";
         $query = mysqli_query($conn,$sql);
         if ($row=mysqli_fetch_array($query)) { ?>
             if (num_afb == "") {
