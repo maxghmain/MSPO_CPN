@@ -1,5 +1,4 @@
-<?php
-include 'php/connect_db.php'; ?>
+
 <!--<link rel="stylesheet" href="../../css/component/popup.css">-->
 <style>
     #add_afb_po {
@@ -330,7 +329,7 @@ include 'php/connect_db.php'; ?>
 
     #box-context-3 input[type="text"] {
 
-        width: 500px;
+        width: 350px;
     }
 
     #box-context-3 {
@@ -372,13 +371,11 @@ include 'php/connect_db.php'; ?>
         width: 100px;
         border: 0px solid red;
     }
+    #ahah{
+        border: 1px solid red;
+    }
 </style>
-<?php
-$sql = "SELECT * FROM comp_contect_tbl";
-$result = mysqli_query($conn, $sql);
 
-$comp_name = $row['comp_contect_name'];
-?>
 <div class="add_afb_po" id="add_afb_po">
     <div id="crop-box">
         <div id="box_add_afb_po">
@@ -398,11 +395,11 @@ $comp_name = $row['comp_contect_name'];
                                     :
                                 </div>
                                 <div id="box-context-3">
-                                    <input type="text" name="example" list="comp_name">
+                                    <input type="text" name="comp_name" list="comp_name">
                                     <datalist id="comp_name">
-                                        <?php while($row = mysqli_fetch_array($result)){
-                                            echo '<option value="' . $row['comp_contect_name'].'"></option>';
-                                        }?>
+                                      
+
+
                                     </datalist>
                                 </div>
                             </div>
@@ -414,10 +411,28 @@ $comp_name = $row['comp_contect_name'];
                                     :
                                 </div>
                                 <div id="box-context-4">
-                                    เลขที่ : 
-                               
-                                
-                                 หมู่ที่ : <input type="text" />
+                                    เลขที่ : <input type="text" name="num_address" list="num_address">
+                                    <datalist id="num_address">
+                                        <?php
+                                        $sql = "SELECT comp_contect_loca_num FROM comp_contect_tbl";
+                                        $result = mysqli_query($conn, $sql);
+                                        $row = mysqli_fetch_array($result);
+                                        $comp_contect_loca_num = $row['comp_contect_loca_num'];
+                                        
+                                            echo '<option value="' . $row['comp_contect_loca_num'] . '"></option>';
+                                        
+                                        mysqli_close($conn);?>
+                                    </datalist>
+                                    หมู่ที่ : <input type="text" list="mutee" />
+                                    <datalist id="mutee">
+                                        <?php
+                                        $sql = "SELECT comp_contect_loca_moo FROM comp_contect_tbl";
+                                        $result = mysqli_query($conn, $sql);
+                                        $comp_contect_loca_moo = $row3['comp_contect_loca_moo'];
+                                        while ($row3 = mysqli_fetch_array($result)) {
+                                            echo '<option value="' . $row3['comp_contect_loca_moo'] . '"></option>';
+                                        } mysqli_close($conn);?>
+                                    </datalist>
                                 </div>
                             </div>
                             <div id="box-context">
@@ -428,7 +443,16 @@ $comp_name = $row['comp_contect_name'];
 
                                 </div>
                                 <div id="box-context-4">
-                                    ถนน&nbsp; : <input type="text" />
+                                    ถนน&nbsp; : <input type="text" list="road" />
+                                    <datalist id="road">
+                                        <?php
+                                        $sql = "SELECT comp_contect_loca_road FROM comp_contect_tbl";
+                                        $result = mysqli_query($conn, $sql);
+                                        $comp_contect_loca_road = $row3['comp_contect_loca_road'];
+                                        while ($row3 = mysqli_fetch_array($result)) {
+                                            echo '<option value="' . $row3['comp_contect_loca_road'] . '"></option>';
+                                        } mysqli_close($conn);?>
+                                    </datalist>
                                 </div>
                             </div>
                             <div id="box-context">
@@ -439,9 +463,7 @@ $comp_name = $row['comp_contect_name'];
 
                                 </div>
                                 <div id="box-context-3">
-                                    จังหวัด :<select id="input_province">
-                                        <option value="">กรุณาเลือกจังหวัด</option>
-                                    </select>
+                                <div style="width:150px">ตำบล</div>:<input type="text" name="district" id="district" placeholder="กรุณากรอก ตำบล / แขวง" />
                                 </div>
                             </div>
                             <div id="box-context">
@@ -452,9 +474,7 @@ $comp_name = $row['comp_contect_name'];
 
                                 </div>
                                 <div id="box-context-3">
-                                    อำเภอ :<select id="input_amphoe">
-                                        <option value="">กรุณาเลือกเขต/อำเภอ</option>
-                                    </select>
+                                <div style="width:150px">อำเภอ</div>:<input type="text" name="amphoe" id="amphoe" placeholder="กรุณากรอก อำเภอ / เขต" />
 
                                 </div>
                             </div>
@@ -466,12 +486,10 @@ $comp_name = $row['comp_contect_name'];
 
                                 </div>
                                 <div id="box-context-3">
-                                    ตำบน :<select id="input_tambon">
-                                        <option value="">กรุณาเลือกแขวง/ตำบล</option>
-                                    </select>
-
+                                <div style="width:150px">จังหวัด</div>:<input type="text" name="province" id="province" placeholder="กรุณากรอก จังหวัด" />
                                 </div>
                             </div>
+
 
 
                             <div id="box-context">
@@ -482,7 +500,8 @@ $comp_name = $row['comp_contect_name'];
 
                                 </div>
                                 <div id="box-context-3">
-                                    รหัสไปรษณีย์ :<input type="number" id="input_zipcode" placeholder="รหัสไปรษณีย์" />
+                                
+                                   <div style="width:150px">รหัสไปรษณีย์</div>:<input type="text" name="zipcode" id="zipcode" placeholder="กรุณากรอก รหัสไปรษณีย์" />
                                 </div>
                             </div>
 
@@ -494,7 +513,15 @@ $comp_name = $row['comp_contect_name'];
                                     :
                                 </div>
                                 <div id="box-context-3">
-                                    <input type="text" />
+                                 <input type="text" list="comp_contect_tel" />
+                                    <datalist id="comp_contect_tel">
+                                        <?php
+                                        $sql = "SELECT comp_contect_tel FROM comp_contect_tbl";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row3 = mysqli_fetch_array($result)) {
+                                            echo '<option value="' . $row3['comp_contect_tel'] . '"></option>';
+                                        } mysqli_close($conn);?>
+                                    </datalist>
 
                                 </div>
                             </div>
@@ -518,7 +545,15 @@ $comp_name = $row['comp_contect_name'];
                                     :
                                 </div>
                                 <div id="box-context-3">
-                                    <input type="text" />
+                                <input type="text" list="comp_contect_people_name" />
+                                    <datalist id="comp_contect_people_name">
+                                        <?php
+                                        $sql = "SELECT comp_contect_people_name FROM comp_contect_tbl";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row3 = mysqli_fetch_array($result)) {
+                                            echo '<option value="' . $row3['comp_contect_people_name'] . '"></option>';
+                                        } mysqli_close($conn);?>
+                                    </datalist>
 
                                 </div>
                             </div>
@@ -538,6 +573,7 @@ $comp_name = $row['comp_contect_name'];
                                 <a id="butt_add_company" href="mspo_display.php?menu=po_material&add_company=select_company">บันทึกข้อมูล</a>
                             </div>
 
+
                         </div>
                     </div>
                 </div>
@@ -545,129 +581,31 @@ $comp_name = $row['comp_contect_name'];
         </div>
     </div>
     <script>
-        function showProvinces() {
-            let input_province = document.querySelector("#input_province");
-            let url = "https://ckartisan.com/api/provinces";
-            console.log(url);
-            // if(input_province.value == "") return;
-            fetch(url)
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
-                    //UPDATE SELECT OPTION
-                    let input_province = document.querySelector("#input_province");
-                    input_province.innerHTML =
-                        '<option value="">กรุณาเลือกจังหวัด</option>';
-                    for (let item of result) {
-                        let option = document.createElement("option");
-                        option.text = item.province;
-                        option.value = item.province;
-                        input_province.appendChild(option);
-                    }
-                    //QUERY AMPHOES
-                    showAmphoes();
-                });
-        }
+        $.Thailand({
 
-        function showAmphoes() {
-            let input_province = document.querySelector("#input_province");
-            let url =
-                "https://ckartisan.com/api/amphoes?province=" + input_province.value;
-            console.log(url);
-            // if(input_province.value == "") return;
-            fetch(url)
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
-                    //UPDATE SELECT OPTION
-                    let input_amphoe = document.querySelector("#input_amphoe");
-                    input_amphoe.innerHTML =
-                        '<option value="">กรุณาเลือกเขต/อำเภอ</option>';
-                    for (let item of result) {
-                        let option = document.createElement("option");
-                        option.text = item.amphoe;
-                        option.value = item.amphoe;
-                        input_amphoe.appendChild(option);
-                    }
-                    //QUERY AMPHOES
-                    showTambons();
-                });
-        }
+            database: 'js/jquery.Thailand.js-master/jquery.Thailand.js/database/db.json',
 
-        function showTambons() {
-            let input_province = document.querySelector("#input_province");
-            let input_amphoe = document.querySelector("#input_amphoe");
-            let url =
-                "https://ckartisan.com/api/tambons?province=" +
-                input_province.value +
-                "&amphoe=" +
-                input_amphoe.value;
-            console.log(url);
-            // if(input_province.value == "") return;
-            // if(input_amphoe.value == "") return;
-            fetch(url)
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
-                    //UPDATE SELECT OPTION
-                    let input_tambon = document.querySelector("#input_tambon");
-                    input_tambon.innerHTML =
-                        '<option value="">กรุณาเลือกแขวง/ตำบล</option>';
-                    for (let item of result) {
-                        let option = document.createElement("option");
-                        option.text = item.tambon;
-                        option.value = item.tambon;
-                        input_tambon.appendChild(option);
-                    }
-                    //QUERY AMPHOES
-                    showZipcode();
-                });
-        }
+            $district: $('#district'),
 
-        function showZipcode() {
-            let input_province = document.querySelector("#input_province");
-            let input_amphoe = document.querySelector("#input_amphoe");
-            let input_tambon = document.querySelector("#input_tambon");
-            let url =
-                "https://ckartisan.com/api/zipcodes?province=" +
-                input_province.value +
-                "&amphoe=" +
-                input_amphoe.value +
-                "&tambon=" +
-                input_tambon.value;
-            console.log(url);
-            // if(input_province.value == "") return;
-            // if(input_amphoe.value == "") return;
-            // if(input_tambon.value == "") return;
-            fetch(url)
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
-                    //UPDATE SELECT OPTION
-                    let input_zipcode = document.querySelector("#input_zipcode");
-                    input_zipcode.value = "";
-                    for (let item of result) {
-                        input_zipcode.value = item.zipcode;
-                        break;
-                    }
-                });
-        }
-        //EVENTS
-        document
-            .querySelector("#input_province")
-            .addEventListener("change", (event) => {
-                showAmphoes();
-            });
-        document
-            .querySelector("#input_amphoe")
-            .addEventListener("change", (event) => {
-                showTambons();
-            });
-        document
-            .querySelector("#input_tambon")
-            .addEventListener("change", (event) => {
-                showZipcode();
-            });
+            $amphoe: $('#amphoe'),
 
-        showProvinces();
+            $province: $('#province'),
+
+            $zipcode: $('#zipcode'),
+
+            onDataFill: function(data) {
+
+                console.info('Data Filled', data);
+
+            },
+
+            onLoad: function() {
+
+                console.info('Autocomplete is ready!');
+
+                $('#loader, .demo').toggle();
+
+            }
+
+        });
     </script>

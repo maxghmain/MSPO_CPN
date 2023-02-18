@@ -560,13 +560,28 @@ $(function () {
     /* SESSION INPUT LOGS FORM รายการขอซื้อ */
     $('#po_number').on("keyup", function () {
         var po_number = $('#po_number').val();
-       
+        var comp_name = $('#comp_name').val(); 
         $.ajax({
             type: "GET",
             url: "logs_session.php",
             data: {
               
                 po_number: po_number,
+                comp_name:comp_name,
+            }
+
+        });
+    });
+    $('comp_name').on("keyup", function () {
+        var po_number = $('#po_number').val();
+        var comp_name = $('comp_name').val(); 
+        $.ajax({
+            type: "GET",
+            url: "logs_session.php",
+            data: {
+              
+                po_number: po_number,
+                comp_name:comp_name,
             }
 
         });

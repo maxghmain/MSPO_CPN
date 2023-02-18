@@ -36,17 +36,20 @@ if ($_SESSION['username'] == '') {
     $unit_order_afb = $_GET['unit_order_afb'];
     $subject_order = $_GET['subject_order'];
     $form_afb_id = $_SESSION['form_afb_id'];
-    
+    $comp_name = $_SESSION['comp_name'];
 
     /* Session รับค่าที่พิมพ์เก็บไว้ เมื่อรีเฟรชจะไม่หายไป ของเพิ่มใบขอซื้อ */
     $_SESSION['item_Number'] = $_GET['item_Number'];
     $item_Number = $_GET['item_Number'];
     $_SESSION['item_Number_select'] = $_GET['item_Number_select'];
     $item_Number_select = $_GET['item_Number_select'];
-    
+
+$_SESSION['comp_contect_name'] = $_GET['comp_contect_name'];
+
 
     /* PO */
     $po_id = $_SESSION['po_id'];
+
 
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
@@ -59,9 +62,18 @@ if ($_SESSION['username'] == '') {
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
         <link rel="stylesheet" href="css/component/popup.css?version=0s2" />
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+
+        <link rel="stylesheet" href="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+
+        <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+
+        <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+
+        <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
+
+        
 
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
@@ -243,11 +255,10 @@ if ($_SESSION['username'] == '') {
                     }
                 } else if ($_SESSION['state_excecut'] == "saveData") {
                     include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
-                    
+
                     echo '<script>';
                     echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
                     echo '</script>';
-                    
                 } else if ($_SESSION['menu'] == "item_wait_for_use") {
                     include 'component/content/afb_menu/item_wait_for_use.php';
                     include 'component/content/afb_menu/pop_up/pop_up_afb_more_detail.php';
@@ -264,38 +275,27 @@ if ($_SESSION['username'] == '') {
                 } else if ($_SESSION['menu'] == "po_material") {
                     include 'component/content/po_menu/function/check_po_id_material.php';
                     include 'component/content/po_menu/po_material.php';
-                    if($_SESSION['add_item'] == "already_selected") {
+                    if ($_SESSION['add_item'] == "already_selected") {
                         include 'component/content/po_menu/popup/add_po_afb.php';
+                    } else if ($_SESSION['state_excecut'] == "select_item") {
+                        include 'component/content/po_menu/function/insert_afb_to_po.php';
+                        echo '<script>';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                        echo '</script>';
                     }
-                    
-                    else if($_SESSION['state_excecut'] == "select_item"){
-                    include 'component/content/po_menu/function/insert_afb_to_po.php';
-                    echo '<script>';
-                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
-                    echo '</script>';
-                    
-                    }if($_SESSION['add_company'] == "already_selected") {
-                        include 'component/content/po_menu/popup/pop_add_company.php';
-                    }else if($_SESSION['add_company'] == "select_company"){
+                    if ($_SESSION['add_company'] == "already_selected") {
 
+                        include 'component/content/po_menu/popup/pop_add_company.php';
+
+                    } else if ($_SESSION['add_company'] == "select_company") {
+                        include 'component/content/po_menu/function/insert_copany.php';
                     }
-                }
-                
-                
-                
-                
-                else if($_SESSION['menu'] == "po_service"){
+                } else if ($_SESSION['menu'] == "po_service") {
                     include 'component/content/po_menu/function/check_po_id_service.php';
                     include 'component/content/po_menu/po_service.php';
+                } else if ($_SESSION['menu'] == "total_items") {
+                    include 'component/content/total_item/total_item.php';
                 }
-                
-                
-                
-                
-                
-                else if ($_SESSION['menu'] == "total_items") {
-                   include 'component/content/total_item/total_item.php';
-                    }
                 ?>
             </div>
         </div>
