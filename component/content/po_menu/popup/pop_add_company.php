@@ -1,5 +1,38 @@
-
 <!--<link rel="stylesheet" href="../../css/component/popup.css">-->
+<?php
+session_start();
+include 'php/connect_db.php';
+
+$sql = "SELECT * FROM comp_contect_tbl";
+$result = mysqli_query($conn, $sql);
+
+?>
+<div class="add_afb_po" id="add_afb_po">
+    <div id="crop-box">
+        <div id="box_add_afb_po">
+            <div id="box_add_afb_po-1">
+                <div id="box_add_afb_po-2">
+                    <div id="box_butt_close"><a href="mspo_display.php?menu=po_material">X</a></div>
+                    <div id="titel-name">
+                        เพิ่มชื่อบริษัทที่ติดต่อ
+                    </div>
+                    <div id="content-po-box">
+                        <div id="afb_content_xxx">
+                            <div id="box-context">
+                                <form action="component/content/po_menu/function/search_comp.php" method="GET">
+                                    <input id="search" type="text" placeholder="ค้นหาชื่อบริษัท">
+                                    <input id="submit" type="submit" value="ค้นหา">
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     #add_afb_po {
         /*display: none;*/
@@ -371,238 +404,22 @@
         width: 100px;
         border: 0px solid red;
     }
-    #ahah{
+
+    #ahah {
         border: 1px solid red;
     }
+
+    #mySearch {
+        width: 100%;
+        font-size: 18px;
+        padding: 11px;
+        border: 1px solid #ddd;
+    }
+
+    /* Style the navigation menu */
+    #myMenu {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 </style>
-
-<div class="add_afb_po" id="add_afb_po">
-    <div id="crop-box">
-        <div id="box_add_afb_po">
-            <div id="box_add_afb_po-1">
-                <div id="box_add_afb_po-2">
-                    <div id="box_butt_close"><a href="mspo_display.php?menu=po_material">X</a></div>
-                    <div id="titel-name">
-                        เพิ่มชื่อบริษัทที่ติดต่อ
-                    </div>
-                    <div id="content-po-box">
-                        <div id="afb_content_xxx">
-                            <div id="box-context">
-                                <div id="box-context-1">
-                                    ชื่อบริษัท
-                                </div>
-                                <div id="box-context-2">
-                                    :
-                                </div>
-                                <div id="box-context-3">
-                                    <input type="text" name="comp_name" list="comp_name">
-                                    <datalist id="comp_name">
-                                    <?php
-                                        include 'php/connect_db.php';
-                                        $sql = "SELECT comp_contect_name FROM comp_contect_tbl";
-                                        $result = mysqli_query($conn, $sql);
-                                        
-                                        $comp_contect_name = $row['comp_contect_name'];
-                                        while($row = mysqli_fetch_array($result)){
-                                            echo '<option value="' . $row['comp_contect_name'] . '">'.$row['comp_contect_name'].'</option>';
-                                        }
-                                        ?>
-
-
-                                    </datalist>
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-                                    ที่อยู่
-                                </div>
-                                <div id="box-context-2">
-                                    :
-                                </div>
-                                <div id="box-context-4">
-                                    เลขที่ : <input type="text" name="num_address" list="num_address">
-                                    <datalist id="num_address">
-                                        <?php
-                                        include 'php/connect_db.php';
-                                        $sql = "SELECT comp_contect_loca_num FROM comp_contect_tbl";
-                                        $result = mysqli_query($conn, $sql);
-                                        
-                                        $comp_contect_loca_num = $row['comp_contect_loca_num'];
-                                        while($row = mysqli_fetch_array($result)){
-                                            echo '<option value="' . $row['comp_contect_loca_num'] . '">'.$row['comp_contect_loca_num'].'</option>';
-                                        }
-                                        ?>
-                                    </datalist>
-                                    หมู่ที่ : <input type="text" list="mutee" />
-                                    <datalist id="mutee">
-                                    <?php
-                                        include 'php/connect_db.php';
-                                        $sql = "SELECT comp_contect_loca_moo FROM comp_contect_tbl";
-                                        $result = mysqli_query($conn, $sql);
-                                        
-                                        $comp_contect_loca_moo = $row['comp_contect_loca_moo'];
-                                        while($row = mysqli_fetch_array($result)){
-                                            echo '<option value="' . $row['comp_contect_loca_moo'] . '">'.$row['comp_contect_loca_moo'].'</option>';
-                                        }
-                                        ?>
-                                    </datalist>
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-
-                                </div>
-                                <div id="box-context-2">
-
-                                </div>
-                                <div id="box-context-4">
-                                    ถนน&nbsp; : <input type="text" list="road" />
-                                    <datalist id="road">
-                                     
-                                    </datalist>
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-
-                                </div>
-                                <div id="box-context-2">
-
-                                </div>
-                                <div id="box-context-3">
-                                <div style="width:150px">ตำบล</div>:<input type="text" name="district" id="district" placeholder="กรุณากรอก ตำบล / แขวง" />
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-
-                                </div>
-                                <div id="box-context-2">
-
-                                </div>
-                                <div id="box-context-3">
-                                <div style="width:150px">อำเภอ</div>:<input type="text" name="amphoe" id="amphoe" placeholder="กรุณากรอก อำเภอ / เขต" />
-
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-
-                                </div>
-                                <div id="box-context-2">
-
-                                </div>
-                                <div id="box-context-3">
-                                <div style="width:150px">จังหวัด</div>:<input type="text" name="province" id="province" placeholder="กรุณากรอก จังหวัด" />
-                                </div>
-                            </div>
-
-
-
-                            <div id="box-context">
-                                <div id="box-context-1">
-
-                                </div>
-                                <div id="box-context-2">
-
-                                </div>
-                                <div id="box-context-3">
-                                
-                                   <div style="width:150px">รหัสไปรษณีย์</div>:<input type="text" name="zipcode" id="zipcode" placeholder="กรุณากรอก รหัสไปรษณีย์" />
-                                </div>
-                            </div>
-
-                            <div id="box-context">
-                                <div id="box-context-1">
-                                    โทรศัพท์
-                                </div>
-                                <div id="box-context-2">
-                                    :
-                                </div>
-                                <div id="box-context-3">
-                                 <input type="text" list="comp_contect_tel" />
-                                    <datalist id="comp_contect_tel">
-                                     
-                                    </datalist>
-
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-                                    แฟกซ์-FAX
-                                </div>
-                                <div id="box-context-2">
-                                    :
-                                </div>
-                                <div id="box-context-3">
-                                    <input type="text" />
-
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-                                    ชื่อผู้ติดต่อ
-                                </div>
-                                <div id="box-context-2">
-                                    :
-                                </div>
-                                <div id="box-context-3">
-                                <input type="text" list="comp_contect_people_name" />
-                                    <datalist id="comp_contect_people_name">
-                                      
-                                    </datalist>
-
-                                </div>
-                            </div>
-                            <div id="box-context">
-                                <div id="box-context-1">
-                                    รายละเอียดเพิ่มเติม(ถ้ามี)
-                                </div>
-                                <div id="box-context-2">
-                                    :
-                                </div>
-                                <div id="box-context-3">
-                                    <textarea></textarea>
-
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <a id="butt_add_company" href="mspo_display.php?menu=po_material&add_company=select_company">บันทึกข้อมูล</a>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $.Thailand({
-
-            database: 'js/jquery.Thailand.js-master/jquery.Thailand.js/database/db.json',
-
-            $district: $('#district'),
-
-            $amphoe: $('#amphoe'),
-
-            $province: $('#province'),
-
-            $zipcode: $('#zipcode'),
-
-            onDataFill: function(data) {
-
-                console.info('Data Filled', data);
-
-            },
-
-            onLoad: function() {
-
-                console.info('Autocomplete is ready!');
-
-                $('#loader, .demo').toggle();
-
-            }
-
-        });
-    </script>

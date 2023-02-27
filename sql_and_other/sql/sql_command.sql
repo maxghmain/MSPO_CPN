@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS material_tbl(
 
 CREATE TABLE IF NOT EXISTS order_tbl(
     order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    order_afb_id INT NOT NULL,
     order_detail TEXT NOT NULL COLLATE utf8mb4_unicode_ci,
     order_queantity DOUBLE  NOT NULL COLLATE utf8mb4_unicode_ci,
     unit_id INT NULL,
@@ -210,7 +211,8 @@ CREATE TABLE IF NOT EXISTS order_tbl(
     FOREIGN KEY(material_type_id) REFERENCES material_type_tbl(material_type_id),
     FOREIGN KEY(material_class_shelf_id) REFERENCES material_class_shelf_tbl(material_class_shelf_id), 
     FOREIGN KEY(po_id) REFERENCES po_tbl(po_id),
-    FOREIGN KEY(state_id) REFERENCES state_tbl(state_id)
+    FOREIGN KEY(state_id) REFERENCES state_tbl(state_id),
+    FOREIGN KEY(order_afb_id) REFERENCES order_afb_tbl(order_afb_id)
 )ENGINE = INNODB DEFAULT CHARSET UTF8MB4;
 
 CREATE TABLE IF NOT EXISTS order_more_tbl(

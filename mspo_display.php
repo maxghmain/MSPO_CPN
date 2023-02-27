@@ -43,13 +43,27 @@ if ($_SESSION['username'] == '') {
     $item_Number = $_GET['item_Number'];
     $_SESSION['item_Number_select'] = $_GET['item_Number_select'];
     $item_Number_select = $_GET['item_Number_select'];
-
-$_SESSION['comp_contect_name'] = $_GET['comp_contect_name'];
-
+    $name_item = $_GET['name_item'];
+    $_SESSION['name_item'] = $_GET['name_item'];
+    $value_item = $_GET['value_item'];
+    $_SESSION['value_item'] = $_GET['value_item'];
+    $unit_item = $_GET['unit_item'];
+    $_SESSION['unit_item'] = $_GET['unit_item'];
+    $note_item = $_GET['note_item'];
+    $_SESSION['note_item'] = $_GET['note_item'];
+    $form_afbnum = $_GET['form_afbnum'];
+    $_SESSION['form_afbnum'] = $_GET['form_afbnum'];
+    $form_afbbook = $_GET['form_afbbook'];
+    $_SESSION['form_afbbook'] = $_GET['form_afbbook'];
+    $group_id_item = $_GET['group_id_item'];
+    $_SESSION['group_id_item'] = $_GET['group_id_item'];
+    $form_afb_pel = $_GET['form_afb_pel'];
+    $_SESSION['form_afb_pel'] = $_GET['form_afb_pel'];
 
     /* PO */
     $po_id = $_SESSION['po_id'];
 
+    $order_detail = $_SESSION['order_detail'];
 
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
@@ -277,7 +291,10 @@ $_SESSION['comp_contect_name'] = $_GET['comp_contect_name'];
                     include 'component/content/po_menu/po_material.php';
                     if ($_SESSION['add_item'] == "already_selected") {
                         include 'component/content/po_menu/popup/add_po_afb.php';
-                    } else if ($_SESSION['state_excecut'] == "select_item") {
+                    }
+                    
+                    
+                    else if ($_SESSION['state_excecut'] == "select_item") {
                         include 'component/content/po_menu/function/insert_afb_to_po.php';
                         echo '<script>';
                         echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';

@@ -124,7 +124,14 @@ $unit_id = $row['unit_id'];
 
                 </div>
                 <div id="box-po-1">
-                    <p>เลขที่ใบขอซื้อ : <strong>เลขที่</strong> <input type="text" id="po-number" value="<?php echo $row['form_afb_number'] ?>" placeholder="กรุณาเลือกใบขอซื้อ" readonly /> <strong>เล่มที่</strong> <input type="text" id="po-number" value="<?php echo $row['form_afb_book_number'] ?>" placeholder="กรุณาเลือกใบขอซื้อ" readonly /></p>
+                    <?php
+                    $sql = "SELECT * FROM po_afb_tbl WHERE po_id = $po_id";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($result)){
+                       echo' <p>เลขที่ใบขอซื้อ :<strong>เล่มที่</strong> <input type="text" id="po-number" value="'.$row['po_afb_book_num'].'" placeholder="กรุณาเลือกใบขอซื้อ" readonly /> <strong>เลขที่</strong> <input type="text" id="po-number" value="'.$row['po_afb_num'].'" placeholder="กรุณาเลือกใบขอซื้อ" readonly />  </p>';
+                    }
+                    ?>
+                    
                 </div>
                 <div id="box-po-1">
                     <p>ผู้ขอซื้อ : <input type="text" id="po-afb" value="<?php echo $row['form_afb_people_name'] ?>" placeholder="กรุณากรอกชื่อผู้ขอซื้อ" readonly /> </p>
@@ -132,7 +139,7 @@ $unit_id = $row['unit_id'];
             </div>
             <div id="box-po">
                 <div id="box-po-1">
-                    <p> บริษัทที่ติดต่อ : <a href="mspo_display.php?menu=po_material&add_company=already_selected" type="button" id="butt-add-afb-po">เพิ่มชื่อบริษัท</a></p>
+                    <p> บริษัทที่ติดต่อ : <a href="mspo_display.php?menu=po_material&add_company=already_selected" type="button" id="butt-add-afb-po">ค้นหารายชื่อบริษัทที่ติดต่อ</a></p>
                 </div>
 
             </div>
