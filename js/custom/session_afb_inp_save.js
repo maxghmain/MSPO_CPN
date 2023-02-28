@@ -560,28 +560,70 @@ $(function () {
     /* SESSION INPUT LOGS FORM รายการขอซื้อ */
     $('#po_number').on("keyup", function () {
         var po_number = $('#po_number').val();
-        var comp_name = $('#comp_name').val(); 
+        var name_comp_con = $('#name_comp_con').val(); 
+        var note_comp_con = $('#note_comp_con').val();
+       
         $.ajax({
             type: "GET",
             url: "logs_session.php",
             data: {
               
                 po_number: po_number,
-                comp_name:comp_name,
+                name_comp_con:name_comp_con,
+                note_comp_con:note_comp_con,
+                
             }
 
         });
     });
-    $('comp_name').on("keyup", function () {
+    $('#name_comp_con').on("keyup", function () {
         var po_number = $('#po_number').val();
-        var comp_name = $('comp_name').val(); 
+        var name_comp_con = $('#name_comp_con').val(); 
+        var note_comp_con = $('#note_comp_con').val();
+       
         $.ajax({
             type: "GET",
             url: "logs_session.php",
             data: {
               
                 po_number: po_number,
-                comp_name:comp_name,
+                name_comp_con:name_comp_con,
+                note_comp_con:note_comp_con,
+                
+            }
+
+        });
+    });
+    $('#note_comp_con').on("keyup", function () {
+        var po_number = $('#po_number').val();
+        var name_comp_con = $('#name_comp_con').val(); 
+        var note_comp_con = $('#note_comp_con').val();
+       
+        $.ajax({
+            type: "GET",
+            url: "logs_session.php",
+            data: {
+              
+                po_number: po_number,
+                name_comp_con:name_comp_con,
+                note_comp_con:note_comp_con,
+                
+            }
+
+        });
+    });
+    $('#item_price').on("keyup", function () {
+        var po_number = $('#po_number').val();
+        var name_comp_con = $('#name_comp_con').val(); 
+        var note_comp_con = $('#note_comp_con').val();
+        $.ajax({
+            type: "GET",
+            url: "logs_session.php",
+            data: {
+              
+                po_number: po_number,
+                name_comp_con:name_comp_con,
+                note_comp_con:note_comp_con,
             }
 
         });

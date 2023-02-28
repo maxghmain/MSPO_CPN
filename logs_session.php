@@ -21,3 +21,7 @@ $_SESSION['state_excecut'] = $_GET['state_excecut'];*/
 /***************************************************************/
     $_SESSION['po_number'] = $_GET['po_number'];
     $_SESSION['comp_contect_name'] = $_GET['comp_contect_name']; 
+    $_SESSION['name_comp_con'] = $_GET['name_comp_con'];
+    $_SESSION['note_comp_con'] = $_GET['note_comp_con'];
+    $_SESSION['item_price'] = $_GET['item_price'];
+    ?>

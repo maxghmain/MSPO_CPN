@@ -2,6 +2,19 @@
 <?php
 session_start();
 include 'php/connect_db.php';
+$sql = "SELECT * FROM comp_contect_tbl WHERE comp_contect_name like '%$search%'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo $row["comp_contect_name"] . "<br>";
+        
+    }
+} else {
+    echo "0 records";
+}
+
 
 $sql = "SELECT * FROM comp_contect_tbl";
 $result = mysqli_query($conn, $sql);
@@ -19,12 +32,29 @@ $result = mysqli_query($conn, $sql);
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
                             <div id="box-context">
-                                <form action="component/content/po_menu/function/search_comp.php" method="GET">
+                                <form action="" method="GET">
                                     <input id="search" type="text" placeholder="ค้นหาชื่อบริษัท">
                                     <input id="submit" type="submit" value="ค้นหา">
                                 </form>
-
+                               
                             </div>
+                            <div id="comp_item_show">
+                                <?php
+                                while ($row = mysqli_fetch_array($result)) { ?>
+                                    <div class="containner_item">
+                                        <div class="box-item-show-1">
+                                        
+                                            <?php echo '<a style="background: #006ebc;color:white;padding:1px; border-radius: 10px;">ชื่อบริษัท : ' . $row['comp_contect_name'].'</a>'. '<br>'; ?>
+                                            <?php echo 'ที่อยู่ :' . ' ' . $row['comp_contect_loca_num'] . ' ' . '| หมู่ : ' . $row['comp_contect_loca_moo'] . ' ' . '| ถนน : ' . $row['comp_contect_loca_road'] . '| ตำบล : ' . $row['comp_contect_loca_s_district'] . ' | อำเภอ : ' . $row['comp_contect_loca_district'] . '| จังหวัด : ' . $row['comp_contect_loca_prov'] . '| รหัสไปรษณี : ' . $row['comp_contect_loca_codepost'] . '<br>' . 'เบอร์โทร : ' . $row['comp_contect_tel'] . '| FEX : ' . $row['comp_contect_fex']; ?>
+                                        </div>
+                                        <?php echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&add_company=select_and_add_comp&select_comp='.$row['comp_contect_id'].'" >เลือกบริษัท';
+                                        echo '</a>'; ?>
+                                    </div>
+                                <?php 
+                                } ?>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -32,8 +62,14 @@ $result = mysqli_query($conn, $sql);
         </div>
     </div>
 </div>
-
+<?php mysqli_close($conn); ?>
 <style>
+    #comp_item_show {
+        /* border: 1px solid red;*/
+        height: 400;
+        overflow: auto;
+    }
+
     #add_afb_po {
         /*display: none;*/
         position: fixed;
@@ -49,7 +85,7 @@ $result = mysqli_query($conn, $sql);
 
     #box_add_afb_po {
 
-        width: 50%;
+        width: 80%;
         height: 650;
 
     }
