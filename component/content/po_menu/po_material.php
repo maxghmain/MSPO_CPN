@@ -96,6 +96,57 @@ include 'php/connect_db.php'
     #width_comp {
         width: 100px;
     }
+    #tried{
+        cursor: pointer;
+        background: #006ebc;
+        color: white;
+        padding: 3px;
+        border-radius: 30px;
+        text-decoration: none;
+    }
+    .submit-price{
+        cursor: pointer;
+        background: #006ebc;
+        color: white;
+        padding: 3px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+    .submit-price:hover{
+        cursor: pointer;
+        background: #014474;
+        color: white;
+        padding: 3px;
+        border-radius: 30px;
+        text-decoration: none;
+    }
+    #tried-1{
+        cursor: pointer;
+        background: #fd464a;
+        color: white;
+        padding: 3px;
+        border-radius: 30px;
+        text-decoration: none;
+    }
+    .edit-item-price{
+        cursor: pointer;
+        background: #fd464a;
+        color: white;
+        padding: 3px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+    .edit-item-price:hover{
+        cursor: pointer;
+        background:rgb(128, 39, 39);
+        color: white;
+        padding: 3px;
+        border-radius: 30px;
+        text-decoration: none;
+    }
+    
 </style>
 <?php
 $sql = "SELECT order_afb_id, name_ms_normal_name, name_ms_real_name, order_afb_value,c.unit_id,unit_name, order_afb_note,form_afb_number,form_afb_book_number,a.state_id,form_afb_write_date,form_afb_people_name,d.group_id
@@ -265,7 +316,7 @@ $unit_id = $row['unit_id'];
                                 หมายเหตุ
                             </td>
                             <td style="width: 10%;">
-                                บันทึกราคา
+                                เพิ่ม/แก้ไข ราคาสินค้า
                             </td>
 
 
@@ -273,54 +324,55 @@ $unit_id = $row['unit_id'];
 
                     </thead>
                     <form action="component/content/po_menu/function/sum_price_item.php" method="GET">
-                    <tbody>
-                        <?php
-                        $check_page_addData = $_SESSION['addData_id'];
-                        $sql = "SELECT  order_id,order_detail,order_queantity,a.unit_id,unit_name,order_note
+                        <tbody>
+                            <?php
+                            $sql = "SELECT  order_id,order_detail,order_queantity,a.unit_id,unit_name,order_note,order_price
  FROM order_tbl as a
  INNER JOIN unit_tbl as b
  ON a.unit_id = b.unit_id
  WHERE po_id = $po_id";
-                        $query = mysqli_query($conn, $sql);
-                        $count_data = 1;
-                        while ($row = mysqli_fetch_array($query)) {
-                        ?>
+                            $query = mysqli_query($conn, $sql);
+                            $count_data = 1;
 
-                            <tr>
+                            while ($row8 = mysqli_fetch_array($query)) {
 
-                                <td>
-                                    <?= $count_data; ?>
-                                </td>
-                                <td>
-                                    <?= $row['order_detail']; ?>
-                                </td>
-                                <td>
-                                    <?= $row['order_detail']; ?>
-                                </td>
-                                <td>
-                                    <?= $row['order_queantity']; ?>
-                                </td>
-                                <td>
-                                    <?= $row['unit_name']; ?>
-                                </td>
-                                <td>
-                                    <input type="number" id="item_price" style="width:80px" />
-                                    
-                                </td>
-                                <td>
-                                    <?= $row['order_note']; ?>
-                                </td>
-                                <td>
-                                    <a href="mspo_display.php?menu=&state_excecut=save_price&item_id=<?=$row['order_id']?>&item_price=">บันรึกราคา</a>
-                                </td>
-                                
-                            </tr>
-                        <?php
-                            $count_data++;
-                        }
-                        $count_data = 1; ?>
-                    </tbody>
-                   
+
+                                echo ' <tr>';
+
+                                echo '   <td>';
+                                echo $count_data;
+                                echo '    </td>';
+                                echo '    <td>';
+                                echo     $row8['order_detail'];;
+                                echo '   </td>';
+                                echo '   <td>';
+                                echo    $row8['order_detail'];
+                                echo '    </td>';
+                                echo '   <td>';
+                                echo      $row8['order_queantity'];
+                                echo '   </td>';
+                                echo '    <td>';
+                                echo       $row8['unit_name'];
+                                echo '    </td>';
+                                echo '    <td>';
+                                echo '        <input type="number" id="item_price_'.$row8['order_id'].'" class="item-price" style="width:80px" value="'.$row8['order_price'].'" />';
+                                echo '    </td>';
+                                echo '    <td>';
+                                echo      $row8['order_note'];
+                                echo '    </td>';
+                                echo '    <td>';
+                                echo '        <a href="#" class="submit-price" data-order-id="'.$row8['order_id'].'">เพิ่มราคา</a>';
+                                echo '        <a href="#" class="edit-item-price" data-order-id="'.$row8['order_id'].'">แก้ไขราคา</a>';
+                                echo '    </td>';
+                                echo '  </tr>';
+
+
+
+                                $count_data++;
+                            }
+                            $count_data = 1; ?>
+                        </tbody>
+
                     </form>
 
                 </table>
@@ -331,8 +383,52 @@ $unit_id = $row['unit_id'];
 
     </div>
     <div>
-        <a id="butt-add-afb-po" onclick="sum_price()">คำนวนราคารายการขอซื้อ</a>
+        <butto id="butt-add-afb-po" onclick="sum_price()" >คำนวนราคารายการขอซื้อ</butto>
     </div>
 </div>
+<script>
+   // JavaScript code
+   var editButtons = document.querySelectorAll('.edit-item-price');
+editButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+        var orderId = this.getAttribute('data-order-id');
+        var inputField = document.getElementById('item_price_'+orderId);
+        inputField.disabled = false;
+        inputField.style.color = '#006ebc';
+        inputField.focus();
+        var submitButton = document.querySelector('.submit-price[data-order-id="'+orderId+'"]');
+        submitButton.disabled = false;
+    });
+});
 
+var submitButtons = document.querySelectorAll('.submit-price');
+submitButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+        var orderId = this.getAttribute('data-order-id');
+        var itemPrice = document.getElementById('item_price_'+orderId).value;
+        submit_price(orderId, itemPrice);
+        var inputField = document.getElementById('item_price_'+orderId);
+        inputField.disabled = true;
+        inputField.style.color = 'gray';
+        var editButton = document.querySelector('.edit-item-price[data-order-id="'+orderId+'"]');
+        editButton.disabled = false;
+    });
+});
+function submit_price(orderId, itemPrice) {
+    var xhr = new XMLHttpRequest();
+    var url = 'mspo_display.php?menu=po_material&state_excecut=save_price_item';
+    var params = 'order_id=' + encodeURIComponent(orderId) + '&item_price=' + encodeURIComponent(itemPrice);
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // handle the response from the server
+            callback();
+        }
+    };
+    xhr.send(params);
+}
+</script>
 <?php mysqli_close($conn); ?>

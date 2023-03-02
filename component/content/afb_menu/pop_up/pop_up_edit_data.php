@@ -70,7 +70,13 @@ include 'php/connect_db.php';
             </div>
             <?php
             $id_data = $_SESSION['editData_id'];
-            $sql = "SELECT order_afb_id,name_ms_normal_name,name_ms_real_name,order_afb_value,unit_name,order_afb_note FROM order_afb_tbl as a INNER JOIN name_ms_tbl as b ON a.name_ms_id = b.name_ms_id INNER JOIN unit_tbl as c ON a.unit_id = c.unit_id WHERE a.order_afb_id = '$id_data' ";
+            $sql = "SELECT order_afb_id,name_ms_normal_name,name_ms_real_name,order_afb_value,unit_name,order_afb_note 
+            FROM order_afb_tbl as a 
+            INNER JOIN name_ms_tbl as b 
+            ON a.name_ms_id = b.name_ms_id 
+            INNER JOIN unit_tbl as c 
+            ON a.unit_id = c.unit_id 
+            WHERE a.order_afb_id = '$id_data' ";
             $query = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($query)
             ?>

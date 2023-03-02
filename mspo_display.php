@@ -63,8 +63,12 @@ if ($_SESSION['username'] == '') {
     $_SESSION['select_comp'] = $_GET['select_comp'];
     $select_and_add_comp = $_GET['select_and_add_comp'];
     $_SESSION['select_and_add_comp'] = $_GET['select_and_add_comp'];
-    $item_id = $_GET['item_id'];
+    $item_id = $_SESSION['item_id'];
     $_SESSION['item_id'] = $_GET['item_id'];
+    
+    $item_price = $_POST['item_price'];
+    $order_id = $_SESSION['order_id'];
+    $_SESSION['order_id'] = $_GET['order_id'];
 
     /* PO */
     $po_id = $_SESSION['po_id'];
@@ -317,11 +321,9 @@ if ($_SESSION['username'] == '') {
                         echo '<script>';
                         echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
                         echo '</script>';
-                    }else if($_SESSION['state_excecut'] == "save_price"){
-                        include 'component/content/po_menu/function/sum_price_item.php';
-                       /* echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
-                        echo '</script>';*/
+                    }else if($_SESSION['state_excecut'] == "save_price_item"){
+                       
+                      include 'component/content/po_menu/function/sum_price_item.php';
                     }
                 } else if ($_SESSION['menu'] == "po_service") {
                     include 'component/content/po_menu/function/check_po_id_service.php';
