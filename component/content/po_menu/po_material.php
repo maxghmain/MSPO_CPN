@@ -4,8 +4,32 @@ include 'php/connect_db.php'
 ?>
 <div class="container_title">
     <h5>สร้างและออกใบ PO - Create Oder PO / PO สำหรับวัสดุ</h5>
+    <div class="hee" >
+        <a href="mspo_display.php?menu=po_material&state_excecut=save_print_po">บันทึก(PO)</a>
+    </div>
 </div>
 <style>
+    .hee{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 70%;
+    }
+    .hee a{
+        padding: 5px;
+        border-radius: 20px;
+        background: #006ebc;
+        color: white;
+        text-decoration: none;
+        transition-duration: 0.3s;
+    }
+    .hee a:hover{
+        padding: 5px;
+        border-radius: 20px;
+        background: #014474;
+        color: white;
+        text-decoration: none;
+    }
     #container-po-content {
         /* border : 1px solid red;*/
         width: 99.9%;
@@ -178,6 +202,9 @@ $unit_id = $row['unit_id'];
         <div id="content-po">
             <div id="box-po">
                 <div id="box-po-1">
+                <div>
+        <a id="butt-add-afb-po" href="mspo_display.php?menu=po_material&add_item=already_selected">เพิ่มรายการวัสดุ</a>(เพิ่มก่อนทุกครั้ง)
+    </div>
                     <div id="box-po-2">
                         <p>เลขที่ออกใบ PO : PO <input type="number" id="po_number" value="<?php echo $_SESSION['po_number']; ?>" placeholder="กรุณากรอก" /></p>
                     </div>
@@ -206,7 +233,10 @@ $unit_id = $row['unit_id'];
             </div>
             <div id="box-po">
                 <div id="box-po-1">
-                    <p> บริษัทที่ติดต่อ : <a href="mspo_display.php?menu=po_material&add_company=already_selected" type="button" id="butt-add-afb-po">ค้นหารายชื่อบริษัทที่ติดต่อ</a></p>
+                    <p> บริษัทที่ติดต่อ : <a href="mspo_display.php?menu=po_material&add_company=already_selected" type="button" id="butt-add-afb-po">ค้นหารายชื่อบริษัทที่ติดต่อ</a>
+                    <a href="mspo_display.php?menu=po_material&add_company_new=already_selected" type="button" id="butt-add-afb-po">เพิ่มบริษัทที่ติดต่อ</a>
+                </p>
+                    
                 </div>
                 <?php
                 $sql = "SELECT a.comp_contect_id, comp_contect_name, comp_contect_loca_num, comp_contect_loca_moo, comp_contect_loca_road, comp_contect_loca_s_district, comp_contect_loca_district, comp_contect_loca_prov, comp_contect_loca_codepost, comp_contect_tel, comp_contect_fex, comp_contect_people_name, comp_contect_people_note 
@@ -282,13 +312,10 @@ $unit_id = $row['unit_id'];
         </div>
 
     </div>
-    <div>
-        <a id="butt-add-afb-po" href="mspo_display.php?menu=po_material&add_item=already_selected">เพิ่มรายการวัสดุ</a>
-    </div>
+   
 
-    <br>
 
-    <div style="display: flex;justify-content: center;margin-bottom:20px;width:100%;">
+    <div style="display: flex;justify-content: center;margin-bottom:20px;width:100%;margin-top:10px">
         <div id="table_data_show_display" style="border:1px solid black;width:100%;">
             <div id="fuck">
                 <table>
@@ -312,6 +339,9 @@ $unit_id = $row['unit_id'];
                             <td style="width: 7%;">
                                 <strong>ราคา</strong>
                             </td>
+                            <td style="width: 7%;">
+                                <strong>ราคารวม</strong>
+                            </td>
                             <td style="width: 20%;">
                                 หมายเหตุ
                             </td>
@@ -326,7 +356,7 @@ $unit_id = $row['unit_id'];
                     <form action="component/content/po_menu/function/sum_price_item.php" method="GET">
                         <tbody>
                             <?php
-                            $sql = "SELECT  order_id,order_detail,order_queantity,a.unit_id,unit_name,order_note,order_price
+                            $sql = "SELECT  order_id,order_detail,order_queantity,a.unit_id,unit_name,order_note,order_price,order_price_sum_all
  FROM order_tbl as a
  INNER JOIN unit_tbl as b
  ON a.unit_id = b.unit_id
@@ -358,6 +388,9 @@ $unit_id = $row['unit_id'];
                                 echo '        <input type="number" id="item_price_'.$row8['order_id'].'" class="item-price" style="width:80px" value="'.$row8['order_price'].'" />';
                                 echo '    </td>';
                                 echo '    <td>';
+                                echo      number_format($row8['order_price_sum_all']);
+                                echo '    </td>';
+                                echo '    <td>';
                                 echo      $row8['order_note'];
                                 echo '    </td>';
                                 echo '    <td>';
@@ -383,7 +416,56 @@ $unit_id = $row['unit_id'];
 
     </div>
     <div>
-        <butto id="butt-add-afb-po" onclick="sum_price()" >คำนวนราคารายการขอซื้อ</butto>
+        <?php
+        // connect to the database
+        
+        // query to get the total sum of order_price_sum_all
+        $sql = "SELECT SUM(order_price_sum_all) AS total_price_sum FROM order_tbl WHERE po_id = $po_id";
+        $result = mysqli_query($conn, $sql);
+        
+        // get the result as an array and retrieve the total price sum
+        $row10 = mysqli_fetch_assoc($result);
+        $totalPriceSum = $row10['total_price_sum'];
+        $vat = $totalPriceSum * 7 / 100;
+        $price_vat = $vat + $totalPriceSum ;
+        ?>      
+       
+       <table style="width:25%;">
+        <tr >
+            <td style="text-align:left;width:45%;border:none;">
+            มูลค่าสินค้า  
+            </td>
+             <td style="text-align:left;border:none;">
+            : <?=number_format($totalPriceSum, 2)?>
+            </td>
+             <td style="text-align:left;border:none;">
+            บาท
+            </td>
+        </tr>
+        <tr>
+             <td style="text-align:left;border:none;">
+            ภาษีมูลค่าเพิ่ม 7%
+            </td>
+             <td style="text-align:left;border:none;">
+            : <?= number_format($vat, 2)?>
+            </td>
+             <td style="text-align:left;border:none;">
+            บาท
+            </td>
+        </tr>
+        <tr>
+             <td style="text-align:left;border:none;">
+            รวมยอดทั้งสิ้น
+            </td>
+             <td style="text-align:left;border:none;">
+            : <?= number_format($price_vat, 2)?>
+            </td>
+             <td style="text-align:left;border:none;">
+            บาท
+            </td>
+        </tr>
+       </table>
+       
     </div>
 </div>
 <script>
@@ -429,6 +511,7 @@ function submit_price(orderId, itemPrice) {
         }
     };
     xhr.send(params);
+    window.location = '../../mspo_cpn/mspo_display.php?menu=po_material';
 }
 </script>
 <?php mysqli_close($conn); ?>

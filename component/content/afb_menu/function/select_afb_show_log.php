@@ -105,9 +105,8 @@
                 if ($row['state_id'] == 6){
                     echo 'สถานะ :'.'<a id="state_name_cancle">' . $row['state_name'].'</a>';
                 }
-                if($row['state_id'] == 1){
-                    echo 'สถานะ :'.'<a id="state_name_wait">' . $row['state_name'].'</a>';
-                }
+                
+
                 
                  
                 echo '</div>';
@@ -193,7 +192,6 @@
                     echo '<tr>';
                     echo '</table>';
                     echo '</div>';
-                    
                     $count_data ++;
                 }
                 

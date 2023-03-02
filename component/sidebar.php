@@ -88,7 +88,7 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/709510.png" style="width: 20px" height="20px" />
-                    <a href="#">PO ที่รอตรวจ</a>
+                    <a href="mspo_display.php?menu=po_wait_conf">PO ที่รอตรวจรับ</a>
                 </div>
             </div>
             <div class="manu-list">

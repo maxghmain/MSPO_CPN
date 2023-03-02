@@ -19,6 +19,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['add_afb'] = $_GET['add_afb'];
     $_SESSION['add_item'] = $_GET['add_item'];
     $_SESSION['add_company'] = $_GET['add_company'];
+    $_SESSION['add_company_new'] = $_GET['add_company_new'];
 
     $num_afb = $_GET['num_afb'];
     $num_book_afb = $_GET['num_book_afb'];
@@ -42,7 +43,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['item_Number'] = $_GET['item_Number'];
     $item_Number = $_GET['item_Number'];
     $_SESSION['item_Number_select'] = $_GET['item_Number_select'];
-    $item_Number_select = $_GET['item_Number_select'];
+    $item_Number_select = $_SESSION['item_Number_select'];
     $name_item = $_GET['name_item'];
     $_SESSION['name_item'] = $_GET['name_item'];
     $value_item = $_GET['value_item'];
@@ -69,7 +70,7 @@ if ($_SESSION['username'] == '') {
     $item_price = $_POST['item_price'];
     $order_id = $_SESSION['order_id'];
     $_SESSION['order_id'] = $_GET['order_id'];
-
+    $po_number = $_SESSION['po_number'];
     /* PO */
     $po_id = $_SESSION['po_id'];
 
@@ -306,9 +307,7 @@ if ($_SESSION['username'] == '') {
                     
                     else if ($_SESSION['state_excecut'] == "select_item") {
                         include 'component/content/po_menu/function/insert_afb_to_po.php';
-                        echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
-                        echo '</script>';
+                        
                     }
                     if ($_SESSION['add_company'] == "already_selected") {
 
@@ -324,12 +323,29 @@ if ($_SESSION['username'] == '') {
                     }else if($_SESSION['state_excecut'] == "save_price_item"){
                        
                       include 'component/content/po_menu/function/sum_price_item.php';
+                    }else if($_SESSION['state_excecut'] == "save_print_po"){
+                        include 'component/content/po_menu/function/save_po.php';
+                        echo '<script>';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                        echo '</script>';
+                       
+
+                    }
+                    
+                    if($_SESSION['add_company_new'] == "already_selected"){
+                        include 'component/content/po_menu/popup/pop_add_company_new.php';
+                    }else if($_SESSION['add_company_new'] == "save_comp_new"){
+                        include 'component/content/po_menu/function/save_comp_new.php';
                     }
                 } else if ($_SESSION['menu'] == "po_service") {
                     include 'component/content/po_menu/function/check_po_id_service.php';
                     include 'component/content/po_menu/po_service.php';
                 } else if ($_SESSION['menu'] == "total_items") {
                     include 'component/content/total_item/total_item.php';
+                }
+                if($_SESSION['menu'] == "po_wait_conf"){
+                    include 'component/content/po_menu/po_wait_conf.php';
+
                 }
                 ?>
             </div>

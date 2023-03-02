@@ -91,7 +91,7 @@ INNER JOIN unit_tbl as c
 ON a.unit_id = c.unit_id 
 INNER JOIN form_afb_tbl as d 
 ON a.form_afb_id = d.form_afb_id
-WHERE a.state_id = 3 LIMIT $offset, $limit";
+WHERE a.state_id = 3 OR a.state_id = 10 LIMIT $offset, $limit";
 $counst = ($offset + 1);
 $query = mysqli_query($conn, $sql);
 if (!$query) {
@@ -100,20 +100,29 @@ if (!$query) {
 while ($row = mysqli_fetch_array($query)) {
     echo '<div class="containner_item">';
     echo '<div class="box-item-show-1">';
-    echo 'รายการที่ : '.$counst;
+    echo 'รายการที่ : '.$counst; 
     echo '<br>';
     echo ' เล่มที่ '.$row['form_afb_book_number'].' เลขที่ '.$row['form_afb_number'].' | '.' วันที่ :'.$row['form_afb_write_date'].'<br>';
     echo 'ชื่อไม่เป็นทางการ : '.$row['name_ms_normal_name'].'|'; 
     echo 'ชื่อเป็นทางการ : '.$row['name_ms_real_name'].'|';
     echo 'จำนวน : '.$row['order_afb_value'].' '.$row['unit_name'].'|';
-    echo 'หมายเหตุ : '.$row['order_afb_note'];
+    echo 'หมายเหตุ : '.$row['order_afb_note'].'<br>';
+    if($row['state_id'] == 10){
+        echo '<li style="color:red;">รายการขอซื้อกำลังใช้งาน</li>';
+    }
+    if($row['state_id'] == 3){
+        echo '<li style="color:green;">รายการขอซื้อรอใช้งาน</li>';
+    }
     echo '</div>';
+   
     echo '<a id="showdetail_butt" href="mspo_display.php?menu=item_wait_for_use&page='.$_SESSION['page'].'&item_Number='.$row['order_afb_id'].'" >รายละเอียดรายการขอซื้อ';
     echo '</a>';
+    
     echo '</div>';
+   
     $counst++;
 }
-$total_sql = "SELECT COUNT(*) as total FROM order_afb_tbl WHERE state_id = 3";
+$total_sql = "SELECT COUNT(*) as total FROM order_afb_tbl WHERE a.state_id = 3 OR a.state_id = 10";
 $total_result = mysqli_query($conn, $total_sql);
 $total_row = mysqli_fetch_array($total_result);
 $total_items = $total_row['total'];

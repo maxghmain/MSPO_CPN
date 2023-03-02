@@ -21,16 +21,16 @@ include 'php/connect_db.php'; ?>
                             $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
                             $offset = ($page - 1) * $limit;
                             $sql = "SELECT order_afb_id,order_afb_note, name_ms_normal_name, name_ms_real_name, order_afb_value,a.unit_id, unit_name, order_afb_note,a.form_afb_id,form_afb_number,form_afb_book_number,form_afb_people_name,a.state_id,form_afb_write_date,d.group_id
-FROM order_afb_tbl as a 
-INNER JOIN name_ms_tbl as b 
-ON a.name_ms_id = b.name_ms_id 
-INNER JOIN unit_tbl as c 
-ON a.unit_id = c.unit_id 
-INNER JOIN form_afb_tbl as d 
-ON a.form_afb_id = d.form_afb_id
-INNER JOIN group_tbl as e
-ON d.group_id = e.group_id
-WHERE a.state_id = 3 ORDER BY order_afb_id DESC  LIMIT $offset, $limit";
+                            FROM order_afb_tbl as a 
+                            INNER JOIN name_ms_tbl as b 
+                            ON a.name_ms_id = b.name_ms_id 
+                            INNER JOIN unit_tbl as c 
+                            ON a.unit_id = c.unit_id 
+                            INNER JOIN form_afb_tbl as d 
+                            ON a.form_afb_id = d.form_afb_id
+                            INNER JOIN group_tbl as e
+                            ON d.group_id = e.group_id
+                            WHERE a.state_id = 3 ORDER BY order_afb_id DESC  LIMIT $offset, $limit";
                             $counst = ($offset + 1);
                             $query = mysqli_query($conn, $sql);
                             if (!$query) {
@@ -52,7 +52,7 @@ WHERE a.state_id = 3 ORDER BY order_afb_id DESC  LIMIT $offset, $limit";
                                 echo 'จำนวน : ' . $row['order_afb_value'] . ' ' . $row['unit_name'] . '|';
                                 echo 'หมายเหตุ : ' . $row['order_afb_note'];
                                 echo '</div>';
-                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&item_Number_select=' . $row['order_afb_id'] . '&state_excecut=select_item&name_item='.$row['name_ms_real_name'].'&value_item='.$row['order_afb_value'].'&unit_item='.$row['unit_id'].'&note_item='.$row['order_afb_note'].'&form_afbnum='.$row['form_afb_number'].'&form_afbbook='.$row['form_afb_book_number'].'&group_id_item='.$row['group_id'].'&form_afb_pel='.$row['form_afb_people_name'].'" >เลือกรายการขอซื้อ';
+                                    echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&state_excecut=select_item&item_Number_select=' . $row['order_afb_id'] . '&name_item='.$row['name_ms_real_name'].'&value_item='.$row['order_afb_value'].'&unit_item='.$row['unit_id'].'&note_item='.$row['order_afb_note'].'&form_afbnum='.$row['form_afb_number'].'&form_afbbook='.$row['form_afb_book_number'].'&group_id_item='.$row['group_id'].'&form_afb_pel='.$row['form_afb_people_name'].'" >เลือกรายการขอซื้อ';
                                 echo '</a>';
                                 echo '</div>';
                                 $counst++;
