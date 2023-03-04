@@ -1,4 +1,5 @@
 <!--Sticky Sidbar-->
+<?php session_start()?>
 
 <div class="sidbar">
     <div class="box-pf">
@@ -88,7 +89,13 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/709510.png" style="width: 20px" height="20px" />
-                    <a href="mspo_display.php?menu=po_wait_conf">PO ที่รอตรวจรับ</a>
+                    <a href="mspo_display.php?menu=po_wait_conf">PO ที่รอการยืนยัน</a>
+                </div>
+            </div>
+            <div class="manu-list">
+                <div class="manu-text">
+                    <img src="img/icon/709510.png" style="width: 20px" height="20px" />
+                    <a href="mspo_display.php?menu=po_check_in">PO ที่รอตรวจรับ</a>
                 </div>
             </div>
             <div class="manu-list">
@@ -118,7 +125,7 @@
             <div class="manu-list">
                 <div class="manu-text" style="margin-left: 40px">
                     <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="#">PO วัสดุ</a>
+                    <a href="mspo_display.php?menu=history_po_item">PO วัสดุ</a>
                 </div>
             </div>
             <div class="manu-list">
@@ -141,7 +148,7 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/25694.png" style="width: 20px" height="20px" />
-                    <a href="../Store/index.php">Dashboard</a>
+                    <a href="mspo_display.php?menu=dashboard">Dashboard</a>
                 </div>
             </div>
             <div class="manu-list">
@@ -153,7 +160,7 @@
             <div class="manu-list">
                 <div class="manu-text" style="margin-left: 40px">
                     <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="../Store/po-wait.php">PO รอตรวจรับ</a>
+                    <a href="mspo_display.php?menu=po_check_in">PO รอตรวจรับ</a>
                 </div>
             </div>
             <div class="manu-list">

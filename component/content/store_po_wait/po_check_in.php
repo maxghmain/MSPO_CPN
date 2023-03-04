@@ -3,12 +3,13 @@
 
 ?>
 <style>
-    .display-butt{
-       display: flex;
-       justify-content: center;
+    .display-butt {
+        display: flex;
+        justify-content: center;
 
     }
-    .butt-conf-po{
+
+    .butt-conf-po {
         margin: 5px;
         width: 60px;
         border-radius: 20px;
@@ -17,17 +18,20 @@
         text-decoration: none;
         transition-duration: 0.3s;
     }
-    .butt-conf-po:hover{
+
+    .butt-conf-po:hover {
         border-radius: 20px;
         background: #014474;
         color: white;
         text-decoration: none;
     }
-    .butt-conf-po a{
-       text-decoration: none;
-       color: white;
+
+    .butt-conf-po a {
+        text-decoration: none;
+        color: white;
     }
-    .butt-edit-po{
+
+    .butt-edit-po {
         margin: 5px;
         width: 60px;
         border-radius: 20px;
@@ -36,7 +40,8 @@
         text-decoration: none;
         transition-duration: 0.3s;
     }
-    .butt-edit-po:hover{
+
+    .butt-edit-po:hover {
         width: 60px;
         border-radius: 20px;
         background: #fda003;
@@ -44,11 +49,13 @@
         text-decoration: none;
         transition-duration: 0.3s;
     }
-    .butt-edit-po a{
+
+    .butt-edit-po a {
         color: black;
         text-decoration: none;
     }
-    .butt-cancle{
+
+    .butt-cancle {
         margin: 5px;
         width: 60px;
         border-radius: 20px;
@@ -57,7 +64,8 @@
         text-decoration: none;
         transition-duration: 0.3s;
     }
-    .butt-cancle:hover{
+
+    .butt-cancle:hover {
         width: 60px;
         border-radius: 20px;
         background: #930a00;
@@ -65,7 +73,8 @@
         text-decoration: none;
         transition-duration: 0.3s;
     }
-    .butt-cancle a{
+
+    .butt-cancle a {
         color: white;
         text-decoration: none;
     }
@@ -106,9 +115,9 @@
                                         บริษัทที่ติดต่อ
                                     </td>
                                     <td style="width: 10%;">
-                                        ชื่อผู้เพิ่มใบ PO
+                                        ชื่อผู้อนุมัติใบ PO
                                     </td>
-                                    
+
 
 
 
@@ -119,7 +128,7 @@
                                         สถานะ
                                     </td>
                                     <td style="width: 10%;">
-                                        อณุมัติ / แก้ไข / ยกเลิก ใบPO
+                                        ACTION
                                     </td>
 
 
@@ -137,47 +146,80 @@
                                 INNER JOIN user_tbl as d ON c.user_id = d.user_id 
                                 INNER JOIN userdata_tbl as e ON d.userdata_id = e.userdata_id
                                 INNER JOIN prefix_tbl as f on e.prefix_id = f.prefix_id
-                                WHERE a.state_id = 11 ORDER BY po_id DESC";
+                                WHERE a.state_id = 13 ORDER BY po_id DESC";
                                 $result = mysqli_query($conn, $sql);
-                                while ($row = mysqli_fetch_array($result)) {
-                                    if ($row['state_id'] == 11) {
+                                if ($_SESSION['userlvid'] == '3') {
+                                    while ($row = mysqli_fetch_array($result)) {
+
                                 ?>
-                                    <tr>
-                                        <td style="width: 5%;">
-                                            PO <?= $row['po_num']; ?>
-                                        </td>
-                                        <td style="width: 10%;">
-                                            <?= $row['comp_contect_name']; ?>
-                                        </td>
-
-                                        <td style="width: 10%;">
-                                               <?=$row['prefix_name'].' '.$row['userdata_fname'].' '.$row['userdata_lname']?>
-                                               </td>
-
-                                        <td style="width: 7%;">
-                                            <?= $row['po_price_sum_vat']; ?>
-                                        </td>
-                                        
-                                            <td style="width: 10%;">
-                                               <strong><li style="color:red;">รอการอนุมัติ</li></strong>
-                                               </td>
-                                            <td style="width: 10%;">
-
-                                            <div class="display-butt"><div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select='.$row['po_id'].'">อนุมัติ</a></div>
-                                            <div class="butt-edit-po"><a href="#">แก้ไข</a></div>
-                                            <div class="butt-cancle"><a href="#">ยกเลิก</a></div></div>
+                                      
+                                            <td style="width: 5%;">
+                                                PO <?= $row['po_num']; ?>
                                             </td>
-                                            <?php  } ?>
+                                            <td style="width: 10%;">
+                                                <?= $row['comp_contect_name']; ?>
+                                            </td>
+
+                                            <td style="width: 10%;">
+                                                <?= $row['prefix_name'] . ' ' . $row['userdata_fname'] . ' ' . $row['userdata_lname'] ?>
+                                            </td>
+
+                                            <td style="width: 7%;">
+                                                <?= $row['po_price_sum_vat']; ?>
+                                            </td>
+
+                                            <td style="width: 10%;">
+                                                <strong>
+                                                    <li style="color:yellow;">รอตรวจรับ</li>
+                                                </strong>
+                                            </td>
+                                            <td style="width: 10%;">
+
+                                                <div class="display-butt">
+                                                    <div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select='.$row['po_id'].'">อนุมัติ</a></div>
+                                                    <div class="butt-edit-po"><a href="#">แก้ไข</a></div>
+                                                    <div class="butt-cancle"><a href="#">ยกเลิก</a></div>
+                                                </div>
+                                            </td>
+                                        <?php  } ?>
 
 
 
-                                    </tr>
+                                       
+                                        <?php  }
+                                    if ($_SESSION['userlvid'] == '4') {
+                                        while ($row2 = mysqli_fetch_array($result)) { ?>
+                                        <tr>
+<td style="width: 5%;">
+                                                PO <?= $row2['po_num']; ?>
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <?= $row2['comp_contect_name']; ?>
+                                            </td>
 
+                                            <td style="width: 10%;">
+                                                <?= $row2['prefix_name'] . ' ' . $row2['userdata_fname'] . ' ' . $row2['userdata_lname'] ?>
+                                            </td>
 
+                                            <td style="width: 7%;">
+                                                <?= $row2['po_price_sum_vat']; ?>
+                                            </td>
 
-                                <?php  }
+                                            <td style="width: 10%;">
+                                                <strong>
+                                                    <li style="color:green;">ได้รับการอนุมัติแล้ว</li>
+                                                </strong>
+                                            </td>
+                                            <td style="width: 10%;">
 
-                                ?>
+                                                <div class="display-butt">
+                                                    <div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select='.$row['po_id'].'">ตรวจรับ</a></div>                                                 
+                                                </div>
+                                            </td>
+                                            </tr>
+                                    <?php  }
+                                    }
+                                    ?>
                             </tbody>
 
                             </form>

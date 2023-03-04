@@ -20,6 +20,9 @@ if ($_SESSION['username'] == '') {
     $_SESSION['add_item'] = $_GET['add_item'];
     $_SESSION['add_company'] = $_GET['add_company'];
     $_SESSION['add_company_new'] = $_GET['add_company_new'];
+    $_SESSION['comfirm_po'] = $_GET['comfirm_po'];
+
+    $user_id = $_SESSION['userid'];
 
     $num_afb = $_GET['num_afb'];
     $num_book_afb = $_GET['num_book_afb'];
@@ -76,6 +79,11 @@ if ($_SESSION['username'] == '') {
 
     $order_detail = $_SESSION['order_detail'];
 
+
+
+    $_SESSION['po_id_select'] = $_GET['po_id_select'];
+    $po_id_select = $_SESSION['po_id_select'];
+
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
     <!DOCTYPE html>
@@ -104,32 +112,32 @@ if ($_SESSION['username'] == '') {
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=15" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=55" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=15" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=55" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=15" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=55" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=15" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=55" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=15" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=55" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=151" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=551" />
         <?php
         }
         ?>
@@ -326,7 +334,7 @@ if ($_SESSION['username'] == '') {
                     }else if($_SESSION['state_excecut'] == "save_print_po"){
                         include 'component/content/po_menu/function/save_po.php';
                         echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_wait_conf")';
                         echo '</script>';
                        
 
@@ -346,6 +354,20 @@ if ($_SESSION['username'] == '') {
                 if($_SESSION['menu'] == "po_wait_conf"){
                     include 'component/content/po_menu/po_wait_conf.php';
 
+                }if ($_SESSION['comfirm_po'] == "alrady_comfirm"){
+                    include 'component/content/po_menu/popup/comfirm_po.php'; 
+                }if($_SESSION['state_excecut'] == "comfirm_po_sure"){
+                    include 'component/content/po_menu/function/confirm_po.php';
+                    echo '<script>';
+                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_wait_conf")';
+                    echo '</script>';
+                }
+                /* STORE USER */
+                if($_SESSION['menu'] == "po_check_in"){
+                    include 'component/content/store_po_wait/po_check_in.php';
+                }
+                if($_SESSION['menu'] == "history_po_item"){
+                    include 'component/content/history_po_item/history_po_item.php';
                 }
                 ?>
             </div>

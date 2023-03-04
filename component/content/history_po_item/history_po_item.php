@@ -71,7 +71,7 @@
     }
 </style>
 <div class="container_title">
-    <h5>PO ที่รอตรวจรับ - PO WAIT</h5>
+    <h5>ประวัติ PO วัสดุ - LOGS PO ITEM</h5>
 
 </div>
 <div class="container_box">
@@ -105,10 +105,6 @@
                                     <td style="width: 10%;">
                                         บริษัทที่ติดต่อ
                                     </td>
-                                    <td style="width: 10%;">
-                                        ชื่อผู้เพิ่มใบ PO
-                                    </td>
-                                    
 
 
 
@@ -116,10 +112,13 @@
                                         <strong>ราคา</strong>
                                     </td>
                                     <td style="width: 10%;">
+                                        วันที่เพิ่มลงระบบ
+                                    </td>
+                                    <td style="width: 10%;">
                                         สถานะ
                                     </td>
                                     <td style="width: 10%;">
-                                        อณุมัติ / แก้ไข / ยกเลิก ใบPO
+                                        ชื่อผู้ทำรายการ
                                     </td>
 
 
@@ -130,19 +129,18 @@
                                 <?php
                                 session_start();
                                 include 'php/connect_db.php';
-                                $sql = "SELECT a.po_id,po_num,a.comp_contect_id,comp_contect_name,a.state_id,po_price_sum_vat,po_logs_id,po_logs_date_record,c.user_id,d.userdata_id,userdata_fname,userdata_lname,e.prefix_id,prefix_name FROM po_tbl as a 
+                                $sql = "SELECT a.po_id,a.comp_contect_id,comp_contect_name,a.state_id,po_price_sum_vat,po_logs_id,po_logs_date_record,c.user_id,d.userdata_id,userdata_fname,userdata_lname,e.prefix_id,prefix_name FROM po_tbl as a 
                                 INNER JOIN comp_contect_tbl as b 
                                 ON a.comp_contect_id = b.comp_contect_id 
                                 INNER JOIN po_logs_tbl as c ON a.po_id = c.po_id 
                                 INNER JOIN user_tbl as d ON c.user_id = d.user_id 
                                 INNER JOIN userdata_tbl as e ON d.userdata_id = e.userdata_id
                                 INNER JOIN prefix_tbl as f on e.prefix_id = f.prefix_id
-                                WHERE a.state_id = 11 ORDER BY po_id DESC";
+                                ORDER BY po_id DESC";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                     if ($row['state_id'] == 11) {
-                                ?>
-                                    <tr>
+                                        ?>
                                         <td style="width: 5%;">
                                             PO <?= $row['po_num']; ?>
                                         </td>
@@ -150,24 +148,50 @@
                                             <?= $row['comp_contect_name']; ?>
                                         </td>
 
-                                        <td style="width: 10%;">
-                                               <?=$row['prefix_name'].' '.$row['userdata_fname'].' '.$row['userdata_lname']?>
-                                               </td>
+
 
                                         <td style="width: 7%;">
                                             <?= $row['po_price_sum_vat']; ?>
                                         </td>
-                                        
+                                        <td style="width: 10%;">
+                                               <?=$row['po_logs_date_record']?>
+                                               </td>
                                             <td style="width: 10%;">
                                                <strong><li style="color:red;">รอการอนุมัติ</li></strong>
                                                </td>
                                             <td style="width: 10%;">
 
-                                            <div class="display-butt"><div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select='.$row['po_id'].'">อนุมัติ</a></div>
-                                            <div class="butt-edit-po"><a href="#">แก้ไข</a></div>
-                                            <div class="butt-cancle"><a href="#">ยกเลิก</a></div></div>
-                                            </td>
-                                            <?php  } ?>
+                                            <?=$row['prefix_name'].' '.$row['userdata_fname'].' '.$row['userdata_lname']?>
+                                            </td>           
+                               <?php }
+                               if ($row['state_id'] == 13) {
+                                        ?>
+                                        <td style="width: 5%;">
+                                            PO <?= $row['po_num']; ?>
+                                        </td>
+                                        <td style="width: 10%;">
+                                            <?= $row['comp_contect_name']; ?>
+                                        </td>
+
+
+
+                                        <td style="width: 7%;">
+                                            <?= $row['po_price_sum_vat']; ?>
+                                        </td>
+                                        <td style="width: 10%;">
+                                               <?=$row['po_logs_date_record']?>
+                                               </td>
+                                            <td style="width: 10%;">
+                                               <strong><li style="color:#f7d07a;">รอตรวจรับ</li></strong>
+                                               </td>
+                                            <td style="width: 10%;">
+
+                                           <?=$row['prefix_name'].' '.$row['userdata_fname'].' '.$row['userdata_lname']?>
+                                            </td>           
+                               <?php } ?>
+                                    <tr>
+                                        
+                
 
 
 

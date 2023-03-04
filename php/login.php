@@ -7,7 +7,7 @@ include('connect_db.php');
         $username = $_POST['user_name'];
         $password = MD5($_POST['user_password']);
 
-        $query = (" SELECT user_name,user_password,b.userlv_id as userlv_id_get,userlv_name,userdata_fname,userdata_lname,rank_name FROM user_tbl as a
+        $query = ("SELECT user_id,user_name,user_password,b.userlv_id as userlv_id_get,userlv_name,userdata_fname,userdata_lname,rank_name FROM user_tbl as a
         INNER JOIN userlv_tbl as b 
         ON a.userlv_id = b.userlv_id
         INNER JOIN userdata_tbl as c
@@ -29,10 +29,7 @@ include('connect_db.php');
             $_SESSION['userlvid'] = $row['userlv_id_get'];
             $_SESSION['userlvname'] = $row['userlv_name'];
             $_SESSION['rankname'] = $row['rank_name'];
-            if(!empty($_POST["remember"])) {
-                setcookie ("user_name",$_POST["user_name"],time()+ (10 * 365 * 24 * 60 * 60));
-                setcookie ("user_password",$_POST["user_password"],time()+ (10 * 365 * 24 * 60 * 60));
-            }
+            
             if ($_SESSION['userlvid'] != '') {
                 $_SESSION['menu'] == "dashboard";
                 header("Location: ../mspo_display.php?menu=dashboard");

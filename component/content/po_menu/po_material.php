@@ -295,7 +295,7 @@ $unit_id = $row['unit_id'];
                             ผู้ติดต่อ
                         </div>
                         <div>
-                            : <input type="text" id="name_comp_con" value="<?php echo $_SESSION['name_comp_con']; ?>" placeholder="กรุณากรอก..." />
+                            : <?php if($row3['comp_contect_people_name'] != ""){ echo $row3['comp_contect_people_name']; } else{ echo $_SESSION['name_comp_con']; }?> 
                         </div>
                     </div>
                     <div id="comp_box">

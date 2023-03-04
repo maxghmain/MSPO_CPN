@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS po_tbl(
     po_num VARCHAR(12) NULL COLLATE utf8mb4_unicode_ci,
     comp_contect_id INT NULL,
     po_price_not_vat DOUBLE NULL,
+    
     po_price_vat DOUBLE NULL,
     po_price_sum_vat DOUBLE NULL,
     state_id INT NOT NULL,
@@ -224,7 +225,7 @@ CREATE TABLE IF NOT EXISTS order_more_tbl(
 
 CREATE TABLE IF NOT EXISTS po_logs_tbl(
     po_logs_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    po_logs_note VARCHAR(100) NOT NULL COLLATE utf8mb4_unicode_ci,
+    po_logs_note VARCHAR(100) NULL COLLATE utf8mb4_unicode_ci,
     po_logs_date_record DATETIME NOT NULL COLLATE utf8mb4_unicode_ci,
     po_id INT NOT NULL,
     user_id INT NOT NULL,
@@ -469,7 +470,7 @@ INSERT INTO material_tbl(material_name,material_value,unit_id,material_type_id,m
 ('ไม้กวาดก้านมะพร้าว',3,23,7,1),('ไม้กวาดดอกหญ้า',3,23,7,1);
 
 INSERT INTO state_tbl(state_name) VALUES
-('มีรายการคงเหลือ'),('ใช้รายการทั้งหมดแล้ว'),('รอเรียกใช้รายการ'),('สร้างฟอร์มเพิ่มใบขอซื้อ'),('รายการถูกสร้างใหม่(รอยืนยัน)'),('ใบขอซื้อที่ถูกยกเลิก'),('รายการจากใบขอซื้อถูกยกเลิก'),('สร้างฟอร์มใบPO'),('รายการใบPO'),('รายการโดนเรียกใช้งาน'),('POที่รออณุมัติ'),('รายการที่รออณุมัติPO');
+('มีรายการคงเหลือ'),('ใช้รายการทั้งหมดแล้ว'),('รอเรียกใช้รายการ'),('สร้างฟอร์มเพิ่มใบขอซื้อ'),('รายการถูกสร้างใหม่(รอยืนยัน)'),('ใบขอซื้อที่ถูกยกเลิก'),('รายการจากใบขอซื้อถูกยกเลิก'),('สร้างฟอร์มใบPO'),('รายการใบPO'),('รายการโดนเรียกใช้งาน'),('POที่รออณุมัติ'),('รายการที่รออณุมัติPO'),('POได้รับการยืนยันแล้ว');
 
 INSERT INTO type_po_tbl(type_po_name) VALUES
 ('ประเภทสำหรับวัสดุ'),('ประเภทสำหรับบริการ');
