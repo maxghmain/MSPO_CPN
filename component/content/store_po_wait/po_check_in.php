@@ -78,6 +78,28 @@
         color: white;
         text-decoration: none;
     }
+
+    .butt-more-detail-po {
+        margin: 5px;
+        width: 100px;
+        border-radius: 20px;
+        background: #006ebc;
+        color: white;
+        text-decoration: none;
+        transition-duration: 0.3s;
+    }
+
+    .butt-more-detail-po:hover {
+        border-radius: 20px;
+        background: #014474;
+        color: white;
+        text-decoration: none;
+    }
+
+    .butt-more-detail-po a {
+        color: white;
+        text-decoration: none;
+    }
 </style>
 <div class="container_title">
     <h5>PO ที่รอตรวจรับ - PO WAIT</h5>
@@ -127,6 +149,10 @@
                                     <td style="width: 10%;">
                                         สถานะ
                                     </td>
+
+                                    <td style="width: 7%;">
+                                        ประเภท PO
+                                    </td>
                                     <td style="width: 10%;">
                                         ACTION
                                     </td>
@@ -139,20 +165,22 @@
                                 <?php
                                 session_start();
                                 include 'php/connect_db.php';
-                                $sql = "SELECT a.po_id,po_num,a.comp_contect_id,comp_contect_name,a.state_id,po_price_sum_vat,po_logs_id,po_logs_date_record,c.user_id,d.userdata_id,userdata_fname,userdata_lname,e.prefix_id,prefix_name FROM po_tbl as a 
+                                $sql = "SELECT a.po_id,po_num,a.comp_contect_id,comp_contect_name,a.state_id,po_price_sum_vat,po_logs_id,po_logs_date_record,c.user_id,d.userdata_id,userdata_fname,userdata_lname,e.prefix_id,prefix_name,a.type_po_id,type_po_name FROM po_tbl as a 
                                 INNER JOIN comp_contect_tbl as b 
                                 ON a.comp_contect_id = b.comp_contect_id 
                                 INNER JOIN po_logs_tbl as c ON a.po_id = c.po_id 
                                 INNER JOIN user_tbl as d ON c.user_id = d.user_id 
                                 INNER JOIN userdata_tbl as e ON d.userdata_id = e.userdata_id
                                 INNER JOIN prefix_tbl as f on e.prefix_id = f.prefix_id
+                                INNER JOIN type_po_tbl as g
+                                ON a.type_po_id = g. type_po_id
                                 WHERE a.state_id = 13 ORDER BY po_id DESC";
                                 $result = mysqli_query($conn, $sql);
                                 if ($_SESSION['userlvid'] == '3') {
                                     while ($row = mysqli_fetch_array($result)) {
 
                                 ?>
-                                      
+                                        <tr>
                                             <td style="width: 5%;">
                                                 PO <?= $row['po_num']; ?>
                                             </td>
@@ -170,27 +198,31 @@
 
                                             <td style="width: 10%;">
                                                 <strong>
-                                                    <li style="color:yellow;">รอตรวจรับ</li>
+                                                    <li style="color:#f7d07a;">รอตรวจรับ</li>
                                                 </strong>
+                                            </td>
+                                            <td style="width: 7%;">
+                                                <?= $row['type_po_name'] ?>
                                             </td>
                                             <td style="width: 10%;">
 
                                                 <div class="display-butt">
-                                                    <div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select='.$row['po_id'].'">อนุมัติ</a></div>
-                                                    <div class="butt-edit-po"><a href="#">แก้ไข</a></div>
-                                                    <div class="butt-cancle"><a href="#">ยกเลิก</a></div>
+                                                    <div class="butt-more-detail-po"><a href="#">ดูรายละเอียด</a></div>
+
                                                 </div>
                                             </td>
-                                        <?php  } ?>
+                                        </tr>
+                                    <?php  } ?>
 
 
 
-                                       
-                                        <?php  }
-                                    if ($_SESSION['userlvid'] == '4') {
-                                        while ($row2 = mysqli_fetch_array($result)) { ?>
+
+                                    <?php  }
+                                    /* STORE */
+                                if ($_SESSION['userlvid'] == '4') {
+                                    while ($row2 = mysqli_fetch_array($result)) { ?>
                                         <tr>
-<td style="width: 5%;">
+                                            <td style="width: 5%;">
                                                 PO <?= $row2['po_num']; ?>
                                             </td>
                                             <td style="width: 10%;">
@@ -207,19 +239,23 @@
 
                                             <td style="width: 10%;">
                                                 <strong>
-                                                    <li style="color:green;">ได้รับการอนุมัติแล้ว</li>
+                                                    <li style="color:#f7d07a;">รอตรวจรับ</li>
                                                 </strong>
+                                            </td>
+                                            <td style="width: 7%;">
+
+                                                <?= $row['type_po_name'] ?>
                                             </td>
                                             <td style="width: 10%;">
 
                                                 <div class="display-butt">
-                                                    <div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select='.$row['po_id'].'">ตรวจรับ</a></div>                                                 
+                                                    <div class="butt-conf-po"><a href="mspo_display.php?menu=po_check_in&check_in=<?=$row2['po_id']?>&state_excecut=check_in_list">ตรวจรับ</a></div>
                                                 </div>
                                             </td>
-                                            </tr>
-                                    <?php  }
-                                    }
-                                    ?>
+                                        </tr>
+                                <?php  }
+                                }
+                                ?>
                             </tbody>
 
                             </form>

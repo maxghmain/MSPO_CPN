@@ -89,7 +89,7 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/709510.png" style="width: 20px" height="20px" />
-                    <a href="mspo_display.php?menu=po_wait_conf">PO ที่รอการยืนยัน</a>
+                    <a href="mspo_display.php?menu=po_wait_conf">PO ที่รอการอนุมัติ</a>
                 </div>
             </div>
             <div class="manu-list">

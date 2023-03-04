@@ -84,6 +84,9 @@ if ($_SESSION['username'] == '') {
     $_SESSION['po_id_select'] = $_GET['po_id_select'];
     $po_id_select = $_SESSION['po_id_select'];
 
+    $_SESSION['check_in'] = $_GET['check_in'];
+    $check_in = $_SESSION['check_in'];
+
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
     <!DOCTYPE html>
@@ -368,6 +371,9 @@ if ($_SESSION['username'] == '') {
                 }
                 if($_SESSION['menu'] == "history_po_item"){
                     include 'component/content/history_po_item/history_po_item.php';
+                }
+                if($_SESSION['state_excecut'] == "check_in_list"){
+                    include 'component/content/store_po_wait/popup/check_in_list.php';
                 }
                 ?>
             </div>
