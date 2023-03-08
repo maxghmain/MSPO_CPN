@@ -388,7 +388,7 @@ $unit_id = $row['unit_id'];
                                 echo '        <input type="number" id="item_price_'.$row8['order_id'].'" class="item-price" style="width:80px" value="'.$row8['order_price'].'" />';
                                 echo '    </td>';
                                 echo '    <td>';
-                                echo      number_format($row8['order_price_sum_all']);
+                                echo      number_format($row8['order_price_sum_all'],2);
                                 echo '    </td>';
                                 echo '    <td>';
                                 echo      $row8['order_note'];

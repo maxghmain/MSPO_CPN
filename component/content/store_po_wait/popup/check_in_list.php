@@ -9,6 +9,7 @@ include 'php/connect_db.php'; ?>
             <div id="box_add_afb_po-1">
                 <div id="box_add_afb_po-2">
                     <div id="box_butt_close">
+                        <?php ?>
                         <a href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=complet_po_list" style="text-decoration:none ;">ปิดรายการ/ตรวจรับทุกรายการจนหมดแล้ว</a>
                         <a href="mspo_display.php?menu=po_check_in" style="text-decoration:none ;">X</a>
                     </div>
@@ -38,7 +39,7 @@ include 'php/connect_db.php'; ?>
                                 <li style="color:#f7d07a;">รอตรวจรับ</li>
                                
                                 </div>
-                                    <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=check_in_list&input_value=alradyinput&order_id_input=<?=$row['order_id']?>" >ตรวจรับรายการนี้</a>
+                                    <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=check_in_list&input_value=alradyinput&order_id_input=<?=$row['order_id']?>&name_item_check_in=<?=$row['order_detail']?>&unit_name_check=<?=$row['unit_id']?>" >ตรวจรับรายการนี้</a>
                                 
                                 </div>
                                

@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $sql);
                 <div id="box_add_afb_po-2">
                     <div id="box_butt_close"><a href="mspo_display.php?menu=po_material">X</a></div>
                     <div id="titel-name">
-                        เพิ่มชื่อบริษัทที่ติดต่อ
+                        รายชื่อบริษัทที่เคยติดต่อ
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">

@@ -91,9 +91,25 @@ if ($_SESSION['username'] == '') {
 
     $_SESSION['input_value_check_in'] = $_GET['input_value_check_in'];
     $input_value_check_in = $_SESSION['input_value_check_in'];
+
+    $_SESSION['type_material'] = $_GET['type_material'];
+    $type_material = $_SESSION['type_material'];
+
+    $_SESSION['class_shelf'] = $_GET['class_shelf'];
+    $class_shelf = $_SESSION['class_shelf'];
+
+    $_SESSION['unit_name_check'] = $_GET['unit_name_check'];
+    $unit_name_check = $_SESSION['unit_name_check'];
+
+
     $_SESSION['order_id_input'] = $_GET['order_id_input'];
     $order_id_input = $_SESSION['order_id_input'];
 
+
+
+
+    $_SESSION['name_item_check_in'] = $_GET['name_item_check_in'];
+    $name_item_check_in = $_SESSION['name_item_check_in'];
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
     <!DOCTYPE html>
@@ -123,32 +139,32 @@ if ($_SESSION['username'] == '') {
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=555" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=512" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=555" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=512" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=555" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=512" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=555" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=555" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=512" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=5551" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=5121" />
         <?php
         }
         ?>
@@ -324,7 +340,7 @@ if ($_SESSION['username'] == '') {
                     else if ($_SESSION['state_excecut'] == "select_item") {
                         include 'component/content/po_menu/function/insert_afb_to_po.php';
                         echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn//mspo_display.php?menu=po_material")';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
                         echo '</script>';
                     }
                     if ($_SESSION['add_company'] == "already_selected") {
@@ -343,9 +359,7 @@ if ($_SESSION['username'] == '') {
                       include 'component/content/po_menu/function/sum_price_item.php';
                     }else if($_SESSION['state_excecut'] == "save_print_po"){
                         include 'component/content/po_menu/function/save_po.php';
-                        echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_wait_conf")';
-                        echo '</script>';
+                        
                        
 
                     }
@@ -381,9 +395,11 @@ if ($_SESSION['username'] == '') {
                 }
                 if($_SESSION['state_excecut'] == "check_in_list"){
                     include 'component/content/store_po_wait/popup/check_in_list.php';
+                   
                 }
                 if($_SESSION['input_value'] == "alradyinput"){
                     include 'component/content/store_po_wait/popup/value_check_in.php';
+                    include 'component/content/store_po_wait/function/insert_item_material.php';
                 }
                 if($_SESSION['state_excecut'] == "complet_po_list"){
                     include 'component/content/store_po_wait/function/complet_po_list.php';

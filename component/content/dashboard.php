@@ -31,40 +31,42 @@ if ($_SESSION['userlvid'] == '3') {
                     <p>ประวัติ PO ที่ตรวจรับเสร็จสมบูรณ์แล้ว จบ PO สมบูรณ์แล้ว</p>
                 </div>
             </div>
+            <?php
+           $sql = "SELECT a.state_id,po_logs_date_record,a.po_id,po_num,b.comp_contect_id,comp_contect_name,d.order_id,order_queantity 
+           FROM po_logs_tbl as a
+           INNER JOIN po_tbl as b
+           ON a.po_id = b.po_id
+           INNER JOIN comp_contect_tbl as c
+           ON b.comp_contect_id = c.comp_contect_id
+           INNER JOIN order_tbl as d
+           ON a.po_id = d.po_id
+           WHERE a.state_id = 16 ORDER BY po_logs_id DESC LIMIT 2";
+           $result = mysqli_query($conn,$sql);
+            while ($row4 = mysqli_fetch_array($result)){
+            ?>
             <div class="box_content_1">
                 <div class="title-box2">
-                    <p>เลขที่: No data วันที่: No data</p>
-                    <p>บริษัท]: No data</p>
-                    <p>จำนวน: 0 รายการ</p>
+                    <p>เลขที่: <?=$row4['po_num']?> วันที่: <?=$row4['po_logs_date_record']?></p>
+                    <p>บริษัท]: <?=$row4['comp_contect_name']?></p>
+                    <p>จำนวน: <?=$row4['order_queantity']?> รายการ</p>
                     <button class="btn-po">
                         คลิกที่นี่เพื่อดูรายละเอียด PO นี้
                     </button>
                 </div>
             </div>
-            <div class="box_content_1">
-                <div class="title-box2">
-                    <p>เลขที่: No data วันที่: No data</p>
-                    <p>บริษัท]: No data</p>
-                    <p>จำนวน: 0 รายการ</p>
-                    <button class="btn-po">
-                        คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                    </button>
-                </div>
-            </div>
-            <div class="box_content_1">
-                <div class="title-box2">
-                    <p>เลขที่: No data วันที่: No data</p>
-                    <p>บริษัท]: No data</p>
-                    <p>จำนวน: 0 รายการ</p>
-                    <button class="btn-po">
-                        คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                    </button>
-                </div>
-            </div>
+            <?php } ?>
+            <?php
+            include 'php/connect_db.php';
+            $sql2 = "SELECT * FROM po_logs_tbl WHERE state_id = 16";
+            $query = mysqli_query($conn, $sql2);
+            $row5 = mysqli_num_rows($query);
+            
+           
+              ?>
             <div class="box_content_1">
                 <div class="title-box2">
                     <p>รายการทั้งหมด</p>
-                    <p>None รายการ</p>
+                    <p><?=$row5?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -75,30 +77,42 @@ if ($_SESSION['userlvid'] == '3') {
                     <p>รายการ PO ที่ตรวจรับแล้วแต่ยังไม่สมบูรณ์</p>
                 </div>
             </div>
+            <?php
+           $sql = "SELECT a.state_id,po_logs_date_record,a.po_id,po_num,b.comp_contect_id,comp_contect_name,d.order_id,order_queantity 
+           FROM po_logs_tbl as a
+           INNER JOIN po_tbl as b
+           ON a.po_id = b.po_id
+           INNER JOIN comp_contect_tbl as c
+           ON b.comp_contect_id = c.comp_contect_id
+           INNER JOIN order_tbl as d
+           ON a.po_id = d.po_id
+           WHERE a.state_id = 15 ORDER BY po_logs_id DESC LIMIT 2";
+           $result = mysqli_query($conn,$sql);
+            while ($row2 = mysqli_fetch_array($result)){
+            ?>
             <div class="box_content_2">
                 <div class="title-box2">
-                    <p>เลขที่: No data วันที่: No data</p>
-                    <p>บริษัท]: No data</p>
-                    <p>จำนวน: 0 รายการ</p>
+                    <p>เลขที่: <?=$row2['po_num']?> วันที่: <?=$row2['po_logs_date_record']?></p>
+                    <p>บริษัท: <?=$row2['comp_contect_name']?></p>
+                    <p>จำนวน: <?=$row2['order_queantity']?> รายการ</p>
                     <button class="btn-po">
                         คลิกที่นี่เพื่อดูรายละเอียด PO นี้
                     </button>
                 </div>
             </div>
-            <div class="box_content_2">
-                <div class="title-box2">
-                    <p>เลขที่: No data วันที่: No data</p>
-                    <p>บริษัท]: No data</p>
-                    <p>จำนวน: 0 รายการ</p>
-                    <button class="btn-po">
-                        คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                    </button>
-                </div>
-            </div>
+            <?php } ?>
+            <?php
+            include 'php/connect_db.php';
+            $sql2 = "SELECT * FROM po_logs_tbl WHERE state_id = 15";
+            $query = mysqli_query($conn, $sql2);
+            $row3 = mysqli_num_rows($query);
+            
+           
+              ?>
             <div class="box_content_2">
                 <div class="title-box2">
                     <p>รายการทั้งหมด</p>
-                    <p>None รายการ</p>
+                    <p><?= $row3?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -110,8 +124,6 @@ if ($_SESSION['userlvid'] == '3') {
                 </div>
             </div>
             <?php
-            session_start();
-            include 'php/connect_db.php';
             $sql = "SELECT a.state_id,po_logs_date_record,a.po_id,po_num,b.comp_contect_id,comp_contect_name,d.order_id,order_queantity 
             FROM po_logs_tbl as a
             INNER JOIN po_tbl as b
@@ -120,7 +132,7 @@ if ($_SESSION['userlvid'] == '3') {
             ON b.comp_contect_id = c.comp_contect_id
             INNER JOIN order_tbl as d
             ON a.po_id = d.po_id
-            WHERE a.state_id = 13 OR a.po_id = b.po_id ORDER BY po_logs_id DESC LIMIT 2";
+            WHERE a.state_id = 13 ORDER BY po_logs_id DESC LIMIT 2";
             $result = mysqli_query($conn,$sql);
             while ($row = mysqli_fetch_array($result)){
             echo '<div class="box_content_3">';
@@ -138,7 +150,7 @@ if ($_SESSION['userlvid'] == '3') {
                 <div class="title-box2">
               <?php
             include 'php/connect_db.php';
-            $sql2 = "SELECT * FROM po_logs_tbl WHERE state_id = 11";
+            $sql2 = "SELECT * FROM po_logs_tbl WHERE state_id = 13";
             $query = mysqli_query($conn, $sql2);
             $row2 = mysqli_num_rows($query);
             
@@ -157,30 +169,29 @@ if ($_SESSION['userlvid'] == '3') {
                     <p>รวยการวัสดุที่ใกล้หมดสต๊อก</p>
                 </div>
             </div>
+            <?php
+            $sql = "SELECT * FROM material_tbl WHERE material_value < 5 LIMIT 6";
+            $result = mysqli_query($conn,$sql);
+            while($row6 = mysqli_fetch_array($result)){
+
+            
+            
+            ?>
             <div class="box_content_4">
                 <div class="title-box2">
-                    <p>None</p>
+                    <p><?=$row6['material_name']?> จำนวนคงเหลือ : <?=$row6['material_value']?></p>
                 </div>
             </div>
-            <div class="box_content_4">
-                <div class="title-box2">
-                    <p>None</p>
-                </div>
-            </div>
-            <div class="box_content_4">
-                <div class="title-box2">
-                    <p>None</p>
-                </div>
-            </div>
-            <div class="box_content_4">
-                <div class="title-box2">
-                    <p>None</p>
-                </div>
-            </div>
+            <?php } ?>
+            <?php
+              $sql = "SELECT * FROM material_tbl WHERE material_value < 5";
+              $result = mysqli_query($conn,$sql);
+              $row7 = mysqli_num_rows($result);
+            ?>
             <div class="box_content_4">
                 <div class="title-box2">
                     <p>รายการทั้งหมด</p>
-                    <p>None รายการ</p>
+                    <p><?=$row7?> รายการ</p>
                 </div>
             </div>
         </div>

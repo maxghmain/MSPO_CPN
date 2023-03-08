@@ -126,7 +126,7 @@ if ($_SESSION['userlvid'] == '3') { ?>
                         </td>
                         <td style="border:none;display:flex;">
                             สถานะใบ PO <select>
-                            <option>รออนุมัติ</option>
+                                <option>รออนุมัติ</option>
                                 <option>รอตรวจรับ</option>
                                 <option>ตรวจรับแล้วแต่ไม่สมบูรณื</option>
                                 <option>ตรวจรับสมบูรณ์แล้ว</option>
@@ -184,7 +184,7 @@ if ($_SESSION['userlvid'] == '3') { ?>
                                 INNER JOIN prefix_tbl as f on e.prefix_id = f.prefix_id
                                 INNER JOIN type_po_tbl as g
                                 ON a.type_po_id = g. type_po_id
-                                WHERE a.state_id = 13 OR a.state_id = 15 OR a.state_id = 16 ORDER BY po_id DESC";
+                                WHERE a.state_id = 13 OR a.state_id = 15 OR a.state_id = 16 OR a.state_id = 11 ORDER BY po_id DESC";
                                     $result = mysqli_query($conn, $sql);
 
                                     while ($row = mysqli_fetch_array($result)) {
@@ -208,19 +208,27 @@ if ($_SESSION['userlvid'] == '3') { ?>
 
                                             <td style="width: 10%;">
                                             <?php
-                                            if($row['state_id'] == 13){
-                                            ?>
-                                                <strong>
-                                                    <li style="color:red;">รอตรวจรับ</li>
-                                                </strong>
-                                                <?php } if($row['state_id'] == 15){?>
+                                                if ($row['state_id'] == 11) {
+                                                ?>
                                                     <strong>
-                                                    <li style="color:#f7d07a;">รอตรวจรับแล้วแต่ยังไม่สมบูรณ์</li>
-                                                </strong>
-                                                <?php } if($row['state_id'] == 16){?>
+                                                        <li style="color:red;">รอการอนุมัติ</li>
+                                                    </strong>
+                                                <?php }
+                                                if ($row['state_id'] == 13) {
+                                                ?>
                                                     <strong>
-                                                    <li style="color:green;">ตรวจรับสมบูรณ์แล้ว</li>
-                                                </strong>
+                                                        <li style="color:red;">รอตรวจรับ</li>
+                                                    </strong>
+                                                <?php }
+                                                if ($row['state_id'] == 15) { ?>
+                                                    <strong>
+                                                        <li style="color:#f7d07a;">รอตรวจรับแล้วแต่ยังไม่สมบูรณ์</li>
+                                                    </strong>
+                                                <?php }
+                                                if ($row['state_id'] == 16) { ?>
+                                                    <strong>
+                                                        <li style="color:green;">ตรวจรับสมบูรณ์แล้ว</li>
+                                                    </strong>
                                                 <?php } ?>
                                             </td>
                                             <td style="width: 7%;">
@@ -265,6 +273,14 @@ if ($_SESSION['userlvid'] == '4') { ?>
                             <td style="border:none;">
                                 ถึงวันที่ <input type="date" id="date-start" />
                             </td>
+                            <td style="border:none;display:flex;">
+                            สถานะใบ PO <select>
+                                <option>รออนุมัติ</option>
+                                <option>รอตรวจรับ</option>
+                                <option>ตรวจรับแล้วแต่ไม่สมบูรณื</option>
+                                <option>ตรวจรับสมบูรณ์แล้ว</option>
+                            </select>
+                        </td>
                         </tr>
                     </table>
                     <div style="display: flex;justify-content: center;margin-bottom:20px;width:100%;margin-top:10px">
@@ -303,15 +319,15 @@ if ($_SESSION['userlvid'] == '4') { ?>
                                         session_start();
                                         include 'php/connect_db.php';
                                         $sql = "SELECT a.po_id,po_num,a.comp_contect_id,comp_contect_name,a.state_id,po_price_sum_vat,po_logs_id,po_logs_date_record,c.user_id,d.userdata_id,userdata_fname,userdata_lname,e.prefix_id,prefix_name,a.type_po_id,type_po_name FROM po_tbl as a 
-    INNER JOIN comp_contect_tbl as b 
-    ON a.comp_contect_id = b.comp_contect_id 
-    INNER JOIN po_logs_tbl as c ON a.po_id = c.po_id 
-    INNER JOIN user_tbl as d ON c.user_id = d.user_id 
-    INNER JOIN userdata_tbl as e ON d.userdata_id = e.userdata_id
-    INNER JOIN prefix_tbl as f on e.prefix_id = f.prefix_id
-    INNER JOIN type_po_tbl as g
-    ON a.type_po_id = g. type_po_id
-    WHERE a.state_id = 13 OR a.state_id = 15 ORDER BY po_id DESC";
+                                INNER JOIN comp_contect_tbl as b 
+                                ON a.comp_contect_id = b.comp_contect_id 
+                                INNER JOIN po_logs_tbl as c ON a.po_id = c.po_id 
+                                INNER JOIN user_tbl as d ON c.user_id = d.user_id 
+                                INNER JOIN userdata_tbl as e ON d.userdata_id = e.userdata_id
+                                INNER JOIN prefix_tbl as f on e.prefix_id = f.prefix_id
+                                INNER JOIN type_po_tbl as g
+                                ON a.type_po_id = g. type_po_id
+                                WHERE a.state_id = 13 OR a.state_id = 15 OR a.state_id = 16 OR a.state_id = 11 ORDER BY po_id DESC";
                                         $result = mysqli_query($conn, $sql);
                                         while ($row2 = mysqli_fetch_array($result)) { ?>
                                             <tr>
@@ -331,25 +347,46 @@ if ($_SESSION['userlvid'] == '4') { ?>
                                                 </td>
 
                                                 <td style="width: 10%;">
-                                                <?php if($row2['state_id'] == 13){ ?>
-                                                    <strong>
-                                                        <li style="color:red;">รอตรวจรับ</li>
-                                                    </strong>
+                                                    <?php if ($row2['state_id'] == 11) { ?>
+                                                        <strong>
+                                                            <li style="color:red;">รอการอนุมัติ</li>
+                                                        </strong>
                                                     <?php } ?>
-                                                    <?php if($row2['state_id'] == 15){ ?>
-                                                    <strong>
-                                                        <li style="color:#f7d07a;">ตรวจรับแล้วแต่ยังไม่สมบูรณ์</li>
-                                                    </strong>
+                                                    <?php if ($row2['state_id'] == 13) { ?>
+                                                        <strong>
+                                                            <li style="color:red;">รอตรวจรับ</li>
+                                                        </strong>
+                                                    <?php } ?>
+                                                    <?php if ($row2['state_id'] == 15) { ?>
+                                                        <strong>
+                                                            <li style="color:#f7d07a;">ตรวจรับแล้วแต่ยังไม่สมบูรณ์</li>
+                                                        </strong>
+                                                    <?php } ?>
+                                                    <?php if ($row2['state_id'] == 16) { ?>
+                                                        <strong>
+                                                            <li style="color:green;">ตรวจรับสมบูรณ์แล้ว</li>
+                                                        </strong>
                                                     <?php } ?>
                                                 </td>
                                                 <td style="width: 7%;">
                                                     <?= $row2['type_po_name'] ?>
                                                 </td>
                                                 <td style="width: 10%;">
-
+                                                <?php if ($row2['state_id'] == 13) { ?>
                                                     <div class="display-butt">
                                                         <div class="butt-conf-po"><a href="mspo_display.php?menu=po_check_in&check_in=<?= $row2['po_id'] ?>&state_excecut=check_in_list">ตรวจรับ</a></div>
                                                     </div>
+                                                    <?php } ?>
+                                                    <?php if ($row2['state_id'] == 15) { ?>
+                                                    <div class="display-butt">
+                                                        <div class="butt-conf-po"><a href="mspo_display.php?menu=po_check_in&check_in=<?= $row2['po_id'] ?>&state_excecut=check_in_list">ตรวจรับ</a></div>
+                                                    </div>
+                                                    <?php } ?>
+                                                    <?php if ($row2['state_id'] == 16) { ?>
+                                                    <div class="display-butt">
+                                                        <div class="butt-conf-po"><a href="mspo_display.php?menu=po_check_in&check_in=<?= $row2['po_id'] ?>&state_excecut=check_in_list">INFO</a></div>
+                                                    </div>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                         <?php  } ?>
