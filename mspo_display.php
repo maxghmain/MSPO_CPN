@@ -21,6 +21,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['add_company'] = $_GET['add_company'];
     $_SESSION['add_company_new'] = $_GET['add_company_new'];
     $_SESSION['comfirm_po'] = $_GET['comfirm_po'];
+    $_SESSION['input_value'] = $_GET['input_value'];
 
     $user_id = $_SESSION['userid'];
 
@@ -78,6 +79,7 @@ if ($_SESSION['username'] == '') {
     $po_id = $_SESSION['po_id'];
 
     $order_detail = $_SESSION['order_detail'];
+    
 
 
 
@@ -86,6 +88,11 @@ if ($_SESSION['username'] == '') {
 
     $_SESSION['check_in'] = $_GET['check_in'];
     $check_in = $_SESSION['check_in'];
+
+    $_SESSION['input_value_check_in'] = $_GET['input_value_check_in'];
+    $input_value_check_in = $_SESSION['input_value_check_in'];
+    $_SESSION['order_id_input'] = $_GET['order_id_input'];
+    $order_id_input = $_SESSION['order_id_input'];
 
     /* ปิดการแสดงของ Popup และ Loading */
 ?>
@@ -109,38 +116,39 @@ if ($_SESSION['username'] == '') {
 
         <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 
-        
+        <link rel="stylesheet" href="js/jquery-confirm-master/dist/jquery-confirm.min.css"/>
+        <script type="text/javascript" src="js/jquery-confirm-master/dist/jquery-confirm.min.js"></script>
 
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=55" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=555" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=55" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=555" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=55" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=555" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=55" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=555" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=55" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=555" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=551" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=5551" />
         <?php
         }
         ?>
@@ -189,9 +197,6 @@ if ($_SESSION['username'] == '') {
                             echo '<script>$("#bg_pop_delete").show();</script>';
                         } else if ($_SESSION['state_excecut'] == "addData") {
                             echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
-                            echo '<script>';
-                            echo  '$("#bg_loading").show();';
-                            echo '</script>';
                             include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
                             echo  '<script>setTimeout(loading_hide,50);</script>';
                             echo '<script>';
@@ -318,7 +323,9 @@ if ($_SESSION['username'] == '') {
                     
                     else if ($_SESSION['state_excecut'] == "select_item") {
                         include 'component/content/po_menu/function/insert_afb_to_po.php';
-                        
+                        echo '<script>';
+                        echo 'window.location.assign("../mspo_cpn//mspo_display.php?menu=po_material")';
+                        echo '</script>';
                     }
                     if ($_SESSION['add_company'] == "already_selected") {
 
@@ -375,7 +382,17 @@ if ($_SESSION['username'] == '') {
                 if($_SESSION['state_excecut'] == "check_in_list"){
                     include 'component/content/store_po_wait/popup/check_in_list.php';
                 }
+                if($_SESSION['input_value'] == "alradyinput"){
+                    include 'component/content/store_po_wait/popup/value_check_in.php';
+                }
+                if($_SESSION['state_excecut'] == "complet_po_list"){
+                    include 'component/content/store_po_wait/function/complet_po_list.php';
+                    echo '<script>';
+                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_check_in")';
+                    echo '</script>';
+                }
                 ?>
+                
             </div>
         </div>
     </body>

@@ -120,12 +120,12 @@ if ($_SESSION['userlvid'] == '3') {
             ON b.comp_contect_id = c.comp_contect_id
             INNER JOIN order_tbl as d
             ON a.po_id = d.po_id
-            WHERE a.state_id = 11 ORDER BY po_logs_id DESC LIMIT 2";
+            WHERE a.state_id = 13 OR a.po_id = b.po_id ORDER BY po_logs_id DESC LIMIT 2";
             $result = mysqli_query($conn,$sql);
             while ($row = mysqli_fetch_array($result)){
             echo '<div class="box_content_3">';
             echo '  <div class="title-box2">';
-            echo '     <p>เลขที่: '.$row['po_num'].' วันที่: '.$row['po_logs_date_record'].'</p>';
+            echo '     <p>เลขที่: PO '.$row['po_num'].' วันที่: '.$row['po_logs_date_record'].'</p>';
             echo '     <p>บริษัท]: '.$row['comp_contect_name'].'</p>';
             echo '     <p>จำนวน: '.$row['order_id'].' รายการ</p>';
             echo '     <button class="btn-po">';

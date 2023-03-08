@@ -8,10 +8,13 @@ include 'php/connect_db.php'; ?>
         <div id="box_add_afb_po">
             <div id="box_add_afb_po-1">
                 <div id="box_add_afb_po-2">
-                    <div id="box_butt_close"><a href="mspo_display.php?menu=po_check_in">X</a></div>
+                    <div id="box_butt_close">
+                        <a href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=complet_po_list" style="text-decoration:none ;">ปิดรายการ/ตรวจรับทุกรายการจนหมดแล้ว</a>
+                        <a href="mspo_display.php?menu=po_check_in" style="text-decoration:none ;">X</a>
+                    </div>
+                    
                     <div id="titel-name">
                         รายการของ PO ที่รอตรวจรับ
-
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
@@ -21,8 +24,7 @@ include 'php/connect_db.php'; ?>
                            INNER JOIN order_tbl as b
                            ON a.po_id = b.po_id
                            INNER JOIN unit_tbl as c
-                           ON b.unit_id = c.unit_id where a.po_id = $check_in
-                           ";
+                           ON b.unit_id = c.unit_id WHERE a.po_id = $check_in AND order_queantity >= 1";
                            $result = mysqli_query($conn, $sql);
                            $counst = 1;
                             while($row = mysqli_fetch_array($result)){ ?>
@@ -30,16 +32,19 @@ include 'php/connect_db.php'; ?>
                                 <div class="box-item-show-1">
                                 รายการที่ : <?=$counst;?>
                                 <br>
-                                <?=$row['order_detail']?>
+                                ชื่อรายการ : <?=$row['order_detail']?> | 
+                                &nbsp;จำนวน : <?=$row['order_queantity'].' '.$row['unit_name']?> 
+                              
+                                <li style="color:#f7d07a;">รอตรวจรับ</li>
+                               
                                 </div>
-                                    <a id="showdetail_butt" href="" >ตรวจรับราบการนี้</a>
+                                    <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=check_in_list&input_value=alradyinput&order_id_input=<?=$row['order_id']?>" >ตรวจรับรายการนี้</a>
                                 
                                 </div>
-                                
+                               
                                  
                           <?php $counst++; }
                           
-                           
                            ?>
 
                         </div>
@@ -65,7 +70,7 @@ include 'php/connect_db.php'; ?>
 
         #box_add_afb_po {
 
-            width: 90%;
+            width: 50%;
             height: 70%;
             /*  border: 1px solid red;*/
         }
@@ -104,6 +109,7 @@ include 'php/connect_db.php'; ?>
             height: 450px;
             background: white;
             border: 1px solid #006ebc;
+            overflow: auto;
         }
 
         #afb_content_xxx {

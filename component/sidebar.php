@@ -95,15 +95,10 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/709510.png" style="width: 20px" height="20px" />
-                    <a href="mspo_display.php?menu=po_check_in">PO ที่รอตรวจรับ</a>
+                    <a href="mspo_display.php?menu=po_check_in">สถานะใบ PO</a>
                 </div>
             </div>
-            <div class="manu-list">
-                <div class="manu-text">
-                    <img src="img/icon/709510.png" style="width: 20px" height="20px" />
-                    <a href="#">PO ที่ตรวจรับแล้วแต่ยังไม่สมบูรณ์</a>
-                </div>
-            </div>
+           
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/7387663.png" style="width: 20px" height="20px" />
