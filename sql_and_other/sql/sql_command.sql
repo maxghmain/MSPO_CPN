@@ -187,8 +187,8 @@ CREATE TABLE IF NOT EXISTS material_tbl(
     material_name VARCHAR(100) NOT NULL COLLATE utf8mb4_unicode_ci,
     material_value DOUBLE NULL DEFAULT 0.00,
     unit_id INT NOT NULL,
-    material_type_id INT NOT NULL,
-    material_class_shelf_id INT NOT NULL DEFAULT 1,
+    material_type_id INT NULL,
+    material_class_shelf_id INT NULL DEFAULT 1,
     FOREIGN KEY(unit_id) REFERENCES unit_tbl(unit_id),
     FOREIGN KEY(material_type_id) REFERENCES material_type_tbl(material_type_id),
     FOREIGN KEY(material_class_shelf_id) REFERENCES material_class_shelf_tbl(material_class_shelf_id)
