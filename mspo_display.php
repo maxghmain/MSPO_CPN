@@ -22,6 +22,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['add_company_new'] = $_GET['add_company_new'];
     $_SESSION['comfirm_po'] = $_GET['comfirm_po'];
     $_SESSION['input_value'] = $_GET['input_value'];
+    $_SESSION['pick_in'] = $_GET['pick_in'];
 
     $user_id = $_SESSION['userid'];
 
@@ -79,8 +80,16 @@ if ($_SESSION['username'] == '') {
     $po_id = $_SESSION['po_id'];
 
     $order_detail = $_SESSION['order_detail'];
-    
 
+    $_SESSION['pick_out'] = $_GET['pick_out'];
+    $pick_out = $_SESSION['pick_out'];
+    $_SESSION['item_id_pick'] = $_GET['item_id_pick'];
+    $item_id_pick = $_SESSION['item_id_pick'];
+    $_SESSION['name_item_pick'] = $_GET['name_item_pick'];
+    $name_item_pick = $_SESSION['name_item_pick'];
+
+    $_SESSION['value_total'] = $_GET['value_total'];
+    $value_total = $_SESSION['value_total'];
 
 
     $_SESSION['po_id_select'] = $_GET['po_id_select'];
@@ -106,11 +115,22 @@ if ($_SESSION['username'] == '') {
     $order_id_input = $_SESSION['order_id_input'];
 
 
+    /* PICK OUT*/
+    $value_item_pick = $_GET['value_item_pick'];
+    $textarea_pick = $_GET['textarea_pick'];
+    $name_of_pel = $_GET['name_of_pel'];
+    $afb_group_id_pick = $_GET['afb_group_id_pick'];
+ /* PICK IN */
+    $_SESSION['price_item_not_sum'] = $_GET['price_item_not_sum'];
+    $price_item_not_sum = $_SESSION['price_item_not_sum'];
+
 
 
     $_SESSION['name_item_check_in'] = $_GET['name_item_check_in'];
     $name_item_check_in = $_SESSION['name_item_check_in'];
     /* ปิดการแสดงของ Popup และ Loading */
+
+    $fullname_depart = $_SESSION['userdatafullname'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -406,6 +426,14 @@ if ($_SESSION['username'] == '') {
                     echo '<script>';
                     echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_check_in")';
                     echo '</script>';
+                }if($_SESSION['menu'] == "pick_in_out"){
+                    include 'component/content/pick_in_out/pick_in_out.php';
+                }
+                if($_SESSION['pick_out'] == "select_item"){
+                    include 'component/content/pick_in_out/popup/pick_in_out_pop.php';
+                }
+                if($_SESSION['pick_in'] == "success"){
+                    include 'component/content/store_po_wait/function/pick_in.php';
                 }
                 ?>
                 

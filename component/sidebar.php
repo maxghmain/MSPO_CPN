@@ -114,19 +114,7 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="#">ประวัติ PO</a>
-                </div>
-            </div>
-            <div class="manu-list">
-                <div class="manu-text" style="margin-left: 40px">
-                    <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="mspo_display.php?menu=history_po_item">PO วัสดุ</a>
-                </div>
-            </div>
-            <div class="manu-list">
-                <div class="manu-text" style="margin-left: 40px">
-                    <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="#">PO บริการ</a>
+                    <a href="mspo_display.php?menu=history_po_item">ประวัติ PO</a>
                 </div>
             </div>
             <div class="manu-list">
@@ -167,13 +155,13 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="../Store/pick-u-material.php">เบิกออกวัสดุ</a>
+                    <a href="mspo_display.php?menu=pick_in_out">เบิกออกวัสดุ</a>
                 </div>
             </div>
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/7387663.png" style="width: 20px" height="20px" />
-                    <a href="../Store/วัสดุคงเหลือ.php">จำนวนวัสดุคงเหลือ</a>
+                    <a href="mspo_display.php?menu=total_items">จำนวนวัสดุคงเหลือ</a>
                 </div>
             </div>
             <div class="manu-list">

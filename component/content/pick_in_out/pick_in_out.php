@@ -5,6 +5,31 @@ include 'php/connect_db.php'
 <div class="container_title">
     <h5>จำนวนวัสดุคงเหลือ - Total Items</h5>
 </div>
+
+<style>
+    .select_item_pick{
+        cursor: pointer;
+        height: 25px;
+        width: 100px;
+        border-radius: 20px;
+        background: #006ebc;
+        color: white;
+        text-decoration: none;
+        transition-duration: 0.3s;
+        border: 0px solid red;
+        font-size: 14px;
+        padding: 2px;
+    }
+    .select_item_pick:hover{
+        width: 100px;
+        border-radius: 20px;
+        background: #014474;
+        color: white;
+        text-decoration: none;
+        transition-duration: 0.3s;
+        border: 0px solid red;
+    }
+</style>
 <?php
 
 session_start();
@@ -82,7 +107,7 @@ if (!$_SESSION['username']) {
                     <form action="" method="POST">
                         <tr>
                             <td style="border:none;">
-                                รายการวัสดุในคลัง (STORE)
+                               เบิกออกวัสดุ
                             </td>
                             <td style="border:none;">
                                 ค้นหา <input type="search" id="name-po" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" />
@@ -119,6 +144,7 @@ if (!$_SESSION['username']) {
                                             <th>หน่วยนับ</th>
                                             <th>ประเภท</th>
                                             <th>เก็บไว้ชั้นที่</th>
+                                            <th>เบิกออกวัสดุ</th>
                                         </tr>
                                         <?php
                                         $i = 1;
@@ -176,6 +202,7 @@ if (!$_SESSION['username']) {
                                                 <td height="20">&nbsp;<?= $rs['unit_name'] ?></td>
                                                 <td height="20">&nbsp;<?= $rs['material_type_name'] ?></td>
                                                 <td height="20">&nbsp;<?= $rs['material_class_shelf_name'] ?></td>
+                                                <td><a href="mspo_display.php?menu=pick_in_out&pick_out=select_item&item_id_pick=<?=$rs['material_id_a']?>&name_item_pick=<?=$rs['material_name']?>&value_total=<?=$rs['material_value'].$rs['unit_name']?>" class="select_item_pick">เบิกรายการนี้</a></td>
                                             </tr>
                                         <?php
                                             $i++;

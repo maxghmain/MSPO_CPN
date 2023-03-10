@@ -226,7 +226,8 @@ CREATE TABLE IF NOT EXISTS order_more_tbl(
 CREATE TABLE IF NOT EXISTS po_logs_tbl(
     po_logs_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     po_logs_note VARCHAR(100) NULL COLLATE utf8mb4_unicode_ci,
-    po_logs_date_record DATETIME NOT NULL COLLATE utf8mb4_unicode_ci,
+    po_logs_date_record DATE NOT NULL COLLATE utf8mb4_unicode_ci,
+    po_logs_datetime_record DATETIME  NULL COLLATE utf8mb4_unicode_ci,
     po_id INT NOT NULL,
     user_id INT NOT NULL,
     state_id INT NOT NULL,
@@ -238,14 +239,18 @@ CREATE TABLE IF NOT EXISTS po_logs_tbl(
 CREATE TABLE IF NOT EXISTS pick_in_out_logs_tbl (
     pick_in_out_logs_id INT NOT NULL  AUTO_INCREMENT PRIMARY KEY,
     pick_in_out_val DOUBLE NOT NULL COLLATE utf8mb4_unicode_ci,
+    pick_in_out_pel VARCHAR (150) NULL COLLATE utf8mb4_unicode_ci,
     pick_in_out_price DOUBLE NULL COLLATE utf8mb4_unicode_ci,
-    pick_in_out_sumval DOUBLE NOT NULL COLLATE utf8mb4_unicode_ci,
-    pick_in_out_comment VARCHAR(150) NOT NULL COLLATE utf8mb4_unicode_ci,
+    pick_in_out_sumval DOUBLE  NULL COLLATE utf8mb4_unicode_ci,
+    pick_in_out_comment VARCHAR(150) NULL COLLATE utf8mb4_unicode_ci,
     pick_in_out_date DATETIME NOT NULL COLLATE utf8mb4_unicode_ci,
-    pick_in_out_note VARCHAR(150) NOT NULL COLLATE utf8mb4_unicode_ci,
-    material_id INT NOT NULL,
+    pick_in_out_note VARCHAR(150) NULL COLLATE utf8mb4_unicode_ci,
+    pick_in_name VARCHAR(150) NOT NULL COLLATE utf8mb4_unicode_ci,
+    material_id INT NULL,
+    depart_id INT NULL,
     state_id INT NOT NULL,
     FOREIGN KEY(material_id) REFERENCES material_tbl(material_id),
+    FOREIGN KEY(depart_id) REFERENCES depart_tbl(depart_id),
     FOREIGN KEY(state_id) REFERENCES state_tbl(state_id)
  )ENGINE = INNODB DEFAULT CHARSET UTF8MB4;
 
@@ -470,7 +475,7 @@ INSERT INTO material_tbl(material_name,material_value,unit_id,material_type_id,m
 ('ไม้กวาดก้านมะพร้าว',3,23,7,1),('ไม้กวาดดอกหญ้า',3,23,7,1);
 
 INSERT INTO state_tbl(state_name) VALUES
-('มีรายการคงเหลือ'),('ใช้รายการทั้งหมดแล้ว'),('รอเรียกใช้รายการ'),('สร้างฟอร์มเพิ่มใบขอซื้อ'),('รายการถูกสร้างใหม่(รอยืนยัน)'),('ใบขอซื้อที่ถูกยกเลิก'),('รายการจากใบขอซื้อถูกยกเลิก'),('สร้างฟอร์มใบPO'),('รายการใบPO'),('รายการโดนเรียกใช้งาน'),('POที่รออณุมัติ'),('รายการที่รออณุมัติPO'),('POได้รับการยืนยันแล้ว'),('รายการที่รอตรวจรับจาก PO'),('ตรวจรับแล้วแต่ยังไม่สมบูรณ์'),('ตรวจรับเสร็จสมบูรณ์');
+('มีรายการคงเหลือ'),('ใช้รายการทั้งหมดแล้ว'),('รอเรียกใช้รายการ'),('สร้างฟอร์มเพิ่มใบขอซื้อ'),('รายการถูกสร้างใหม่(รอยืนยัน)'),('ใบขอซื้อที่ถูกยกเลิก'),('รายการจากใบขอซื้อถูกยกเลิก'),('สร้างฟอร์มใบPO'),('รายการใบPO'),('รายการโดนเรียกใช้งาน'),('POที่รออณุมัติ'),('รายการที่รออณุมัติPO'),('POได้รับการยืนยันแล้ว'),('รายการที่รอตรวจรับจาก PO'),('ตรวจรับแล้วแต่ยังไม่สมบูรณ์'),('ตรวจรับเสร็จสมบูรณ์'),('รับเข้า'),('เบิกออก');
 
 INSERT INTO type_po_tbl(type_po_name) VALUES
 ('ประเภทสำหรับวัสดุ'),('ประเภทสำหรับบริการ');
