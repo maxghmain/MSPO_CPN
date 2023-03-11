@@ -153,7 +153,7 @@ include 'php/connect_db.php';
 <?php
 date_default_timezone_set('Asia/Kolkata');      
 $date=date("Y/m/d h:i:sa");
-$sql = "INSERT INTO pick_in_out_logs_tbl(pick_in_out_val,pick_in_out_pel,pick_in_out_sumval,pick_in_out_comment,pick_in_out_date,pick_in_name,material_id,depart_id,state_id) VALUES ('$value_item_pick','$name_of_pel','$value_item_pick','$textarea_pick','$date',NULL,'$item_id_pick','$afb_group_id_pick',18)";
+$sql = "INSERT INTO pick_in_out_logs_tbl(pick_in_out_val,pick_in_out_pel,pick_in_out_sumval,pick_in_out_comment,pick_in_out_date,pick_in_name,material_id,depart_id,state_id) VALUES ('$value_item_pick','$name_of_pel','$value_item_pick','$textarea_pick','$date','$name_item_pick','$item_id_pick','$afb_group_id_pick',18)";
 mysqli_query($conn,$sql);
 
 $sql = "UPDATE material_tbl SET material_value = material_value-$value_item_pick WHERE material_id = $item_id_pick";
