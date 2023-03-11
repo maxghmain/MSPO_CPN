@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS pick_in_out_logs_tbl (
     pick_in_out_comment VARCHAR(150) NULL COLLATE utf8mb4_unicode_ci,
     pick_in_out_date DATETIME NOT NULL COLLATE utf8mb4_unicode_ci,
     pick_in_out_note VARCHAR(150) NULL COLLATE utf8mb4_unicode_ci,
-    pick_in_name VARCHAR(150) NOT NULL COLLATE utf8mb4_unicode_ci,
+    pick_in_name VARCHAR(150) NULL COLLATE utf8mb4_unicode_ci,
     material_id INT NULL,
     depart_id INT NULL,
     state_id INT NOT NULL,

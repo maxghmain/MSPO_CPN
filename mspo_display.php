@@ -418,8 +418,9 @@ if ($_SESSION['username'] == '') {
                    
                 }
                 if($_SESSION['input_value'] == "alradyinput"){
-                    include 'component/content/store_po_wait/popup/value_check_in.php';
                     include 'component/content/store_po_wait/function/insert_item_material.php';
+                    include 'component/content/store_po_wait/popup/value_check_in.php';
+                    
                 }
                 if($_SESSION['state_excecut'] == "complet_po_list"){
                     include 'component/content/store_po_wait/function/complet_po_list.php';
@@ -434,6 +435,12 @@ if ($_SESSION['username'] == '') {
                 }
                 if($_SESSION['pick_in'] == "success"){
                     include 'component/content/store_po_wait/function/pick_in.php';
+                }
+                if($_SESSION['menu'] == "history_pick_in_out"){
+                    include 'component/content/pick_in_out/history_pick_in_out.php';
+                }
+                if($_SESSION['menu'] == "history_pick_in_out_in"){
+                    include 'component/content/pick_in_out/history_pick_in_out_in.php';
                 }
                 ?>
                 

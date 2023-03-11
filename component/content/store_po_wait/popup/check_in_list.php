@@ -42,7 +42,7 @@ include 'php/connect_db.php'; ?>
                                 </div>
                                <?php if($_SESSION['userlvid'] == '4'){?>
                                
-                                    <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=check_in_list&input_value=alradyinput&" >ตรวจรับรายการนี้</a>
+                                    <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=check_in_list&input_value=alradyinput&order_id_input=<?=$row['order_id']?>&name_item_check_in=<?= $row['order_detail'] ?>&unit_name_check=<?=$row['unit_id']?>&price_item_not_sum=<?=$price_item_not_sum?>" >ตรวจรับรายการนี้</a>
                                
                                
                                  

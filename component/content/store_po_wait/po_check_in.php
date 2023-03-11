@@ -305,7 +305,7 @@ include 'php/connect_db.php';
                                                 <?php } ?>
                                                 <?php if ($search['state_id'] == 15) { ?>
                                                     <div class="display-butt">
-                                                        <div class="butt-conf-po"><a href="mspo_display.php?menu=po_check_in&check_in=<?= $search['po_id'] ?>&state_excecut=check_in_list">ตรวจรับ</a></div>
+                                                    <div class="butt-conf-po"><a href="mspo_display.php?menu=po_check_in&check_in=<?= $search['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?=$search['order_price']?>">ตรวจรับ</a></div>
                                                     </div>
                                                 <?php } ?>
                                                 <?php if ($search['state_id'] == 16) { ?>

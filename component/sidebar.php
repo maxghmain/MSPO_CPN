@@ -167,7 +167,19 @@
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/951971.png" style="width: 20px" height="20px" />
-                    <a href="../Store/history.php">ประวัติรับเข้าและเบิกออกของวัสดุ</a>
+                    <a href="">ประวัติรับเข้าและเบิกออกของวัสดุ</a>
+                </div>
+            </div>
+            <div class="manu-list">
+                <div class="manu-text" style="margin-left: 40px">
+                    <img src="img/icon/951971.png" style="width: 20px" height="20px" />
+                    <a href="mspo_display.php?menu=history_pick_in_out_in">รับเข้า</a>
+                </div>
+            </div>
+            <div class="manu-list">
+                <div class="manu-text" style="margin-left: 40px">
+                    <img src="img/icon/951971.png" style="width: 20px" height="20px" />
+                    <a href="mspo_display.php?menu=history_pick_in_out">เบิกออก</a>
                 </div>
             </div>
             <div class="manu-list">
