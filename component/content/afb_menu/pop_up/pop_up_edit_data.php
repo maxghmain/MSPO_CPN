@@ -206,3 +206,4 @@ mysqli_close($conn)
     }
 </style>
 
+<?php mysqli_close($conn); ?>

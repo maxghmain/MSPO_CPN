@@ -3,7 +3,7 @@ session_start();
 include 'php/connect_db.php'
 ?>
 <div class="container_title">
-    <h5>จำนวนวัสดุคงเหลือ - Total Items</h5>
+    <h5>เบิกออกวัสดุ - PICK OUT MATERIAL</h5>
 </div>
 
 <style>

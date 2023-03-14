@@ -24,6 +24,9 @@ if ($_SESSION['username'] == '') {
     $_SESSION['input_value'] = $_GET['input_value'];
     $_SESSION['pick_in'] = $_GET['pick_in'];
 
+    $_SESSION['keyword'] = $_POST['keyword'];
+    $keyword = $_SESSION['keyword'];
+
     $user_id = $_SESSION['userid'];
 
     $num_afb = $_GET['num_afb'];
@@ -131,6 +134,9 @@ if ($_SESSION['username'] == '') {
     /* ปิดการแสดงของ Popup และ Loading */
 
     $fullname_depart = $_SESSION['userdatafullname'];
+
+    $_SESSION['add_user_new'] = $_GET['add_user_new'];
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -176,6 +182,11 @@ if ($_SESSION['username'] == '') {
         ?>
             <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
         <?php
+        }
+        if ($_SESSION['userlvid'] == 5) {
+            ?>
+                <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
+            <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
@@ -441,6 +452,12 @@ if ($_SESSION['username'] == '') {
                 }
                 if($_SESSION['menu'] == "history_pick_in_out_in"){
                     include 'component/content/pick_in_out/history_pick_in_out_in.php';
+                }
+                if($_SESSION['menu'] == "add_user"){
+                    include 'component/content/add_user/add_user.php';
+                }
+                if($_SESSION['add_user_new'] == "alrady"){
+                    include 'component/content/add_user/add_user_new.php';
                 }
                 ?>
                 

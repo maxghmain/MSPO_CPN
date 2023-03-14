@@ -114,9 +114,7 @@ $sql = "SELECT form_afb_id,form_afb_number,form_afb_book_number,form_afb_write_d
             ON c.state_id = a.state_id
             WHERE a.state_id = 1 ORDER BY form_afb_id DESC LIMIT $offset, $limit ";
 $result = mysqli_query($conn, $sql);
-if (!$result) {
-    die('Error: ' . mysqli_error($conn));
-}
+
 while ($row = mysqli_fetch_array($result)) {
 
     echo '<div id="body-afb-box-1">';

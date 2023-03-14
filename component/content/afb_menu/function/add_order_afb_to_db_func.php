@@ -23,4 +23,6 @@ $sql4 = "INSERT INTO order_afb_tbl(name_ms_id,order_afb_value,unit_id,order_afb_
 ) VALUES ($name_ms_id,$value_order_afb,$unit_id,'$subject_order',5,$form_afb_id);";
 mysqli_query($conn, $sql4);
 
+
 ?>
+<?php mysqli_close($conn); ?>

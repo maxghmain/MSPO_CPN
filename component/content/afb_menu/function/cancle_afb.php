@@ -8,3 +8,4 @@ mysqli_query($conn,$sql);
  echo "<script>alert('ยกเลิกใบขอซื้อเสร็จสิ้น');</script>";
 
 ?>
+<?php mysqli_close($conn); ?>

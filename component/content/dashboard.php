@@ -1,3 +1,40 @@
+<style>
+    .detail_not_check_in {
+        color: white;
+        background: #006EBC;
+        font-family: Noto sans Thai;
+        font-size: 18px;
+        width: 180px;
+        height: auto;
+        margin-right: 20px;
+        border: 0px solid blue;
+        border-radius: 30px;
+        font-size: 12px;
+        text-align: center;
+        margin-left: 50px;
+    }
+
+    .detail_not_check_in:hover {
+        color: white;
+        background: #053659;
+        font-family: Noto sans Thai;
+        font-size: 18px;
+        width: 180px;
+        height: auto;
+        margin-right: 20px;
+        border: 0px solid blue;
+        border-radius: 30px;
+        text-align: center;
+        font-size: 12px;
+        margin-left: 50px;
+    }
+
+    .detail_not_check_in a {
+        color: white;
+        text-decoration: none;
+
+    }
+</style>
 <?php
 if ($_SESSION['userlvid'] == '1') {
     /* Dashboard สำหรับ admin_user */
@@ -7,12 +44,17 @@ if ($_SESSION['userlvid'] == '1') {
     </div>
 <?php
 }
-if ($_SESSION['userlvid'] == '2') {
-    /* Dashboard สำหรับ normal_user */
-?>
+if ($_SESSION['userlvid'] == '2') { ?>
+
     <div class="container_title">
-        <h5>กระดานสรุปข้อมูล - Dashboard</h5>
+        <h5>ผู้ใช้ทั่วไป - Normal User</h5>
     </div>
+    <div class="container_title">
+  <h1>ยินดีต้อนรับสู่ ระบบจัดการคลังวัสดุและ PO / NS COLD STORAGE</h1>
+
+</div>
+
+
 <?php
 }
 if ($_SESSION['userlvid'] == '3') {
@@ -46,12 +88,12 @@ if ($_SESSION['userlvid'] == '3') {
             ?>
                 <div class="box_content_1">
                     <div class="title-box2">
-                        <p>เลขที่: <?= $row4['po_num'] ?> วันที่: <?= $row4['po_logs_date_record'] ?></p>
+                        <p>เลขที่: PO<?= $row4['po_num'] ?> วันที่: <?= $row4['po_logs_date_record'] ?></p>
                         <p>บริษัท]: <?= $row4['comp_contect_name'] ?></p>
                         <p>จำนวน: <?= $row4['order_queantity'] ?> รายการ</p>
-                        <button class="btn-po">
-                            คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                        </button>
+                        <div class="detail_not_check_in">
+                            <a href="mspo_display.php?menu=dashboard&check_in=<?= $row4['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?= $row4['order_price'] ?>">คลิกที่นี่เพื่อดูรายละเอียด PO นี้</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
@@ -65,8 +107,8 @@ if ($_SESSION['userlvid'] == '3') {
             ?>
             <div class="box_content_1">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row5 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row5 ?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -92,12 +134,12 @@ if ($_SESSION['userlvid'] == '3') {
             ?>
                 <div class="box_content_2">
                     <div class="title-box2">
-                        <p>เลขที่: <?= $row2['po_num'] ?> วันที่: <?= $row2['po_logs_date_record'] ?></p>
+                        <p>เลขที่: PO<?= $row2['po_num'] ?> วันที่: <?= $row2['po_logs_date_record'] ?></p>
                         <p>บริษัท: <?= $row2['comp_contect_name'] ?></p>
                         <p>จำนวน: <?= $row2['order_queantity'] ?> รายการ</p>
-                        <button class="btn-po">
-                            คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                        </button>
+                        <div class="detail_not_check_in">
+                            <a href="mspo_display.php?menu=dashboard&check_in=<?= $row2['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?= $row2['order_price'] ?>">คลิกที่นี่เพื่อดูรายละเอียด PO นี้</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
@@ -111,8 +153,8 @@ if ($_SESSION['userlvid'] == '3') {
             ?>
             <div class="box_content_2">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row3 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row3 ?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -134,18 +176,18 @@ if ($_SESSION['userlvid'] == '3') {
             ON a.po_id = d.po_id
             WHERE a.state_id = 13 ORDER BY po_logs_id DESC LIMIT 2";
             $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($result)) {
-                echo '<div class="box_content_3">';
-                echo '  <div class="title-box2">';
-                echo '     <p>เลขที่: PO ' . $row['po_num'] . ' วันที่: ' . $row['po_logs_date_record'] . '</p>';
-                echo '     <p>บริษัท]: ' . $row['comp_contect_name'] . '</p>';
-                echo '     <p>จำนวน: ' . $row['order_id'] . ' รายการ</p>';
-                echo '     <button class="btn-po">';
-                echo '         คลิกที่นี่เพื่อดูรายละเอียด PO นี้';
-                echo '     </button>';
-                echo ' </div>';
-                echo '</div>';
-            } ?>
+            while ($row = mysqli_fetch_array($result)) { ?>
+                <div class="box_content_3">
+                    <div class="title-box2">
+                        <p>เลขที่: PO<?= $row['po_num'] ?> วันที่: <?= $row['po_logs_date_record'] ?></p>
+                        <p>บริษัท]: <?= $row['comp_contect_name'] ?></p>
+                        <p>จำนวน: <?= $row['order_id'] ?> รายการ</p>
+                        <div class="detail_not_check_in">
+                            <a href="mspo_display.php?menu=dashboard&check_in=<?= $row['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?= $row['order_price'] ?>">คลิกที่นี่เพื่อดูรายละเอียด PO นี้</a>
+                        </div>
+                    </div>
+                </div>
+            <?php  } ?>
             <div class="box_content_3">
                 <div class="title-box2">
                     <?php
@@ -157,8 +199,8 @@ if ($_SESSION['userlvid'] == '3') {
 
                     ?>
 
-                    <p>รายการทั้งหมด</p>
-                    <p> <?= $row2 ?> : รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row2 ?> : รายการ</p>
                 </div>
             </div>
         </div>
@@ -190,8 +232,8 @@ if ($_SESSION['userlvid'] == '3') {
             ?>
             <div class="box_content_4">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row7 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row7 ?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -233,9 +275,9 @@ if ($_SESSION['userlvid'] == '4') {
                         <p>เลขที่: <?= $row4['po_num'] ?> วันที่: <?= $row4['po_logs_date_record'] ?></p>
                         <p>บริษัท: <?= $row4['comp_contect_name'] ?></p>
                         <p>จำนวน: <?= $row4['order_queantity'] ?> รายการ</p>
-                        <button class="btn-po">
-                            คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                        </button>
+                        <div class="detail_not_check_in">
+                            <a href="mspo_display.php?menu=dashboard&check_in=<?= $row4['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?= $row4['order_price'] ?>">คลิกที่นี่เพื่อดูรายละเอียด PO นี้</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
@@ -249,8 +291,8 @@ if ($_SESSION['userlvid'] == '4') {
             ?>
             <div class="box_content_1">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row5 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row5 ?> รายการ</p>
                 </div>
             </div>
 
@@ -276,33 +318,31 @@ if ($_SESSION['userlvid'] == '4') {
             ?>
                 <div class="box_content_1">
                     <div class="title-box2">
-                         <?php if ($row15['state_id'] == 17) { ?>
+                        <?php if ($row15['state_id'] == 17) { ?>
                             <p style="color:green;">รับเข้า
                             <?php } ?>
                             <?php if ($row15['state_id'] == 18) { ?>
-                                <p style="color:red;">เบิกออก
+                            <p style="color:red;">เบิกออก
                             <?php } ?>
-                         
-                        วันที่: <?= $row15['pick_in_out_date'] ?></p>
-                        <p>ชื่อรายการ: <?= $row15['pick_in_name'] ?> จำนวน: <?= $row15['pick_in_out_val'] ?></p>
-                        <p>แผนก: <?= $row15['depart_name'] ?></p>
-                        <p>ผู้ทำรายการ: <?= $row15['pick_in_out_pel'] ?></p>
-                        <button class="btn-po">
-                            คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                        </button>
+
+                            วันที่: <?= $row15['pick_in_out_date'] ?></p>
+                            <p>ชื่อรายการ: <?= $row15['pick_in_name'] ?> จำนวน: <?= $row15['pick_in_out_val'] ?></p>
+                            <p>แผนก: <?= $row15['depart_name'] ?></p>
+                            <p>ผู้ทำรายการ: <?= $row15['pick_in_out_pel'] ?></p>
+
                     </div>
                 </div>
             <?php } ?>
 
-            <?php 
+            <?php
             $sql = "SELECT * FROM pick_in_out_logs_tbl";
             $result = mysqli_query($conn, $sql);
             $row16 = mysqli_num_rows($result);
             ?>
             <div class="box_content_1">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row16 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row16 ?> รายการ</p>
                 </div>
             </div>
 
@@ -333,9 +373,9 @@ if ($_SESSION['userlvid'] == '4') {
                         <p>เลขที่: <?= $row2['po_num'] ?> วันที่: <?= $row2['po_logs_date_record'] ?></p>
                         <p>บริษัท: <?= $row2['comp_contect_name'] ?></p>
                         <p>จำนวน: <?= $row2['order_queantity'] ?> รายการ</p>
-                        <button class="btn-po">
-                            คลิกที่นี่เพื่อดูรายละเอียด PO นี้
-                        </button>
+                        <div class="detail_not_check_in">
+                            <a href="mspo_display.php?menu=dashboard&check_in=<?= $row2['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?= $row2['order_price'] ?>">คลิกที่นี่เพื่อดูรายละเอียด PO นี้</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
@@ -349,8 +389,8 @@ if ($_SESSION['userlvid'] == '4') {
             ?>
             <div class="box_content_2">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row3 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row3 ?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -372,18 +412,19 @@ if ($_SESSION['userlvid'] == '4') {
             ON a.po_id = d.po_id
             WHERE a.state_id = 13 ORDER BY po_logs_id DESC LIMIT 2";
             $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($result)) {
-                echo '<div class="box_content_3">';
-                echo '  <div class="title-box2">';
-                echo '     <p>เลขที่: PO ' . $row['po_num'] . ' วันที่: ' . $row['po_logs_date_record'] . '</p>';
-                echo '     <p>บริษัท]: ' . $row['comp_contect_name'] . '</p>';
-                echo '     <p>จำนวน: ' . $row['order_id'] . ' รายการ</p>';
-                echo '     <button class="btn-po">';
-                echo '         คลิกที่นี่เพื่อดูรายละเอียด PO นี้';
-                echo '     </button>';
-                echo ' </div>';
-                echo '</div>';
-            } ?>
+            while ($row = mysqli_fetch_array($result)) { ?>
+                <div class="box_content_3">
+                    <div class="title-box2">
+                        <p>เลขที่: PO <?= $row['po_num'] ?> วันที่: <?= $row['po_logs_date_record'] ?></p>
+                        <p>บริษัท]: <?= $row['comp_contect_name'] ?></p>
+                        <p>จำนวน: <?= $row['order_id'] ?> รายการ</p>
+                        <div class="detail_not_check_in">
+                            <a href="mspo_display.php?menu=dashboard&check_in=<?= $row['po_id'] ?>&state_excecut=check_in_list&price_item_not_sum=<?= $row['order_price'] ?>">คลิกที่นี่เพื่อดูรายละเอียด PO นี้</a>
+                        </div>
+
+                    </div>
+                </div>
+            <?php  } ?>
             <div class="box_content_3">
                 <div class="title-box2">
                     <?php
@@ -395,8 +436,8 @@ if ($_SESSION['userlvid'] == '4') {
 
                     ?>
 
-                    <p>รายการทั้งหมด</p>
-                    <p> <?= $row2 ?> : รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row2 ?> รายการ</p>
                 </div>
             </div>
         </div>
@@ -428,8 +469,8 @@ if ($_SESSION['userlvid'] == '4') {
             ?>
             <div class="box_content_4">
                 <div class="title-box2">
-                    <p>รายการทั้งหมด</p>
-                    <p><?= $row7 ?> รายการ</p>
+                    <p>รายการทั้งหมด
+                        <?= $row7 ?> รายการ</p>
                 </div>
             </div>
         </div>

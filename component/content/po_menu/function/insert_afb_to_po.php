@@ -17,7 +17,7 @@ $item_Number_select = $_SESSION['item_Number_select'];
     VALUES ('$form_afb_pel','$po_id','$group_id_item')";
     mysqli_query($conn,$sql);
 
-    $sql = "UPDATE order_afb_tbl SET order_afb_value = order_afb_value-$value_item,state_id = 10 WHERE order_afb_id = $item_Number_select";
+    $sql = "UPDATE order_afb_tbl SET state_id = 10 WHERE order_afb_id = $item_Number_select";
     mysqli_query($conn,$sql);
 
 

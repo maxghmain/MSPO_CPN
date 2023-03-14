@@ -2,22 +2,9 @@
 <?php
 session_start();
 include 'php/connect_db.php';
-$sql = "SELECT * FROM comp_contect_tbl WHERE comp_contect_name like '%$search%'";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo $row["comp_contect_name"] . "<br>";
-        
-    }
-} else {
-    echo "0 records";
-}
 
 
-$sql = "SELECT * FROM comp_contect_tbl";
-$result = mysqli_query($conn, $sql);
+
 
 ?>
 <div class="add_afb_po" id="add_afb_po">
@@ -32,14 +19,34 @@ $result = mysqli_query($conn, $sql);
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
                             <div id="box-context">
-                                <form action="" method="GET">
-                                    <input id="search" type="text" placeholder="ค้นหาชื่อบริษัท">
-                                    <input id="submit" type="submit" value="ค้นหา">
+                                <form action="" method="POST">
+                                    <input name="keyword" type="text" placeholder="ค้นหาชื่อบริษัท">
+                                    <input name="search" type="submit" value="ค้นหา">
                                 </form>
                                
                             </div>
                             <div id="comp_item_show">
                                 <?php
+                                 if (isset($_POST['search'])) {
+                                    $keyword = $_POST['keyword'];
+    
+                                    $where = [];
+                                    if (!empty($keyword)) {
+                                        $where[] = "comp_contect_name LIKE '%$keyword%'";
+                                    }
+    
+                                    $where_clause = '';
+                                    if (!empty($where)) {
+                                        $where_clause = ' WHERE ' . implode(' AND ', $where);
+                                    }
+    
+                                    $sql = "SELECT * FROM comp_contect_tbl" . $where_clause ;
+    
+                                    $result = mysqli_query($conn, $sql);
+                                } else {
+                                    $sql = "SELECT * FROM comp_contect_tbl";
+                                    $result = mysqli_query($conn, $sql);
+                                }                               
                                 while ($row = mysqli_fetch_array($result)) { ?>
                                     <div class="containner_item">
                                         <div class="box-item-show-1">

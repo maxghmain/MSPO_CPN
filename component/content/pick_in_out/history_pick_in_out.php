@@ -118,7 +118,7 @@
                                         วันที่
                                     </td>
                                     <td style="width: 10%;">
-                                        ข้อมูลเพิ่มเติม
+                                        แผนกที่เบิก
                                     </td>
 
 
@@ -129,10 +129,12 @@
                                 <?php
                                 session_start();
                                 include 'php/connect_db.php';
-                                $sql = "SELECT pick_in_out_logs_id,pick_in_out_val,pick_in_out_pel,pick_in_out_price,pick_in_out_price,pick_in_out_sumval,pick_in_out_comment,pick_in_out_date,pick_in_name,a.material_id,material_name,depart_id,state_id FROM pick_in_out_logs_tbl as a
+                                $sql = "SELECT pick_in_out_logs_id,pick_in_out_val,pick_in_out_pel,pick_in_out_price,pick_in_out_price,pick_in_out_sumval,pick_in_out_comment,pick_in_out_date,pick_in_name,a.material_id,material_name,a.depart_id,depart_name,state_id FROM pick_in_out_logs_tbl as a
                                 INNER JOIN material_tbl as b
                                 ON a.material_id = b.material_id
-                                WHERE state_id = 18
+                                INNER JOIN depart_tbl as d
+                                ON a.depart_id = d.depart_id
+                                WHERE state_id = 18 ORDER BY pick_in_out_logs_id DESC
                                ";
                                 $result = mysqli_query($conn, $sql);
                                 $eiei = 1;
@@ -165,6 +167,9 @@
                                         </td>
                                         <td style="width: 10%;">
                                         <?=$row['pick_in_out_date']?>
+                                    </td>
+                                    <td style="width: 10%;">
+                                    <?=$row['depart_name']?>
                                     </td>
                                         
                                            

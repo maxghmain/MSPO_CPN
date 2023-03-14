@@ -2,250 +2,234 @@
 session_start();
 include 'php/connect_db.php'
 ?>
+<style>
+     .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .pagination .page-item {
+    margin: 0 10px;
+  }
+
+  .pagination .page-link {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .pagination .page-link:hover,
+  .pagination .page-link:focus {
+    background-color: #f2f2f2;
+    outline: none;
+  }
+
+  .pagination .page-link.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+</style>
 <div class="container_title">
     <h5>จำนวนวัสดุคงเหลือ - Total Items</h5>
 </div>
-<?php
+<div class="container_box1">
+    <div class="container_box_h1">
+        <div class="bg-item">
+            <div class="tbl_item">
+                <div style="margin:auto;text-align:left;width:100%;">
+                    <!--ส่วนสร้างฟอร์ม สำหรับค้นหา -->
+                    <table>
+                        <form action="" method="POST">
+                            <tr>
+                                <td style="border:none;">
+                                    รายการวัสดุในคลัง (STORE)
+                                </td>
+                                <td style="border:none;">
+                                    ค้นหา <input type="search" id="name-po" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" />
+                                </td>
 
-session_start();
-include '../connect.php';
-if (!$_SESSION['username']) {
-    header("Location: index.php");
-} else {
+                                <td style="border:none;display:flex;">
+                                    ประเภทวัสดุ <select style="width:150px;" name="type_material">
+                                        <option value="">ทุกประเภท</option>
+                                        <option value="1">ประเภทซ่อมบำรุง</option>
+                                        <option value="2">ประเภทไฟฟ้า</option>
+                                        <option value="3">ประเภทสารเคมี</option>
+                                        <option value="4">ประเภทเครื่องทำความเย็น</option>
+                                        <option value="5">ประเภทงานประปา</option>
+                                        <option value="6">ประเภทเฉพาะงาน</option>
+                                        <option value="7">ประเภทงานทั่วไป</option>
+                                        <option value="8">ประเภทอื่นๆ</option>
+                                    </select>
+                                </td>
 
-
-    function page_navi($before_p, $plus_p, $total, $total_p, $chk_page)
-    {
-        global $urlquery_str;
-        $pPrev = $chk_page - 1;
-        $pPrev = ($pPrev >= 0) ? $pPrev : 0;
-        $pNext = $chk_page + 1;
-        $pNext = ($pNext >= $total_p) ? $total_p - 1 : $pNext;
-
-        $lt_page = $total_p - 4;
-        if ($chk_page > 0) {
-            echo "<a  href='$urlquery_str" . "pages=" . intval($pPrev + 1) . "' class='naviPN'>ย้อนกลับ</a>";
-        }
-        if ($total_p >= 11) {
-            if ($chk_page >= 4) {
-                echo "<a href='$urlquery_str" . "pages=1'>1</a><a class='SpaceC'>. . .</a>";
-            }
-            if ($chk_page < 4) {
-                for ($i = 0; $i < $total_p; $i++) {
-                    $nClass = ($chk_page == $i) ? "class='selectPage'" : "";
-                    if ($i <= 4) {
-                        echo "<a $nClass href='$urlquery_str" . "pages=" . intval($i + 1) . "'>" . intval($i + 1) . "</a> ";
-                    }
-                    if ($i == $total_p - 1) {
-                        echo "<a class='SpaceC'>. . .</a><a $nClass href='$urlquery_str" . "pages=" . intval($i + 1) . "'>" . intval($i + 1) . "</a> ";
-                    }
-                }
-            }
-            if ($chk_page >= 4 && $chk_page < $lt_page) {
-                $st_page = $chk_page - 3;
-                for ($i = 1; $i <= 5; $i++) {
-                    $nClass = ($chk_page == ($st_page + $i)) ? "class='selectPage'" : "";
-                    echo "<a $nClass href='$urlquery_str" . "pages=" . intval($st_page + $i + 1) . "'>" . intval($st_page + $i + 1) . "</a> ";
-                }
-                for ($i = 0; $i < $total_p; $i++) {
-                    if ($i == $total_p - 1) {
-                        $nClass = ($chk_page == $i) ? "class='selectPage'" : "";
-                        echo "<a class='SpaceC'>. . .</a><a $nClass href='$urlquery_str" . "pages=" . intval($i + 1) . "'>" . intval($i + 1) . "</a> ";
-                    }
-                }
-            }
-            if ($chk_page >= $lt_page) {
-                for ($i = 0; $i <= 4; $i++) {
-                    $nClass = ($chk_page == ($lt_page + $i - 1)) ? "class='selectPage'" : "";
-                    echo "<a $nClass href='$urlquery_str" . "pages=" . intval($lt_page + $i) . "'>" . intval($lt_page + $i) . "</a> ";
-                }
-            }
-        } else {
-            for ($i = 0; $i < $total_p; $i++) {
-                $nClass = ($chk_page == $i) ? "class='selectPage'" : "";
-                echo "<a href='$urlquery_str" . "pages=" . intval($i + 1) . "' $nClass  >" . intval($i + 1) . "</a> ";
-            }
-        }
-        if ($chk_page < $total_p - 1) {
-            echo "<a href='$urlquery_str" . "pages=" . intval($pNext + 1) . "'  class='naviPN'>ถัดไป</a>";
-        }
-    }
-
-?>
-    <div class="container_box1">
-        <div class="container_box_h1">
-            <div class="bg-item">
-                <div class="tbl_item">
-                    <div style="margin:auto;text-align:left;width:100%;">
-                        <!--ส่วนสร้างฟอร์ม สำหรับค้นหา -->
-                        <table>
-                    <form action="" method="POST">
+                                <td style="border:none;">
+                                    <button class="myBtn" id="search-po-butt" name="search">ค้นหา</button>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                    <table style="border:none;">
                         <tr>
-                            <td style="border:none;">
-                                รายการวัสดุในคลัง (STORE)
-                            </td>
-                            <td style="border:none;">
-                                ค้นหา <input type="search" id="name-po" name="keyword" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>" />
-                            </td>
-                           
-                            <td style="border:none;display:flex;">
-                                ประเภทวัสดุ <select style="width:150px;" name="type_material">
-                                <option value="">ทุกประเภท</option>
-                                    <option value="1">ประเภทซ่อมบำรุง</option>
-                                    <option value="2">ประเภทไฟฟ้า</option>
-                                    <option value="3">ประเภทสารเคมี</option>
-                                    <option value="4">ประเภทเครื่องทำความเย็น</option>
-                                    <option value="5">ประเภทงานประปา</option>
-                                    <option value="6">ประเภทเฉพาะงาน</option>
-                                    <option value="7">ประเภทงานทั่วไป</option>
-                                    <option value="8">ประเภทอื่นๆ</option>
-                                </select>
-                            </td>
-                            
-                            <td style="border:none;">
-                                <button class="myBtn" id="search-po-butt" name="search">ค้นหา</button>
+                            <td align="left" style="border:none;">
+                                <table width="100%" border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;">
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>ชื่อวัสดุ</th>
+                                        <th>จำนวน</th>
+                                        <th>หน่วยนับ</th>
+                                        <th>ประเภท</th>
+                                        <th>เก็บไว้ชั้นที่</th>
+                                    </tr>
+                                    <?php
+                                      $limit = 10; // number of items to show per page
+                                      $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
+                                      $offset = ($page - 1) * $limit;
+                                      $counst = ($offset + 1);
+                                     if (isset($_POST['search'])) {
+                                        $keyword = $_POST['keyword'];
+                                        $type_material = $_POST['type_material'];
+                                     
+                                        $where = [];
+                                        if (!empty($keyword)) {
+                                            $where[] = "material_name LIKE '%$keyword%'";
+                                        }
+                                        if(!empty($type_material)){
+                                            $where[] = "material_type_name LIKE '%$type_material%'";
+                                        }
+                                       
+    
+                                        $where_clause = '';
+                                        if (!empty($where)) {
+                                            $where_clause = ' WHERE ' . implode(' AND ', $where);
+                                        }
+    
+                                        $sql = "SELECT material_id as material_id_a ,material_name ,material_value ,unit_name ,a.material_type_id,material_type_name,material_class_shelf_name FROM material_tbl as a
+                                        INNER JOIN material_type_tbl as b
+                                        ON a.material_type_id = b.material_type_id
+                                        INNER JOIN unit_tbl as c
+                                        ON a.unit_id = c.unit_id 
+                                        INNER JOIN material_class_shelf_tbl as d
+                                        ON a.material_class_shelf_id = d.material_class_shelf_id" . $where_clause . " LIMIT  $offset, $limit";
+    
+                                        $result = mysqli_query($conn, $sql);
+                                    } else {
+                                        $sql = "SELECT material_id as material_id_a ,material_name ,material_value ,unit_name ,a.material_type_id,material_type_name,material_class_shelf_name FROM material_tbl as a
+                                        INNER JOIN material_type_tbl as b
+                                        ON a.material_type_id = b.material_type_id
+                                        INNER JOIN unit_tbl as c
+                                        ON a.unit_id = c.unit_id 
+                                        INNER JOIN material_class_shelf_tbl as d
+                                        ON a.material_class_shelf_id = d.material_class_shelf_id LIMIT  $offset, $limit";
+                                        $result = mysqli_query($conn, $sql);
+                                        
+                                    }
+                                    while ($search = mysqli_fetch_array($result)) {
+
+                                    
+                                    ?>
+                                        <tr>
+                                            <td height="20">&nbsp;<?= $counst ?></td>
+                                            <td height="20">&nbsp;<?= $search['material_name'] ?></td>
+                                            <td height="20">&nbsp;<?= $search['material_value'] ?></td>
+                                            <td height="20">&nbsp;<?= $search['unit_name'] ?></td>
+                                            <td height="20">&nbsp;<?= $search['material_type_name'] ?></td>
+                                            <td height="20">&nbsp;<?= $search['material_class_shelf_name'] ?></td>
+                                        </tr>
+                                    <?php
+                                        $counst++;
+                                    }
+                                    $total_sql = "SELECT COUNT(*) as total FROM material_tbl as a
+                                        INNER JOIN material_type_tbl as b
+                                        ON a.material_type_id = b.material_type_id
+                                        INNER JOIN unit_tbl as c
+                                        ON a.unit_id = c.unit_id 
+                                        INNER JOIN material_class_shelf_tbl as d
+                                        ON a.material_class_shelf_id = d.material_class_shelf_id";
+                                    $total_result = mysqli_query($conn, $total_sql);
+                                    $total_row = mysqli_fetch_array($total_result);
+                                    $total_items = $total_row['total'];
+                                    $total_pages = ceil($total_items / $limit);
+
+                                    // Create the pagination links
+                                    $pagination = "";
+                                    if ($total_pages > 1) {
+                                        for ($i = 1; $i <= $total_pages; $i++) {
+                                            if ($i == $page) {
+                                                $pagination .= "<strong>$i</strong>";
+                                            } else {
+                                                $pagination .= "<a href=mspo_display.php?menu=total_items&page=$i'>$i</a>";
+                                            }
+                                        }
+                                    }
+                                    ?>
+
+                                </table>
+                                <div class="pagination">
+                                    <?php if ($total_pages > 1) : ?>
+                                        <div class="page-item">
+                                            <a class="page-link" href="mspo_display.php?menu=total_items&page=1">First</a>
+                                        </div>
+                                        <?php
+                                        $start_page = max(1, $page - 2);
+                                        $end_page = min($total_pages, $page + 2);
+                                        for ($i = $start_page; $i <= $end_page; $i++) :
+                                        ?>
+                                            <div class="page-item">
+                                                <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=total_items&page=<?php echo $i; ?>">
+                                                    <?php echo $i; ?>
+                                                </a>
+                                            </div>
+                                        <?php endfor; ?>
+                                        <?php if ($page < $total_pages - 2) : ?>
+                                            <div class="page-item">
+                                                <span class="page-link">&hellip;</span>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($page < $total_pages - 1) : ?>
+                                            <div class="page-item">
+                                                <a class="page-link" href="mspo_display.php?menu=total_items&page=<?php echo $total_pages; ?>">Last</a>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <br />
+
                             </td>
                         </tr>
-                    </form>
-                </table>
-                        <table style="border:none;">
-                            <tr>
-                                <td align="left" style="border:none;">
-                                    <table width="100%" border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;">
-                                        <tr>
-                                            <th>ลำดับ</th>
-                                            <th>ชื่อวัสดุ</th>
-                                            <th>จำนวน</th>
-                                            <th>หน่วยนับ</th>
-                                            <th>ประเภท</th>
-                                            <th>เก็บไว้ชั้นที่</th>
-                                        </tr>
-                                        <?php
-                                        $i = 1;
-                                        $q = "SELECT material_id as material_id_a ,material_name ,material_value ,unit_name ,a.material_type_id,material_type_name,material_class_shelf_name FROM material_tbl as a
-                            INNER JOIN material_type_tbl as b
-                            ON a.material_type_id = b.material_type_id
-                            INNER JOIN unit_tbl as c
-                            ON a.unit_id = c.unit_id 
-                            INNER JOIN material_class_shelf_tbl as d
-                            ON a.material_class_shelf_id = d.material_class_shelf_id";
-                                        // เงื่อนไขการค้นหา ถ้ามีการส่งค่า ตัวแปร $_GET['keyword'] 
-                                        if (isset($_POST['search'])) {
-                                            $keyword = $_POST['keyword'];
-                                            $type_material = $_POST['type_material'];
-                                            // ต่อคำสั่ง sql 
-                                            if(!empty($keyword)){
-                                                $q .= " AND material_name LIKE '%" . trim($_POST['keyword']) . "%' ";
-                                            }
-                                            if(!empty($type_material)){
-                                                $q .= " AND a.material_type_id LIKE '%" . trim($_POST['type_material']) . "%' ";
-                                            }
-                                           
-                                        }
-                                        $qr = @mysqli_query($conn, $q);
-
-                                        $total = @mysqli_num_rows($qr);
-                                        $e_page = 10; // กำหนด จำนวนรายการที่แสดงในแต่ละหน้า   
-                                        if (!isset($_GET['pages'])) {
-                                            $_GET['pages'] = 0;
-                                        } else {
-                                            $_GET['pages'] = $_GET['pages'] - 1;
-                                            if ($_GET['pages'] < 0) {
-                                                $_GET['pages'] = 0;
-                                            }
-                                            $chk_page = $_GET['pages'];
-                                            $_GET['pages'] = $_GET['pages'] * $e_page;
-                                        }
-                                        $q .= " ORDER BY material_id DESC  LIMIT " . $_GET['pages'] . ",$e_page";
-
-                                        $qr = @mysqli_query($conn, $q);
-                                        if (@mysqli_num_rows($qr) >= 1) {
-                                            $plus_p = ($chk_page * $e_page) + @mysqli_num_rows($qr);
-                                        } else {
-                                            $plus_p = ($chk_page * $e_page);
-                                        }
-                                        $total_p = ceil($total / $e_page);
-                                        $before_p = ($chk_page * $e_page) + 1;
-                                        /// END PAGE NAVI ZONE          
-                                        while ($rs = @mysqli_fetch_array($qr)) {
-                                        ?>
-                                            <tr>
-                                                <td width="60" height="20" align="center"><?= (($e_page * $chk_page) + $i) ?></td>
-                                                <td height="20">&nbsp;<?= $rs['material_name'] ?></td>
-                                                <td height="20">&nbsp;<?= $rs['material_value'] ?></td>
-                                                <td height="20">&nbsp;<?= $rs['unit_name'] ?></td>
-                                                <td height="20">&nbsp;<?= $rs['material_type_name'] ?></td>
-                                                <td height="20">&nbsp;<?= $rs['material_class_shelf_name'] ?></td>
-                                            </tr>
-                                        <?php
-                                            $i++;
-                                        }
-                                        ?>
-
-                                    </table>
-
-                                    <br />
-
-                                </td>
-                            </tr>
+                        <tr>
+                            <td align="left" style="border:none;">
 
 
 
-                            <tr>
-                                <td align="left" style="border:none;">
+                            </td>
+                        </tr>
+                        </thead>
+                        <br>
+                        <?php
+                        $sql = "SELECT material_id as material_id_a ,material_name ,material_value ,unit_name ,a.material_type_id,material_type_name,material_class_shelf_name FROM material_tbl as a
+                        INNER JOIN material_type_tbl as b
+                        ON a.material_type_id = b.material_type_id
+                        INNER JOIN unit_tbl as c
+                        ON a.unit_id = c.unit_id 
+                        INNER JOIN material_class_shelf_tbl as d
+                        ON a.material_class_shelf_id = d.material_class_shelf_id";
+                        $result = mysqli_query($conn,$sql);
+                        $row55 = mysqli_num_rows($result); ?>
+                        <div ><span>จำนวนรายการทั้งหมด : <strong> <?php echo $row55 ?> </strong>รายการ</span></div>
+                        <tfoot>
 
 
-                                    <div style="margin:auto;width:100%;">
-                                        <?php if ($total > 10) { ?>
-                                            <div class="browse_page">
-                                                <?php
-                                                if (count($_GET) <= 1) {
-                                                    $urlquery_str = "?";
-                                                } else {
-                                                    $para_get = "";
-                                                    foreach ($_GET as $key => $value) {
-                                                        if ($key != "pages") {
-                                                            $para_get .= $key . "=" . $value . "&";
-                                                        }
-                                                    }
-                                                    $urlquery_str = "?$para_get";
-                                                }
-                                                // เรียกใช้งานฟังก์ชั่น สำหรับแสดงการแบ่งหน้า      
-                                                ?>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            </thead>
-                                            <br>
-                            <div class="total_list" style="text-aling:center;"><span>จำนวนรายการทั้งหมด : <strong> <?php echo $total ?> </strong>รายการ</span></div>
-                            <tfoot>
-
-                                <tr>
-                                    <td align="left" style="border:none;">
-
-                                        <div style="margin:auto;width:100%;">
-                                            <?php if ($total > 10) { ?>
-                                                <div class="browse_page">
-                                                    <?php
-                                                    // เรียกใช้งานฟังก์ชั่น สำหรับแสดงการแบ่งหน้า      
-                                                    page_navi($before_p, $plus_p, $total, $total_p, $chk_page);
-                                                    ?>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-
-
-<?php } ?>
+</div>

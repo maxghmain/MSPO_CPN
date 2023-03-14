@@ -1,5 +1,5 @@
 <!--Sticky Sidbar-->
-<?php session_start()?>
+<?php session_start() ?>
 
 <div class="sidbar">
     <div class="box-pf">
@@ -60,7 +60,25 @@
         }
         if ($_SESSION['userlvid'] == '2') {
         ?>
-            <!-- Sidebar ของ Normal User -->
+            <div class="manu-list">
+                <div class="manu-text">
+                    <img src="img/icon/9177009.png" style="width: 20px" height="20px" />
+                    <a href="mspo_display.php?">หน้าแรก</a>
+                </div>
+            </div>
+            <div class="manu-list">
+                <div class="manu-text">
+                    <img src="img/icon/9177009.png" style="width: 20px" height="20px" />
+                    <a href="mspo_display.php?menu=afb_add_afb">เพิ่มใบขอซื้อ</a>
+                </div>
+            </div>
+
+            <div class="manu-list">
+                <div class="manu-text">
+                    <img src="img/icon/9177009.png" style="width: 20px" height="20px" />
+                    <a href="mif()spo_display.php?menu=history_afb">ประวัติใบขอซื้อ</a>
+                </div>
+            </div>
         <?php
         }
         if ($_SESSION['userlvid'] == '3') {
@@ -98,7 +116,7 @@
                     <a href="mspo_display.php?menu=po_check_in">สถานะใบ PO</a>
                 </div>
             </div>
-           
+
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/7387663.png" style="width: 20px" height="20px" />
@@ -158,7 +176,7 @@
                     <a href="mspo_display.php?menu=po_check_in">PO รอตรวจรับ</a>
                 </div>
             </div>
-           
+
             <div class="manu-list">
                 <div class="manu-text">
                     <img src="img/icon/951971.png" style="width: 20px" height="20px" />
@@ -197,6 +215,20 @@
             </div>
         <?php
         }
+        if ($_SESSION['userlvid'] == '5') { ?>
+            <div class="manu-list">
+                <div class="manu-text">
+                    <img src="img/icon/951971.png" style="width: 20px" height="20px" />
+                    <a href="#">หน้าแรก</a>
+                </div>
+            </div>
+            <div class="manu-list">
+                <div class="manu-text">
+                    <img src="img/icon/951971.png" style="width: 20px" height="20px" />
+                    <a href="mspo_display.php?menu=add_user">เพิ่มผู้ใช้ / ผู้ใช้ที่มีอยู่ในระบบ</a>
+                </div>
+            </div>
+        <?php }
         ?>
         <br />
     </div>

@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS pick_in_out_logs_tbl (
  )ENGINE = INNODB DEFAULT CHARSET UTF8MB4;
 
 INSERT INTO userlv_tbl(userlv_name) VALUES
-('admin_user'),('normal_user'),('purchase_user'),('store_user');
+('admin_user'),('normal_user'),('purchase_user'),('store_user'),('super_admin');
 
 INSERT INTO prefix_tbl(prefix_name) VALUES
 ('นาย'),('นาง'),('นางสาว'),('ว่าที่ร้อยตรีหญิง');

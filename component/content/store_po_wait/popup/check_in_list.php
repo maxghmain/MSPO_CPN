@@ -10,50 +10,87 @@ include 'php/connect_db.php'; ?>
                 <div id="box_add_afb_po-2">
                     <div id="box_butt_close">
                         <?php ?>
-                        <?php if($_SESSION['userlvid'] == '4'){?>
-                        <a href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=complet_po_list" style="text-decoration:none ;">ปิดรายการ/ตรวจรับทุกรายการจนหมดแล้ว</a>
+                        <?php if ($_SESSION['userlvid'] == '4') { ?>
+                            <a href="mspo_display.php?menu=po_check_in&check_in=<?= $check_in ?>&state_excecut=complet_po_list" style="text-decoration:none ;">ปิดรายการ/ตรวจรับทุกรายการจนหมดแล้ว</a>
                         <?php } ?>
-                        <a href="mspo_display.php?menu=po_check_in" style="text-decoration:none ;">X</a>
+                        <?php
+                        if ($_SESSION['menu'] == "po_check_in") {
+                        ?>
+                            <a href="mspo_display.php?menu=po_check_in" style="text-decoration:none ;">X</a>
+                        <?php } ?>
+                        <?php
+                        if ($_SESSION['menu'] == "dashboard") {
+                        ?>
+                            <a href="mspo_display.php?menu=dashboard" style="text-decoration:none ;">X</a>
+                        <?php } ?>
                     </div>
-                    
+
                     <div id="titel-name">
                         รายการของ PO ที่รอตรวจรับ
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
-                           <?php
-                           $sql = "SELECT a.po_id,po_num,b.order_id,order_detail,order_queantity,order_price,b.unit_id,unit_name,b.state_id
+                            <?php
+                            $sql = "SELECT a.po_id,po_num,b.order_id,order_detail,order_queantity,order_price,b.unit_id,unit_name,b.state_id
                            FROM po_tbl as a
                            INNER JOIN order_tbl as b
                            ON a.po_id = b.po_id
                            INNER JOIN unit_tbl as c
-                           ON b.unit_id = c.unit_id WHERE a.po_id = $check_in AND order_queantity >= 1";
-                           $result = mysqli_query($conn, $sql);
-                           $counst = 1;
-                            while($row = mysqli_fetch_array($result)){ ?>
-                            <div class="containner_item">
-                                <div class="box-item-show-1">
-                                รายการที่ : <?=$counst;?>
-                                <br>
-                                ชื่อรายการ : <?=$row['order_detail']?> | 
-                                &nbsp;จำนวน : <?=$row['order_queantity'].' '.$row['unit_name']?> 
-                              
-                                <li style="color:#f7d07a;">รอตรวจรับ</li>
+                           ON b.unit_id = c.unit_id WHERE a.po_id = $check_in OR order_queantity >= 1 AND b.state_id = 15  AND b.state_id = 16 AND b.state_id = 14";
+                            $result = mysqli_query($conn, $sql);
+                            $counst = 1;
+                            while ($row = mysqli_fetch_array($result)) { ?>
+                                <div class="containner_item">
+                                    <?php if ($row['state_id'] == 14) { ?>
+                                        <div class="box-item-show-1">
+                                            รายการที่ : <?= $counst; ?>
+                                            <br>
+                                            ชื่อรายการ : <?= $row['order_detail'] ?> |
+                                            &nbsp;จำนวน : <?= $row['order_queantity'] . ' ' . $row['unit_name'] ?>
+
+                                            <li style="color:#f7d07a;">รอตรวจรับ</li>
+                                        </div>
+                                    <?php }
+                                    ?>
+                                    <?php if ($row['state_id'] == 15) { ?>
+                                        <div class="box-item-show-1">
+                                            รายการที่ : <?= $counst; ?>
+                                            <br>
+                                            ชื่อรายการ : <?= $row['order_detail'] ?> |
+                                            &nbsp;จำนวน : <?= $row['order_queantity'] . ' ' . $row['unit_name'] ?>
+
+                                            <li style="color:#f7d07a;">ตรวจรับแล้วแต่ยังไม่สมบูรณ์</li>
+                                        </div>
+                                    <?php }
+                                    ?>
+                                    <?php
+                                    if ($row['state_id'] == 16) { ?>
+                                        <div class="box-item-show-1">
+                                            รายการที่ : <?= $counst; ?>
+                                            <br>
+                                            ชื่อรายการ : <?= $row['order_detail'] ?> |
+                                            &nbsp;จำนวน : <?= $row['order_queantity'] . ' ' . $row['unit_name'] ?>
+
+                                            <li style="color:green;">ตรวจรับเสร็จสมบูรณ์แล้ว</li>
+                                        </div>
+                                    <?php }
+                                    ?>
+
+                                    <?php if ($_SESSION['userlvid'] == '4') { ?>
+
+                                        <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?= $check_in ?>&state_excecut=check_in_list&input_value=alradyinput&order_id_input=<?= $row['order_id'] ?>&name_item_check_in=<?= $row['order_detail'] ?>&unit_name_check=<?= $row['unit_id'] ?>&price_item_not_sum=<?= $price_item_not_sum ?>">ตรวจรับรายการนี้</a>
+
+
+
+                                    <?php  } ?>
                                 </div>
-                               <?php if($_SESSION['userlvid'] == '4'){?>
-                               
-                                    <a id="showdetail_butt" href="mspo_display.php?menu=po_check_in&check_in=<?=$check_in?>&state_excecut=check_in_list&input_value=alradyinput&order_id_input=<?=$row['order_id']?>&name_item_check_in=<?= $row['order_detail'] ?>&unit_name_check=<?=$row['unit_id']?>&price_item_not_sum=<?=$price_item_not_sum?>" >ตรวจรับรายการนี้</a>
-                               
-                               
-                                 
-                          <?php  } ?>
-                          </div>
-                          <?php  $counst++;}
-                          
-                           ?>
+                            <?php $counst++;
+                            }
+
+                            ?>
 
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

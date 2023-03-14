@@ -10,3 +10,4 @@ mysqli_query($conn,$sql);
 $sql = "UPDATE order_afb_tbl SET state_id=3 WHERE form_afb_id = $form_afb_id";
 mysqli_query($conn,$sql);
 ?>
+<?php mysqli_close($conn); ?>

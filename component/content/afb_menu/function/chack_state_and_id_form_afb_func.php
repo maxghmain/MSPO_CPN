@@ -13,3 +13,4 @@ if ($row = mysqli_fetch_array($query)) {
     $_SESSION['form_afb_id'] = $row['form_afb_id'];
 }
 ?>
+<?php mysqli_close($conn); ?>

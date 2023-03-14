@@ -118,7 +118,7 @@
                                         วันที่
                                     </td>
                                     <td style="width: 10%;">
-                                        ข้อมูลเพิ่มเติม
+                                        <strong>ราคาล่าสุดที่รับเข้า(บาท)</strong>
                                     </td>
 
 
@@ -130,7 +130,7 @@
                                 session_start();
                                 include 'php/connect_db.php';
                                 $sql = "SELECT * FROM pick_in_out_logs_tbl 
-                                WHERE state_id = 17
+                                WHERE state_id = 17 ORDER BY pick_in_out_logs_id DESC
                                ";
                                 $result = mysqli_query($conn, $sql);
                                 $eiei = 1;
@@ -164,7 +164,11 @@
                                         <td style="width: 10%;">
                                         <?=$row['pick_in_out_date']?>
                                     </td>
-                                        
+                                    <td style="width: 7%;">
+                                       
+                                       <?= number_format($row['pick_in_out_price'],2); ?>
+                                       
+                                   </td>
                                            
                                             <?php $eiei++; }  ?>
 

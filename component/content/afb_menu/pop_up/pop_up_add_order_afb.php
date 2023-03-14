@@ -206,3 +206,4 @@ $title_input =
         $("#bg_pop_alert_succ").hide();
     }
 </script>
+<?php mysqli_close($conn); ?>

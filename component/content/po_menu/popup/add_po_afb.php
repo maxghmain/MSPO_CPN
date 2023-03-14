@@ -2,7 +2,35 @@
 session_start();
 include 'php/connect_db.php'; ?>
 <!--<link rel="stylesheet" href="../../css/component/popup.css">-->
-
+<style>
+    input[type="search"] {
+        border:1px solid #006EBC;
+        border-radius: 30px;
+    }
+    .butt-search-afb-it{
+        margin: 5px;
+        width: 100px;
+        border-radius: 20px;
+        background: #006ebc;
+        color: white;
+        text-decoration: none;
+        transition-duration: 0.3s;
+        border: 0px solid red;
+        height: 35px;
+    }
+    .butt-search-afb-it:hover{
+        margin: 5px;
+        width: 100px;
+        border-radius: 20px;
+        background: #014474;
+        color: white;
+        text-decoration: none;
+        transition-duration: 0.3s;
+        border: 0px solid red;
+        height: 35px;
+    }
+    
+</style>
 <div class="add_afb_po" id="add_afb_po">
     <div id="crop-box">
         <div id="box_add_afb_po">
@@ -15,33 +43,64 @@ include 'php/connect_db.php'; ?>
                     </div>
                     <div id="content-po-box">
                         <div id="afb_content_xxx">
-                            <?php
-                            session_start();
-                            $limit = 4; // number of items to show per page
-                            $page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
-                            $offset = ($page - 1) * $limit;
-                            $sql = "SELECT order_afb_id,order_afb_note, name_ms_normal_name, name_ms_real_name, order_afb_value,a.unit_id, unit_name, order_afb_note,a.form_afb_id,form_afb_number,form_afb_book_number,form_afb_people_name,a.state_id,form_afb_write_date,d.group_id
-                            FROM order_afb_tbl as a 
-                            INNER JOIN name_ms_tbl as b 
-                            ON a.name_ms_id = b.name_ms_id 
-                            INNER JOIN unit_tbl as c 
-                            ON a.unit_id = c.unit_id 
-                            INNER JOIN form_afb_tbl as d 
-                            ON a.form_afb_id = d.form_afb_id
-                            INNER JOIN group_tbl as e
-                            ON d.group_id = e.group_id
-                            WHERE a.state_id = 3 ORDER BY order_afb_id DESC  LIMIT $offset, $limit";
-                            $counst = ($offset + 1);
-                            $query = mysqli_query($conn, $sql);
-                            if (!$query) {
-                                die('Error: ' . mysqli_error($conn));
-                            }
-                            $form_afb_book_number = $row['form_afb_book_number'];
-                            $form_afb_number = $row['form_afb_number'];
-                            $form_afb_write_date = $row['form_afb_write_date'];
-                            $_SESSION['order_detail'] = $row['name_ms_real_name'];
+                            <form action="" method="POST" >
+                                <div>
+                                ค้นหารายการที่ต้องการ
+                                <input type="search" class="search_it_afb" name="keyword" />
+                                <button type="submit" name="search" class="butt-search-afb-it">ค้าหา</button>
+                                </div>
 
-                            while ($row = mysqli_fetch_array($query)) {
+                              
+                            </form>
+                            <?php
+                            if (isset($_POST['search'])) {
+                                $keyword = $_POST['keyword'];
+
+                                $where = [];
+                                if (!empty($keyword)) {
+                                    $where[] = "name_ms_normal_name LIKE '%$keyword%'";
+                                }
+
+                                $where_clause = '';
+                                if (!empty($where)) {
+                                    $where_clause = ' WHERE ' . implode(' AND ', $where);
+                                }
+
+                                $sql = "SELECT order_afb_id,order_afb_note, name_ms_normal_name, name_ms_real_name, order_afb_value,a.unit_id, unit_name, order_afb_note,a.form_afb_id,form_afb_number,form_afb_book_number,form_afb_people_name,a.state_id,form_afb_write_date,d.group_id
+                                    FROM order_afb_tbl as a 
+                                    INNER JOIN name_ms_tbl as b 
+                                    ON a.name_ms_id = b.name_ms_id 
+                                    INNER JOIN unit_tbl as c 
+                                    ON a.unit_id = c.unit_id 
+                                    INNER JOIN form_afb_tbl as d 
+                                    ON a.form_afb_id = d.form_afb_id
+                                    INNER JOIN group_tbl as e
+                                    ON d.group_id = e.group_id" . $where_clause . " ORDER BY order_afb_id DESC";
+
+                                $result = mysqli_query($conn, $sql);
+                            } else {
+                                $sql = "SELECT order_afb_id,order_afb_note, name_ms_normal_name, name_ms_real_name, order_afb_value,a.unit_id, unit_name, order_afb_note,a.form_afb_id,form_afb_number,form_afb_book_number,form_afb_people_name,a.state_id,form_afb_write_date,d.group_id
+                                    FROM order_afb_tbl as a 
+                                    INNER JOIN name_ms_tbl as b 
+                                    ON a.name_ms_id = b.name_ms_id 
+                                    INNER JOIN unit_tbl as c 
+                                    ON a.unit_id = c.unit_id 
+                                    INNER JOIN form_afb_tbl as d 
+                                    ON a.form_afb_id = d.form_afb_id
+                                    INNER JOIN group_tbl as e
+                                    ON d.group_id = e.group_id
+                                    WHERE a.state_id = 3 ORDER BY order_afb_id DESC";
+                                $result = mysqli_query($conn, $sql);
+                            }
+                            $counst = 1;
+                            while ($row = mysqli_fetch_array($result)) {
+                               
+                            ?>
+
+                            <?php
+
+
+                                
                                 echo '<div class="containner_item">';
                                 echo '<div class="box-item-show-1">';
                                 echo 'รายการที่ : ' . $counst;
@@ -52,59 +111,14 @@ include 'php/connect_db.php'; ?>
                                 echo 'จำนวน : ' . $row['order_afb_value'] . ' ' . $row['unit_name'] . '|';
                                 echo 'หมายเหตุ : ' . $row['order_afb_note'];
                                 echo '</div>';
-                                    echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&state_excecut=select_item&item_Number_select=' . $row['order_afb_id'] . '&name_item='.$row['name_ms_real_name'].'&value_item='.$row['order_afb_value'].'&unit_item='.$row['unit_id'].'&note_item='.$row['order_afb_note'].'&form_afbnum='.$row['form_afb_number'].'&form_afbbook='.$row['form_afb_book_number'].'&group_id_item='.$row['group_id'].'&form_afb_pel='.$row['form_afb_people_name'].'" >เลือกรายการขอซื้อ';
+                                echo '<a id="showdetail_butt" href="mspo_display.php?menu=po_material&state_excecut=select_item&item_Number_select=' . $row['order_afb_id'] . '&name_item=' . $row['name_ms_real_name'] . '&value_item=' . $row['order_afb_value'] . '&unit_item=' . $row['unit_id'] . '&note_item=' . $row['order_afb_note'] . '&form_afbnum=' . $row['form_afb_number'] . '&form_afbbook=' . $row['form_afb_book_number'] . '&group_id_item=' . $row['group_id'] . '&form_afb_pel=' . $row['form_afb_people_name'] . '" >เลือกรายการขอซื้อ';
                                 echo '</a>';
                                 echo '</div>';
                                 $counst++;
                             }
-                            $total_sql = "SELECT COUNT(*) as total FROM order_afb_tbl WHERE state_id = 3";
-                            $total_result = mysqli_query($conn, $total_sql);
-                            $total_row = mysqli_fetch_array($total_result);
-                            $total_items = $total_row['total'];
-                            $total_pages = ceil($total_items / $limit);
 
                             // Create the pagination links
-                            $pagination = "";
-                            if ($total_pages > 1) {
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    if ($i == $page) {
-                                        $pagination .= "<strong>$i</strong>";
-                                    } else {
-                                        $pagination .= "<a href=mspo_display.php?menu=item_wait_for_use&page=$i'>$i</a>";
-                                    }
-                                }
-                            }
                             ?>
-
-
-                        </div>
-                        <div class="pagination">
-                            <?php if ($total_pages > 1) : ?>
-                                <div class="page-item">
-                                    <a class="page-link" href="mspo_display.php?menu=po_material&add_item=already_selected&page=1">First</a>
-                                </div>
-                                <?php
-                                $start_page = max(1, $page - 2);
-                                $end_page = min($total_pages, $page + 2);
-                                for ($i = $start_page; $i <= $end_page; $i++) :
-                                ?>
-                                    <div class="page-item">
-                                        <a class="page-link <?php echo $page == $i ? 'active' : ''; ?>" href="mspo_display.php?menu=po_material&add_item=already_selected&page=<?php echo $i; ?>">
-                                            <?php echo $i; ?>
-                                        </a>
-                                    </div>
-                                <?php endfor; ?>
-                                <?php if ($page < $total_pages - 2) : ?>
-                                    <div class="page-item">
-                                        <span class="page-link">&hellip;</span>
-                                    </div>
-                                <?php endif; ?>
-                                <?php if ($page < $total_pages - 1) : ?>
-                                    <div class="page-item">
-                                        <a class="page-link" href="mspo_display.php?menu=po_material&add_item=already_selected&page=<?php echo $total_pages; ?>">Last</a>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -171,7 +185,8 @@ include 'php/connect_db.php'; ?>
         #afb_content_xxx {
             margin: 10px;
             height: 95%;
-            /* border: 1px solid red;*/
+            /*border: 1px solid red;*/
+            overflow: auto;
 
         }
 
