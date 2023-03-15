@@ -23,6 +23,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['comfirm_po'] = $_GET['comfirm_po'];
     $_SESSION['input_value'] = $_GET['input_value'];
     $_SESSION['pick_in'] = $_GET['pick_in'];
+    $_SESSION['print_po'] = $_GET['print_po'];
 
     $_SESSION['keyword'] = $_POST['keyword'];
     $keyword = $_SESSION['keyword'];
@@ -74,7 +75,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['select_and_add_comp'] = $_GET['select_and_add_comp'];
     $item_id = $_SESSION['item_id'];
     $_SESSION['item_id'] = $_GET['item_id'];
-    
+
     $item_price = $_POST['item_price'];
     $order_id = $_SESSION['order_id'];
     $_SESSION['order_id'] = $_GET['order_id'];
@@ -123,7 +124,7 @@ if ($_SESSION['username'] == '') {
     $textarea_pick = $_GET['textarea_pick'];
     $name_of_pel = $_GET['name_of_pel'];
     $afb_group_id_pick = $_GET['afb_group_id_pick'];
- /* PICK IN */
+    /* PICK IN */
     $_SESSION['price_item_not_sum'] = $_GET['price_item_not_sum'];
     $price_item_not_sum = $_SESSION['price_item_not_sum'];
 
@@ -143,7 +144,7 @@ if ($_SESSION['username'] == '') {
 
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
         <link rel="stylesheet" href="css/component/popup.css?version=0s2" />
@@ -158,7 +159,7 @@ if ($_SESSION['username'] == '') {
 
         <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 
-        <link rel="stylesheet" href="js/jquery-confirm-master/dist/jquery-confirm.min.css"/>
+        <link rel="stylesheet" href="js/jquery-confirm-master/dist/jquery-confirm.min.css" />
         <script type="text/javascript" src="js/jquery-confirm-master/dist/jquery-confirm.min.js"></script>
 
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
@@ -184,9 +185,9 @@ if ($_SESSION['username'] == '') {
         <?php
         }
         if ($_SESSION['userlvid'] == 5) {
-            ?>
-                <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
-            <?php
+        ?>
+            <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
+        <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
@@ -204,59 +205,112 @@ if ($_SESSION['username'] == '') {
     </head>
 
     <body>
-        <?php include 'component/header.php'; ?>
-        <div class="contianer_detail_all">
-            <?php include 'component/sidebar.php'; ?>
-            <div class="container_content">
-                <?php
-                /*เมนู Dashboard ของทุก User */
-                if ($_SESSION['menu'] == "") {
-                    include 'component/content/dashboard.php';
-                } else if ($_SESSION['menu'] == "dashboard") {
-                    include 'component/content/dashboard.php';
-                    /*-----เมนูของ Purchase User------------*/
-                    /*เมนูของ ใบขอซื้อ */
-                } else if ($_SESSION['menu'] == "afb_select_menu") {
-                    include 'component/content/afb_menu/afb_select_menu.php';
-                    /*เมนูของ เพิ่มใบขอซื้อ */
-                } else if ($_SESSION['menu'] == "afb_add_afb") {
-                    include 'component/content/afb_menu/function/chack_state_and_id_form_afb_func.php';
-                    include 'component/content/afb_menu/afb_add_afb.php';
-                    include 'component/popup/wrong_inp_alert.php';
-                    include 'component/popup/success_inp_alert.php';
-                    include 'component/content/afb_menu/pop_up/pop_up_edit_data.php';
-                    include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
-                    include 'component/content/afb_menu/pop_up/confirm_popup_delete.php';
-                    echo '<script>$("#bg_pop_alert_succ").hide(); $("#popup_background_order_afb_edit").hide();$("#bg_pop").hide();$("#bg_pop_delete").hide();</script>';
-                    /*popup เพิ่มรายการของใบขอซื้อ*/
-                    /* addData_Page_toggle */
-                    if ($_SESSION['addData_id'] != "") {
-                        echo '<script>$("#bg_pop").show();</script>';
-                        if ($_SESSION['add_last_state'] != "") {
-                            echo '<script>$("#bg_pop_alert_succ").show();</script>';
-                            echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
-                        } else if ($_SESSION['delete_last_state'] != "") {
-                            echo '<script>$("#bg_pop_alert_succ").show();</script>';
-                            echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
+        <style>
+            @media screen {
+                .printOption {
+                    display: none;
+                }
+            }
+        </style>
+
+       
+        <div class="noprint">
+            <?php include 'component/header.php'; ?>
+            <div class="contianer_detail_all">
+                <?php include 'component/sidebar.php'; ?>
+                <div class="container_content">
+                    <?php
+                    /*เมนู Dashboard ของทุก User */
+                    if ($_SESSION['menu'] == "") {
+                        include 'component/content/dashboard.php';
+                    } else if ($_SESSION['menu'] == "dashboard") {
+                        include 'component/content/dashboard.php';
+                        /*-----เมนูของ Purchase User------------*/
+                        /*เมนูของ ใบขอซื้อ */
+                    } else if ($_SESSION['menu'] == "afb_select_menu") {
+                        include 'component/content/afb_menu/afb_select_menu.php';
+                        /*เมนูของ เพิ่มใบขอซื้อ */
+                    } else if ($_SESSION['menu'] == "afb_add_afb") {
+                        include 'component/content/afb_menu/function/chack_state_and_id_form_afb_func.php';
+                        include 'component/content/afb_menu/afb_add_afb.php';
+                        include 'component/popup/wrong_inp_alert.php';
+                        include 'component/popup/success_inp_alert.php';
+                        include 'component/content/afb_menu/pop_up/pop_up_edit_data.php';
+                        include 'component/content/afb_menu/pop_up/pop_up_add_order_afb.php';
+                        include 'component/content/afb_menu/pop_up/confirm_popup_delete.php';
+                        echo '<script>$("#bg_pop_alert_succ").hide(); $("#popup_background_order_afb_edit").hide();$("#bg_pop").hide();$("#bg_pop_delete").hide();</script>';
+                        /*popup เพิ่มรายการของใบขอซื้อ*/
+                        /* addData_Page_toggle */
+                        if ($_SESSION['addData_id'] != "") {
+                            echo '<script>$("#bg_pop").show();</script>';
+                            if ($_SESSION['add_last_state'] != "") {
+                                echo '<script>$("#bg_pop_alert_succ").show();</script>';
+                                echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
+                            } else if ($_SESSION['delete_last_state'] != "") {
+                                echo '<script>$("#bg_pop_alert_succ").show();</script>';
+                                echo  '<script>setTimeout(hide_pop_succ_alert,3000);</script>';
+                            } else if ($_SESSION['editData_id'] != "") {
+                                echo '<script>$("#popup_background_order_afb_edit").show();</script>';
+                            } else if ($_SESSION['deleteData_id'] != "") {
+                                echo '<script>$("#bg_pop_delete").show();</script>';
+                            } else if ($_SESSION['state_excecut'] == "addData") {
+                                echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
+                                include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
+                                echo  '<script>setTimeout(loading_hide,50);</script>';
+                                echo '<script>';
+                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '&state_excecut=addSuccess")';
+                                echo '</script>';
+                            } else if ($_SESSION['state_excecut'] == "addSuccess") {
+                    ?>
+                                <script type="text/javascript">
+                                    window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add; ?> + '&add_last_state=1';
+                                </script>
+                                <?php
+                            } else if ($_SESSION['editData_id'] != "") {
+                                echo '<script>$("#popup_background_order_afb_edit").show();</script>';
+                            } else if ($_SESSION['deleteData_id'] != "") {
+                                echo '<script>$("#bg_pop_delete").show();</script>';
+                                if ($_SESSION['state_excecut'] == "deleteData") {
+                                    echo '<script>';
+                                    echo '$("#bg_pop_delete").hide(); $("#bg_loading").show(); setTimeout(loading_hide,500);';
+                                    echo '</script>';
+                                    include 'component/content/afb_menu/function/delete_order_afb_out_db_func.php';
+                                    echo '<script>';
+                                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '&deleteData_id' . $_SESSION['deleteData_id'] . '=&state_excecut=deleteSuccess")';
+                                    echo '</script>';
+                                } else if ($_SESSION['state_excecut'] == "deleteSuccess") {
+                                    echo '<script>';
+                                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . 'state_excecut=deleteSuccess")';
+                                    echo '</script>';
+                                ?>
+                                    <script type="text/javascript">
+                                        window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&editData_id='
+                                        <?php echo $row_add; ?>;
+                                    </script>
+                                <?php
+                                }
+                            }
+                            /*   EDIT DATA */
                         } else if ($_SESSION['editData_id'] != "") {
                             echo '<script>$("#popup_background_order_afb_edit").show();</script>';
-                        } else if ($_SESSION['deleteData_id'] != "") {
-                            echo '<script>$("#bg_pop_delete").show();</script>';
-                        } else if ($_SESSION['state_excecut'] == "addData") {
-                            echo '<script>$("#popup_background_order_afb_edit").hide();</script>';
-                            include 'component/content/afb_menu/function/add_order_afb_to_db_func.php';
-                            echo  '<script>setTimeout(loading_hide,50);</script>';
-                            echo '<script>';
-                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '&state_excecut=addSuccess")';
-                            echo '</script>';
-                        } else if ($_SESSION['state_excecut'] == "addSuccess") {
-                ?>
-                            <script type="text/javascript">
-                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' + <?php echo $row_add; ?> + '&add_last_state=1';
-                            </script>
+                            if ($_SESSION['state_excecut'] == "editData") {
+                                echo '<script>';
+                                echo '$("#bg_loading").show(); setTimeout(loading_hide,500);';
+                                echo '</script>';
+                                include 'component/content/afb_menu/function/update_oder_afb_to_db_func.php';
+                                echo '<script>';
+                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=editSuccess")';
+                                echo '</script>';
+                            } else if ($_SESSION['state_excecut'] == "editSuccess") {
+                                ?>
+                                <script type="text/javascript">
+                                    window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb';
+                                </script>
                             <?php
-                        } else if ($_SESSION['editData_id'] != "") {
-                            echo '<script>$("#popup_background_order_afb_edit").show();</script>';
+                            }
+
+
+                            /*   DELETE DATA */
                         } else if ($_SESSION['deleteData_id'] != "") {
                             echo '<script>$("#bg_pop_delete").show();</script>';
                             if ($_SESSION['state_excecut'] == "deleteData") {
@@ -265,58 +319,15 @@ if ($_SESSION['username'] == '') {
                                 echo '</script>';
                                 include 'component/content/afb_menu/function/delete_order_afb_out_db_func.php';
                                 echo '<script>';
-                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . '&deleteData_id' . $_SESSION['deleteData_id'] . '=&state_excecut=deleteSuccess")';
+                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=deleteSuccess")';
                                 echo '</script>';
                             } else if ($_SESSION['state_excecut'] == "deleteSuccess") {
-                                echo '<script>';
-                                echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=' . $row_add . 'state_excecut=deleteSuccess")';
-                                echo '</script>';
                             ?>
                                 <script type="text/javascript">
-                                    window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb&editData_id='
-                                    <?php echo $row_add; ?>;
+                                    window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb';
                                 </script>
-                            <?php
-                            }
-                        }
-                        /*   EDIT DATA */
-                    } else if ($_SESSION['editData_id'] != "") {
-                        echo '<script>$("#popup_background_order_afb_edit").show();</script>';
-                        if ($_SESSION['state_excecut'] == "editData") {
-                            echo '<script>';
-                            echo '$("#bg_loading").show(); setTimeout(loading_hide,500);';
-                            echo '</script>';
-                            include 'component/content/afb_menu/function/update_oder_afb_to_db_func.php';
-                            echo '<script>';
-                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=editSuccess")';
-                            echo '</script>';
-                        } else if ($_SESSION['state_excecut'] == "editSuccess") {
-                            ?>
-                            <script type="text/javascript">
-                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb';
-                            </script>
-                        <?php
-                        }
-
-
-                        /*   DELETE DATA */
-                    } else if ($_SESSION['deleteData_id'] != "") {
-                        echo '<script>$("#bg_pop_delete").show();</script>';
-                        if ($_SESSION['state_excecut'] == "deleteData") {
-                            echo '<script>';
-                            echo '$("#bg_pop_delete").hide(); $("#bg_loading").show(); setTimeout(loading_hide,500);';
-                            echo '</script>';
-                            include 'component/content/afb_menu/function/delete_order_afb_out_db_func.php';
-                            echo '<script>';
-                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=afb_add_afb&state_excecut=deleteSuccess")';
-                            echo '</script>';
-                        } else if ($_SESSION['state_excecut'] == "deleteSuccess") {
-                        ?>
-                            <script type="text/javascript">
-                                window.location = '../mspo_cpn/mspo_display.php?menu=afb_add_afb';
-                            </script>
-                <?php
-                        }/*else if($_SESSION['state_excecut'] == "saveData"){
+                    <?php
+                            }/*else if($_SESSION['state_excecut'] == "saveData"){
                             echo '<script>';
                             echo ' $("#bg_loading").show(); setTimeout(loading_hide,500);';
                             echo '</script>';
@@ -331,136 +342,130 @@ if ($_SESSION['username'] == '') {
                                 </script>
                     <?php
                             }*/
-                    }
-                } else if ($_SESSION['menu'] == "state_afb") {
-                    include 'component/content/afb_menu/state_afb.php';
-                    if ($form_afb_id != "" && $_SESSION['state_excecut'] == "cancle_afb") {
-                        include 'component/content/afb_menu/function/cancle_afb.php';
+                        }
+                    } else if ($_SESSION['menu'] == "state_afb") {
+                        include 'component/content/afb_menu/state_afb.php';
+                        if ($form_afb_id != "" && $_SESSION['state_excecut'] == "cancle_afb") {
+                            include 'component/content/afb_menu/function/cancle_afb.php';
+
+                            echo '<script>';
+                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
+                            echo '</script>';
+                        }
+                    } else if ($_SESSION['state_excecut'] == "saveData") {
+                        include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
 
                         echo '<script>';
                         echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
                         echo '</script>';
+                    } else if ($_SESSION['menu'] == "item_wait_for_use") {
+                        include 'component/content/afb_menu/item_wait_for_use.php';
+                        include 'component/content/afb_menu/pop_up/pop_up_afb_more_detail.php';
+                    } else if ($_SESSION['menu'] == "history_afb") {
+                        include 'component/content/afb_menu/history_afb.php';
                     }
-                } else if ($_SESSION['state_excecut'] == "saveData") {
-                    include 'component/content/afb_menu/function/save_all_to_move_to_next_stat_func.php';
+                    if ($_SESSION['item_Number'] != "") {
 
-                    echo '<script>';
-                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=state_afb")';
-                    echo '</script>';
-                } else if ($_SESSION['menu'] == "item_wait_for_use") {
-                    include 'component/content/afb_menu/item_wait_for_use.php';
-                    include 'component/content/afb_menu/pop_up/pop_up_afb_more_detail.php';
-                } else if ($_SESSION['menu'] == "history_afb") {
-                    include 'component/content/afb_menu/history_afb.php';
-                }
-                if ($_SESSION['item_Number'] != "") {
-
-                    echo '<script>';
-                    echo '$("#showDetails_afb").show();';
-                    echo '</script>';
-                } else if ($_SESSION['menu'] == "po_select_menu") {
-                    include 'component/content/po_menu/po_select_menu.php';
-                } else if ($_SESSION['menu'] == "po_material") {
-                    include 'component/content/po_menu/function/check_po_id_material.php';
-                    include 'component/content/po_menu/po_material.php';
-                    if ($_SESSION['add_item'] == "already_selected") {
-                        include 'component/content/po_menu/popup/add_po_afb.php';
-                    }
-                    
-                    
-                    else if ($_SESSION['state_excecut'] == "select_item") {
-                        include 'component/content/po_menu/function/insert_afb_to_po.php';
                         echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                        echo '$("#showDetails_afb").show();';
+                        echo '</script>';
+                    } else if ($_SESSION['menu'] == "po_select_menu") {
+                        include 'component/content/po_menu/po_select_menu.php';
+                    } else if ($_SESSION['menu'] == "po_material") {
+                        include 'component/content/po_menu/function/check_po_id_material.php';
+                        include 'component/content/po_menu/po_material.php';
+                        if ($_SESSION['add_item'] == "already_selected") {
+                            include 'component/content/po_menu/popup/add_po_afb.php';
+                        } else if ($_SESSION['state_excecut'] == "select_item") {
+                            include 'component/content/po_menu/function/insert_afb_to_po.php';
+                            echo '<script>';
+                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                            echo '</script>';
+                        }
+                        if ($_SESSION['add_company'] == "already_selected") {
+
+                            include 'component/content/po_menu/popup/pop_add_company.php';
+                        } else if ($_SESSION['add_company'] == "select_company") {
+                            include 'component/content/po_menu/function/insert_copany.php';
+                        } else if ($_SESSION['add_company'] == "select_and_add_comp") {
+                            include 'component/content/po_menu/function/update_po.php';
+                            echo '<script>';
+                            echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                            echo '</script>';
+                        } else if ($_SESSION['state_excecut'] == "save_price_item") {
+
+                            include 'component/content/po_menu/function/sum_price_item.php';
+                        } else if ($_SESSION['state_excecut'] == "save_print_po") {
+                            include 'component/content/po_menu/function/save_po.php';
+                        }
+
+                        if ($_SESSION['add_company_new'] == "already_selected") {
+                            include 'component/content/po_menu/popup/pop_add_company_new.php';
+                        } else if ($_SESSION['add_company_new'] == "save_comp_new") {
+                            include 'component/content/po_menu/function/save_comp_new.php';
+                        }
+                    } else if ($_SESSION['menu'] == "po_service") {
+                        include 'component/content/po_menu/function/check_po_id_service.php';
+                        include 'component/content/po_menu/po_service.php';
+                    } else if ($_SESSION['menu'] == "total_items") {
+                        include 'component/content/total_item/total_item.php';
+                    }
+                    if ($_SESSION['menu'] == "po_wait_conf") {
+                        include 'component/content/po_menu/po_wait_conf.php';
+                    }
+                    if ($_SESSION['comfirm_po'] == "alrady_comfirm") {
+                        include 'component/content/po_menu/popup/comfirm_po.php';
+                    }
+                    if ($_SESSION['state_excecut'] == "comfirm_po_sure") {
+                        include 'component/content/po_menu/function/confirm_po.php';
+                        echo '<script>';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_wait_conf")';
                         echo '</script>';
                     }
-                    if ($_SESSION['add_company'] == "already_selected") {
-
-                        include 'component/content/po_menu/popup/pop_add_company.php';
-
-                    } else if ($_SESSION['add_company'] == "select_company") {
-                        include 'component/content/po_menu/function/insert_copany.php';
-                    }else if ($_SESSION['add_company'] == "select_and_add_comp"){
-                        include 'component/content/po_menu/function/update_po.php';
+                    /* STORE USER */
+                    if ($_SESSION['menu'] == "po_check_in") {
+                        include 'component/content/store_po_wait/po_check_in.php';
+                    }
+                    if ($_SESSION['menu'] == "history_po_item") {
+                        include 'component/content/history_po_item/history_po_item.php';
+                    }
+                    if ($_SESSION['state_excecut'] == "check_in_list") {
+                        include 'component/content/store_po_wait/popup/check_in_list.php';
+                    }
+                    if ($_SESSION['input_value'] == "alradyinput") {
+                        include 'component/content/store_po_wait/function/insert_item_material.php';
+                        include 'component/content/store_po_wait/popup/value_check_in.php';
+                    }
+                    if ($_SESSION['state_excecut'] == "complet_po_list") {
+                        include 'component/content/store_po_wait/function/complet_po_list.php';
                         echo '<script>';
-                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_material")';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_check_in")';
                         echo '</script>';
-                    }else if($_SESSION['state_excecut'] == "save_price_item"){
-                       
-                      include 'component/content/po_menu/function/sum_price_item.php';
-                    }else if($_SESSION['state_excecut'] == "save_print_po"){
-                        include 'component/content/po_menu/function/save_po.php';
-                        
-                       
-
                     }
-                    
-                    if($_SESSION['add_company_new'] == "already_selected"){
-                        include 'component/content/po_menu/popup/pop_add_company_new.php';
-                    }else if($_SESSION['add_company_new'] == "save_comp_new"){
-                        include 'component/content/po_menu/function/save_comp_new.php';
+                    if ($_SESSION['menu'] == "pick_in_out") {
+                        include 'component/content/pick_in_out/pick_in_out.php';
                     }
-                } else if ($_SESSION['menu'] == "po_service") {
-                    include 'component/content/po_menu/function/check_po_id_service.php';
-                    include 'component/content/po_menu/po_service.php';
-                } else if ($_SESSION['menu'] == "total_items") {
-                    include 'component/content/total_item/total_item.php';
-                }
-                if($_SESSION['menu'] == "po_wait_conf"){
-                    include 'component/content/po_menu/po_wait_conf.php';
+                    if ($_SESSION['pick_out'] == "select_item") {
+                        include 'component/content/pick_in_out/popup/pick_in_out_pop.php';
+                    }
+                    if ($_SESSION['pick_in'] == "success") {
+                        include 'component/content/store_po_wait/function/pick_in.php';
+                    }
+                    if ($_SESSION['menu'] == "history_pick_in_out") {
+                        include 'component/content/pick_in_out/history_pick_in_out.php';
+                    }
+                    if ($_SESSION['menu'] == "history_pick_in_out_in") {
+                        include 'component/content/pick_in_out/history_pick_in_out_in.php';
+                    }
+                    if ($_SESSION['menu'] == "add_user") {
+                        include 'component/content/add_user/add_user.php';
+                    }
+                    if ($_SESSION['add_user_new'] == "alrady") {
+                        include 'component/content/add_user/add_user_new.php';
+                    }
+                    ?>
 
-                }if ($_SESSION['comfirm_po'] == "alrady_comfirm"){
-                    include 'component/content/po_menu/popup/comfirm_po.php'; 
-                }if($_SESSION['state_excecut'] == "comfirm_po_sure"){
-                    include 'component/content/po_menu/function/confirm_po.php';
-                    echo '<script>';
-                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_wait_conf")';
-                    echo '</script>';
-                }
-                /* STORE USER */
-                if($_SESSION['menu'] == "po_check_in"){
-                    include 'component/content/store_po_wait/po_check_in.php';
-                }
-                if($_SESSION['menu'] == "history_po_item"){
-                    include 'component/content/history_po_item/history_po_item.php';
-                }
-                if($_SESSION['state_excecut'] == "check_in_list"){
-                    include 'component/content/store_po_wait/popup/check_in_list.php';
-                   
-                }
-                if($_SESSION['input_value'] == "alradyinput"){
-                    include 'component/content/store_po_wait/function/insert_item_material.php';
-                    include 'component/content/store_po_wait/popup/value_check_in.php';
-                    
-                }
-                if($_SESSION['state_excecut'] == "complet_po_list"){
-                    include 'component/content/store_po_wait/function/complet_po_list.php';
-                    echo '<script>';
-                    echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_check_in")';
-                    echo '</script>';
-                }if($_SESSION['menu'] == "pick_in_out"){
-                    include 'component/content/pick_in_out/pick_in_out.php';
-                }
-                if($_SESSION['pick_out'] == "select_item"){
-                    include 'component/content/pick_in_out/popup/pick_in_out_pop.php';
-                }
-                if($_SESSION['pick_in'] == "success"){
-                    include 'component/content/store_po_wait/function/pick_in.php';
-                }
-                if($_SESSION['menu'] == "history_pick_in_out"){
-                    include 'component/content/pick_in_out/history_pick_in_out.php';
-                }
-                if($_SESSION['menu'] == "history_pick_in_out_in"){
-                    include 'component/content/pick_in_out/history_pick_in_out_in.php';
-                }
-                if($_SESSION['menu'] == "add_user"){
-                    include 'component/content/add_user/add_user.php';
-                }
-                if($_SESSION['add_user_new'] == "alrady"){
-                    include 'component/content/add_user/add_user_new.php';
-                }
-                ?>
-                
+                </div>
             </div>
         </div>
     </body>
