@@ -300,13 +300,32 @@ $sheet->mergeCells('D' . $row5 . ':F' . $row5);
 $sheet->setCellValue('G' . $row5, '             ( ดาวใจ  มณีสว่างวงศ์ )');
 $sheet->getStyle('G' . $row5)->getFont()->setSize(14)->setName('AngsanaUPC');
 $sheet->mergeCells('G' . $row5 . ':I' . $row5);
+
+$row_section5 = $row5;
+
+$row6 = $row_section5 +3;
+
+$sheet->setCellValue('A' . $row6, 'ผู้รับสินค้า………………………………วันที่………………………');
+$sheet->getStyle('A' . $row6)->getFont()->setSize(14)->setName('AngsanaUPC');
+$sheet->mergeCells('A' . $row6 . ':D' . $row6);
+
+$sheet->setCellValue('G' . $row6, 'ผู้อนุมัติ…………………………………………………………');
+$sheet->getStyle('G' . $row6)->getFont()->setSize(14)->setName('AngsanaUPC');
+$sheet->mergeCells('G' . $row6 . ':I' . $row6);
+
+$row_section6 = $row6;
+
+$row7 =$row_section6+1;
+$sheet->setCellValue('G' . $row7, '              ( คุณณัฐวิช  ศรีพิทักษ์ )');
+$sheet->getStyle('G' . $row7)->getFont()->setSize(14)->setName('AngsanaUPC');
+$sheet->mergeCells('G' . $row7 . ':I' . $row7);
+
+
+
 // Fill in the data to the sheet
 $writer = new Xlsx($spreadsheet);
 $output_file = "PO-" . date("dmY") . ".xlsx";
 $writer->save($output_file);
-if (file_exists($output_file)) {
-    echo '<a href="#" onclick="saveAs(\'' . $output_file . '\');">Download</a>';
-}
 
 
 
@@ -314,8 +333,16 @@ if (file_exists($output_file)) {
 <div class="container_title">
     <h5>สร้างและออกใบ PO - Create Oder PO / PO สำหรับวัสดุ</h5>
     <div class="hee">
-        <a href="mspo_display.php?menu=po_material&state_excecut=save_print_po">บันทึก(PO)</a>
-        <a href="mspo_display.php?menu=po_material" class="btn btn-primary"> Export->Excel </a>
+        
+        <?php
+        if (file_exists($output_file)) {
+    echo '<a href="#" onclick="saveAs(\'' . $output_file . '\');">บันทึกใบPO(EXCEL)</a>';
+    
+}
+
+    ?>
+
+
     </div>
 
 </div>
@@ -676,6 +703,8 @@ $unit_id = $row['unit_id'];
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        window.location = "mspo_display.php?menu=po_material&state_excecut=save_print_po";
     }
 </script>
 <style>

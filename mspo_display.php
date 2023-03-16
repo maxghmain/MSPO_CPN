@@ -24,6 +24,7 @@ if ($_SESSION['username'] == '') {
     $_SESSION['input_value'] = $_GET['input_value'];
     $_SESSION['pick_in'] = $_GET['pick_in'];
     $_SESSION['print_po'] = $_GET['print_po'];
+    $_SESSION['cancle'] = $_GET['cancle'];
 
     $_SESSION['keyword'] = $_POST['keyword'];
     $keyword = $_SESSION['keyword'];
@@ -462,6 +463,16 @@ if ($_SESSION['username'] == '') {
                     }
                     if ($_SESSION['add_user_new'] == "alrady") {
                         include 'component/content/add_user/add_user_new.php';
+                    }
+                    if($_SESSION['comfirm_po'] == "alrady_cancel"){
+
+                        include 'component/content/po_menu/function/cancle_po.php';
+                    }
+                    if($_SESSION['cancle'] == "succ"){
+                        include 'component/content/po_menu/function/cancle_po_succ.php';
+                        echo '<script>';
+                        echo 'window.location.assign("../mspo_cpn/mspo_display.php?menu=po_wait_conf")';
+                        echo '</script>';
                     }
                     ?>
 

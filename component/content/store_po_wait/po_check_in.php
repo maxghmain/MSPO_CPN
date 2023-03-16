@@ -280,6 +280,11 @@ include 'php/connect_db.php';
                                                     <li style="color:green;">ตรวจรับสมบูรณ์แล้ว</li>
                                                 </strong>
                                             <?php } ?>
+                                            <?php if ($search['state_id'] == 19) { ?>
+                                                <strong>
+                                                    <li style="color:red;">PO โดนยกเลิก</li>
+                                                </strong>
+                                            <?php } ?>
                                         </td>
 
                                         <td style="width: 7%;">

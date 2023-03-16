@@ -74,6 +74,20 @@ include 'php/connect_db.php'; ?>
                                             <li style="color:green;">ตรวจรับเสร็จสมบูรณ์แล้ว</li>
                                         </div>
                                     <?php }
+                                    
+                                    ?>
+                                     <?php
+                                    if ($row['state_id'] == 19) { ?>
+                                        <div class="box-item-show-1">
+                                            รายการที่ : <?= $counst; ?>
+                                            <br>
+                                            ชื่อรายการ : <?= $row['order_detail'] ?> |
+                                            &nbsp;จำนวน : <?= $row['order_queantity'] . ' ' . $row['unit_name'] ?>
+
+                                            <li style="color:red;">PO โดนยกเลิก</li>
+                                        </div>
+                                    <?php }
+                                    
                                     ?>
 
                                     <?php if ($_SESSION['userlvid'] == '4') { ?>

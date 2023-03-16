@@ -172,8 +172,7 @@
                                             <td style="width: 10%;">
 
                                             <div class="display-butt"><div class="butt-conf-po"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_comfirm&po_id_select=<?=$row['po_id']?>">อนุมัติ</a></div>
-                                            <div class="butt-edit-po"><a href="#">แก้ไข</a></div>
-                                            <div class="butt-cancle"><a href="#">ยกเลิก</a></div></div>
+                                            <div class="butt-cancle"><a href="mspo_display.php?menu=po_wait_conf&comfirm_po=alrady_cancel&po_id_select=<?=$row['po_id']?>">ยกเลิก</a></div></div>
                                             </td>
                                             <?php  } ?>
 
