@@ -24,6 +24,8 @@ $title_input =
     ]
 
 ?>
+
+
 <div class="background_popup" id="bg_pop" style="display: none;">
     <div class="block_item" id="bl_item">
         <a href="mspo_display.php?menu=afb_add_afb">
@@ -86,12 +88,29 @@ $title_input =
                             <input type="number" value="<?php echo $_SESSION['value_order_afb'] ?>" id="value_order_afb">
                         </div>
                         <div id="input_form">
-                            <select title="pleaseSelect" value="" id="unit_order_afb">
-                            
-                                <option value="ก้อน">
-                                    ก้อน
-                                </option>
+                            <select value="<?php echo $_SESSION['unit_order_afb'] ?>" id="unit_order_afb" style="width: 230px;">
+                                <?php
+                                if ($_SESSION['unit_order_afb'] != "") {
+                                ?>
+                                    <option value="<?php echo $_SESSION['unit_order_afb'] ?>" selected><?php echo $_SESSION['unit_order_afb'] ?></option>
+                                <?php
+                                } else {
+                                ?>
+                                    <option selected hidden>กรุณาเลือกหน่วยนับ</option>
+                                <?php
+                                }
+                                ?>
+                                <?php
+                                $unit_use = $_SESSION['unit_order_afb'];
+                                $sql = "SELECT unit_name FROM unit_tbl WHERE unit_name != '$unit_use'";
+                                $query = mysqli_query($conn, $sql);
+                                while ($unit_name = mysqli_fetch_array($query)) {
+                                ?>
+                                    <option value="<?php echo $unit_name['unit_name'] ?>"><?php echo $unit_name['unit_name'] ?></option>
+                                <?php
+                                }
 
+                                ?>
                             </select>
                         </div>
                         <div id="input_form">
@@ -150,6 +169,8 @@ $title_input =
 </div>
 
 <script>
+    $('#unit_order_afb').select2();
+
     function check_and_send_data() {
         var name_not_order_afb = $("#name_not_order_afb").val();
         var name_yes_order_afb = $("#name_yes_order_afb").val();
@@ -173,31 +194,32 @@ $title_input =
             setTimeout(hide_pop_wrong_alert, 3000);
             $("#unit_order_afb").focus();
         }
-        if (subject_order == "") {
+        /*if (subject_order == "") {
             $("#bg_pop_alert").show();
             setTimeout(hide_pop_wrong_alert, 3000);
             $("#subject_order").focus();
-        }
-        if (name_not_order_afb != "" && value_order_afb != "" && unit_order_afb != "" && subject_order != "") {
+        }*/
+        if (name_not_order_afb != "" && value_order_afb != "" && unit_order_afb != "" /*&& subject_order != ""*/) {
             $.ajax({
                 type: "GET",
-                url: "../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData",
+                url: "../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=<?= $row_add ?>&state_excecut=addData",
                 data: {
                     name_not_order_afb: name_not_order_afb,
                     name_yes_order_afb: name_yes_order_afb,
                     value_order_afb: value_order_afb,
                     unit_order_afb: unit_order_afb,
                     subject_order: subject_order,
-               
+
                 }
             });
-            window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=loading&state_excecut=addData';
+            window.location = '../../mspo_cpn/mspo_display.php?menu=afb_add_afb&addData_id=<?= $row_add ?>&state_excecut=addData';
         }
     }
 
     function loading_hide() {
         $("#bg_loading").hide();
     }
+
     function hide_pop_wrong_alert() {
         $("#bg_pop_alert").hide();
     }
@@ -206,4 +228,3 @@ $title_input =
         $("#bg_pop_alert_succ").hide();
     }
 </script>
-<?php mysqli_close($conn); ?>

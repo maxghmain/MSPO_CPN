@@ -31,8 +31,8 @@ body{
     width: 90px;
     /*border: 1px solid red;*/
 }
-ul{
-    display: flex;
+ul{ 
+    display: block;
     width: 100%;
    /* border: 1px solid red;*/
 }
@@ -748,7 +748,7 @@ table td{
       }
 
 
-      select{
+ /* select{
         display: flex;
         border-radius: 10px;
         text-align: center;
@@ -757,6 +757,7 @@ table td{
         width: 385px;
         border: 2px solid rgb(173, 173, 173);
       }
+      */
 
       .box-add-no table {
         text-align: center;
@@ -808,7 +809,7 @@ table td{
         background-color:#999999;
         color:#FFFFFF;   
     }   
-    .browse_page a.selectPage{   
+ .browse_page a.selectPage{   
         display:block;   
         width:45px;   
         font-size:14px;   
@@ -823,7 +824,7 @@ table td{
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px; 
-    }   
+    }  
     .browse_page a.SpaceC{   
         display:block;   
         width:45px;   

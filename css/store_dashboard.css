@@ -32,7 +32,7 @@ body{
     /*border: 1px solid red;*/
 }
 ul{
-    display: flex;
+    display: block;
     width: 100%;
    /* border: 1px solid red;*/
 }
@@ -748,7 +748,7 @@ table td{
       }
 
 
-      select{
+     /* select{
         display: flex;
         border-radius: 10px;
         text-align: center;
@@ -757,7 +757,7 @@ table td{
         width: 385px;
         border: 2px solid rgb(173, 173, 173);
       }
-
+*/
       .box-add-no table {
         text-align: center;
         display: flex;

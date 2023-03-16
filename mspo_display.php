@@ -147,57 +147,52 @@ if ($_SESSION['username'] == '') {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="js/select2/select2.min.js"></script>
         <script type="text/javascript" src="js/custom/session_afb_inp_save.js"></script>
-        <link rel="stylesheet" href="css/component/popup.css?version=0s2" />
-
-
-        <link rel="stylesheet" href="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
-
         <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dependencies/JQL.min.js"></script>
-
         <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
-
         <script type="text/javascript" src="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
-
-        <link rel="stylesheet" href="js/jquery-confirm-master/dist/jquery-confirm.min.css" />
         <script type="text/javascript" src="js/jquery-confirm-master/dist/jquery-confirm.min.js"></script>
-
+        <link rel="stylesheet" href="css/component/popup.css?version=04" />
+        <link rel="stylesheet" href="css/select2/select2.min.css?v=04" />
+        <link rel="stylesheet" href="js/jquery.Thailand.js-master/jquery.Thailand.js/dist/jquery.Thailand.min.css">
+        <link rel="stylesheet" href="js/jquery-confirm-master/dist/jquery-confirm.min.css" />
         <title>ระบบจัดการคลังวัสดุและ PO - Display</title>
         <?php
         if ($_SESSION['userlvid'] == 1) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=512" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=852" />
         <?php
         }
         if ($_SESSION['userlvid'] == 2) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=512" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=852" />
         <?php
         }
         if ($_SESSION['userlvid'] == 3) {
         ?>
-            <link rel="stylesheet" href="css/purchase_dashboard.css?version=512" />
+            <link rel="stylesheet" href="css/purchase_dashboard.css?version=852" />
         <?php
         }
         if ($_SESSION['userlvid'] == 4) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=852" />
         <?php
         }
         if ($_SESSION['userlvid'] == 5) {
         ?>
-            <link rel="stylesheet" href="css/store_dashboard.css?version=512" />
+            <link rel="stylesheet" href="css/store_dashboard.css?version=852" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_select_menu') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=512" />
+            <link rel="stylesheet" href="css/component/afb_select_menu.css?version=852" />
         <?php
         }
         if ($_SESSION['menu'] == 'afb_add_afb') {
         ?>
-            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=5121" />
+            <link rel="stylesheet" href="css/component/afb_add_afb.css?version=8521" />
         <?php
         }
         ?>
