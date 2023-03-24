@@ -90,7 +90,7 @@ $sheet->mergeCells('A2:I2');
 $sheet->mergeCells('A5:I5');
 $sheet->mergeCells('A4:I4');
 $sheet->mergeCells('A3:I3');
-$sheet->mergeCells('A6:C6');
+$sheet->mergeCells('A6:F6');
 $sheet->mergeCells('H6:I6');
 $sheet->mergeCells('A7:F7');
 $sheet->mergeCells('H7:I7');

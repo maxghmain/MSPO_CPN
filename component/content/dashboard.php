@@ -82,7 +82,7 @@ if ($_SESSION['userlvid'] == '3') {
            ON b.comp_contect_id = c.comp_contect_id
            INNER JOIN order_tbl as d
            ON a.po_id = d.po_id
-           WHERE a.state_id = 16 ORDER BY po_logs_id DESC LIMIT 1";
+           WHERE a.state_id = 16 ORDER BY po_logs_id DESC LIMIT 2";
             $result = mysqli_query($conn, $sql);
             while ($row4 = mysqli_fetch_array($result)) {
             ?>
@@ -266,7 +266,7 @@ if ($_SESSION['userlvid'] == '4') {
            ON b.comp_contect_id = c.comp_contect_id
            INNER JOIN order_tbl as d
            ON a.po_id = d.po_id
-           WHERE a.state_id = 16 ORDER BY po_logs_id DESC LIMIT 2";
+           WHERE a.state_id = 16 ORDER BY po_logs_id DESC LIMIT 1";
             $result = mysqli_query($conn, $sql);
             while ($row4 = mysqli_fetch_array($result)) {
             ?>
